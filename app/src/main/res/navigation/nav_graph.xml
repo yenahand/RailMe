@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.subway.railme.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/myRootFragment"
+        android:name="com.subway.railme.myroot.MyRootFragment"
+        android:label="fragment_chating"
+        tools:layout="@layout/fragment_congestion" />
+    <fragment
+        android:id="@+id/congestionFragment"
+        android:name="com.subway.railme.congestion.CongestionFragment"
+        android:label="fragment_communication"
+        tools:layout="@layout/fragment_my_root" />
+    <fragment
+        android:id="@+id/myPageFragment"
+        android:name="com.subway.railme.mypage.MyPageFragment"
+        android:label="fragment_setting"
+        tools:layout="@layout/fragment_my_page" />
+
+</navigation>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/homeFragment"
+        android:title="홈"
+        android:icon="@drawable/congestion"
+        />
+
+    <item
+        android:id="@+id/myRootFragment"
+        android:title="내 경로"
+        android:icon="@drawable/path"
+        />
+    <item
+        android:id="@+id/congestionFragment"
+        android:title="혼잡도"
+        android:icon="@drawable/main"
+        />
+    <item
+        android:id="@+id/myPageFragment"
+        android:title="내 정보"
+        android:icon="@drawable/page"
+        />
+
+
+</menu>
