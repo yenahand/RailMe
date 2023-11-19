@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         _binding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = _binding.getRoot();
         setContentView(view);
-
+        //Component 네비게이션 바텀 하단바 적용
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.my_nav_host);
         NavController navController = navHostFragment.getNavController();
         NavigationUI.setupWithNavController(_binding.myBottomNav, navController);
