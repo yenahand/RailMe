@@ -10,53 +10,14 @@ import android.view.ViewGroup;
 
 import com.subway.railme.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link LoginFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class LoginFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public LoginFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment LoginFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static LoginFragment newInstance(String param1, String param2) {
-        LoginFragment fragment = new LoginFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
+ // 혜림씨 로그인 페이지를 프래그먼트로 만들면 화면전환하는게 어려울거야 일단 기존에 했던 XML 코드 복사해서 다른곳에 두고 프래그먼트랑 엑티비티 만들어 놨던거 삭제하고
+    //다시 붙여넣기 해서 XML 코드만 살리면 될듯 !
+ // 액티비티로 만들어서 로그인을 했던 여부에 따라서 예를들면 ->
+    //로그인을 했다면 MainActivity로 넘어가게 else 아니면 로그인 화면이 뜨게 생각해서 구현 하면 쉬울듯 !
+    //프래그먼트에서 사용하지 않는거 지워 줄테니까 일단 이 화면은 XML 코드만 살려서 엑티비티로 만들자.
+    //그리고 뷰 바인딩을 통한 XML 연결 공부해주면 좋을거같아 다른 프래그먼트 살펴보면서 해보면 좋을듯 ! 이해 안되는거 있으면 바로 연락 ㄱㄱ
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
