@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "643154424579",
+    "project_id": "railme",
+    "storage_bucket": "railme.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:643154424579:android:792f1485c3f55715c02f36",
+        "android_client_info": {
+          "package_name": "com.subway.railme"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSBvKBh1WS4UZvbI7HXQC7UilP1aGKWS8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
