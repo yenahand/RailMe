@@ -34,15 +34,8 @@
                 android:textColorHint="#808080"
                 android:autofillHints="subway" />
 
-            <TextView
-                android:id="@+id/subwayTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="(지하철 노선도)"
-                android:textColor="#bababa"
-                android:textSize="18sp" />
 
+            <!-- 노선도 표시 -->
             <FrameLayout
                 android:id="@+id/container"
                 android:layout_width="match_parent"
