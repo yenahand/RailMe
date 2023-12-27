@@ -13,13 +13,13 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:layout_marginTop="16dp"
         android:background="?android:attr/selectableItemBackground"
         android:contentDescription="뒤로가기"
         android:drawableLeft="@android:drawable/ic_media_previous"
         android:drawablePadding="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <TextView
         android:id="@+id/textView"
@@ -38,46 +38,12 @@
     <!--도착시간 표시 ( 출발시간 + 소요시간 )-->
 
 
-    <EditText
-        android:id="@+id/startTimeText"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_below="@id/backButton"
-        android:layout_marginTop="10dp"
-        android:layout_weight="10"
-        android:hint="출발 시간"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/backButton" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/startTimeText"
-        android:layout_marginStart="10dp"
-        android:text="소요 시간: "
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/startTimeText" />
-
-    <TextView
-        android:id="@+id/arriveTimeText"
-        android:layout_width="101dp"
-        android:layout_height="50dp"
-        android:layout_below="@id/startTimeText"
-        android:layout_marginStart="10dp"
-        android:layout_toEndOf="@id/startTimeText"
-        android:text="도착 시간"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/stationPathList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/arriveTimeText"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/arriveTimeText" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -21,7 +21,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         binding.tvLoginText.setText("로그인");
-        setContentView(binding.root);
+        setContentView(binding.etLogin);
     }
 
 
