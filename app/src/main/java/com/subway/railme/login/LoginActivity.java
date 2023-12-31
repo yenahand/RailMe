@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         binding.tvLoginText.setText("로그인");
 
-
+        // binding으로 바로 참조가 가능한데 findviewbyid 써서 지웠습니다.
         binding.ibKakaoLogin.setOnClickListener(new View.OnClickListener() { // 로그인 버튼 눌렀을 때
             @Override
             public void onClick(View view) {
@@ -58,6 +58,8 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+
+    //왜 ibKakaoLogin.setOnClickListener 이게 두번 선언이 되어있죠? binding으로 바로 참고가 가능한데 findviewbyid 써서 지웠습니다. 이거와 이유 같습니다.
 
     // 카카오톡이 설치되어 있는지 확인하는 메서드 (카카오에서 제공 콜백 객체를 이용)
     Function2<OAuthToken, Throwable, Unit> callback = new Function2<OAuthToken, Throwable, Unit>() {
