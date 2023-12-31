@@ -43,19 +43,15 @@ public class LoginActivity extends AppCompatActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         binding.tvLoginText.setText("로그인");
-        setContentView(R.layout.activity_login);
 
 
-        ImageButton ib_kakaologin = (ImageButton) findViewById(R.id.ib_kakologin);
-
-        ib_kakaologin.setOnClickListener(new View.OnClickListener(){ // 로그인 버튼 눌렀을 때
+        binding.ibKakaoLogin.setOnClickListener(new View.OnClickListener() { // 로그인 버튼 눌렀을 때
             @Override
             public void onClick(View view) {
 
-                if(UserApiClient.getInstance().isKakaoTalkLoginAvailable(LoginActivity.this)){
+                if (UserApiClient.getInstance().isKakaoTalkLoginAvailable(LoginActivity.this)) {
                     UserApiClient.getInstance().loginWithKakaoTalk(LoginActivity.this, callback);
-                }
-                else{
+                } else {
                     UserApiClient.getInstance().loginWithKakaoAccount(LoginActivity.this, callback);
                 }
             }
@@ -79,46 +75,31 @@ public class LoginActivity extends AppCompatActivity {
         }
     };
 
-
-    binding.ibkakaologin.setOnClickListener(new View.OnClickListener()) {
-        Toast.makeText(LoginActivity.this, "clicked button", Toast.LENGTH_SHORT).show();
-
-        if(UserApiClient.getInstance().isKakaoTalkLoginAvailable(LoginActivity.this)){
-            UserApiClient.getInstance().loginWithKakaoTalk(LoginActivity.this, callback);
-        }
-        else {
-            UserApiClient.getInstance().loginWithKakaoAccount(LoginActivity.this, callback);
-        }
-    }
-
     public void clickibkakaologin(View view) {
-
-        binding.ibKakologin.setOnClickListener();
     }
 
 
-    private void updateKakaoLoginUi(){
-        UserApiClient.getInstance().me(new Function2<User, Throwable, Unit>(){
-        @Override
-        public Unit invoke(User user,Throwable throwable){
-            // 로그인이 되어있으면
-            if (user != null) {
-            // 유저 아이디
-            Log.d(TAG,"invoke: id"+user.getId());
-            // 유저 이메일
-            Log.d(TAG,"invoke: email"+user.getKakaoAccount().getEmail());
-            // 유저 닉네임
-            Log.d(TAG,"invoke: nickname"+user.getKakaoAccount().getProfile().getNickname());
-            // 유저 성별
-            Log.d(TAG,"invoke: gerder"+user.getKakaoAccount().getGender());
-            // 유저 나이
-            Log.d(TAG,"invoke: age"+user.getKakaoAccount().getAgeRange());
-            }
-            else {
-            // 로그인 되어 있지 않을때
-            Log.d(TAG,"로그인이 되어 있지 않습니다. 다시 한번 확인해 주시길 바랍니다.");
-            }
-            return null;
+    private void updateKakaoLoginUi() {
+        UserApiClient.getInstance().me(new Function2<User, Throwable, Unit>() {
+            @Override
+            public Unit invoke(User user, Throwable throwable) {
+                // 로그인이 되어있으면
+                if (user != null) {
+                    // 유저 아이디
+                    Log.d(TAG, "invoke: id" + user.getId());
+                    // 유저 이메일
+                    Log.d(TAG, "invoke: email" + user.getKakaoAccount().getEmail());
+                    // 유저 닉네임
+                    Log.d(TAG, "invoke: nickname" + user.getKakaoAccount().getProfile().getNickname());
+                    // 유저 성별
+                    Log.d(TAG, "invoke: gerder" + user.getKakaoAccount().getGender());
+                    // 유저 나이
+                    Log.d(TAG, "invoke: age" + user.getKakaoAccount().getAgeRange());
+                } else {
+                    // 로그인 되어 있지 않을때
+                    Log.d(TAG, "로그인이 되어 있지 않습니다. 다시 한번 확인해 주시길 바랍니다.");
+                }
+                return null;
             }
         });
     }
