@@ -7,47 +7,25 @@
     android:id="@+id/home_container"
     tools:context=".home.HomeFragment">
 
-    <RelativeLayout
+    <!-- 중앙에 WebView -->
+    <WebView
+        android:id="@+id/wv_SubwayMap"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity">
+        android:layout_gravity="center" />
 
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:ignore="UselessParent">
-
-            <!-- 상단 역검색 공간 -->
-
-            <!-- 중앙에 노선도 -->
-            <EditText
-                android:id="@+id/searchStation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#f1edf7"
-                android:drawableStart="@android:drawable/ic_menu_search"
-                android:drawablePadding="8dp"
-                android:hint="역검색"
-                android:inputType="text"
-                android:padding="16dp"
-                android:textColorHint="#808080"
-                android:autofillHints="subway" />
-
-
-            <!-- 노선도 표시 -->
-            <FrameLayout
-                android:id="@+id/container"
-                android:layout_width="match_parent"
-                android:layout_height="0dp" />
-
-
-
-        </RelativeLayout>
-
-
-    </RelativeLayout>
-
-
+    <!-- 역검색 EditText -->
+    <EditText
+        android:id="@+id/searchStation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#f1edf7"
+        android:drawableStart="@android:drawable/ic_menu_search"
+        android:drawablePadding="8dp"
+        android:hint="역검색"
+        android:inputType="text"
+        android:padding="16dp"
+        android:textColorHint="#808080"
+        android:autofillHints="subway"
+        android:layout_gravity="top" />
 </FrameLayout>
-
