@@ -10,6 +10,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.subway.railme.databinding.ActivityMainBinding;
 
+
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding _binding;
@@ -24,8 +25,8 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = navHostFragment.getNavController();
         NavigationUI.setupWithNavController(_binding.myBottomNav, navController);
 
-
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();

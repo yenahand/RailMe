@@ -8,6 +8,6 @@ public class EasyLogin extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        KakaoSdk.init(this, "641c840c3a49b1f89718aeaa4caf6797")
+        KakaoSdk.init(this, "641c840c3a49b1f89718aeaa4caf6797");
     }
 }
