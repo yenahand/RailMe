@@ -87,7 +87,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/kakao_login_medium_narrow"
         tools:ignore="InvalidId"
-        android:contentDescription="kakologin"/>
-
+        android:contentDescription="kakaologin"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

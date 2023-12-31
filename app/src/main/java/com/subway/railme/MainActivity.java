@@ -1,17 +1,17 @@
 package com.subway.railme;
 
+import android.os.Bundle;
+import android.view.View;
+
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
-import android.os.Bundle;
-import android.view.View;
-
 import com.subway.railme.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
+
     private ActivityMainBinding _binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,4 +31,6 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         _binding = null;
     }
+
+
 }

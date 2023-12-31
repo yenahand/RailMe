@@ -1,15 +1,12 @@
 package com.subway.railme.mypage;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.subway.railme.R;
-import com.subway.railme.databinding.FragmentCongestionBinding;
+import androidx.fragment.app.Fragment;
+
 import com.subway.railme.databinding.FragmentMyPageBinding;
 
 
@@ -26,4 +23,5 @@ public class MyPageFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
 }
