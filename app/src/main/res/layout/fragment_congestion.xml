@@ -10,45 +10,148 @@
 
     <!--지하철 혼잡도 표시공간-->
 
-    <Button
-        android:id="@+id/backButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="10dp"
-        android:background="?android:attr/selectableItemBackground"
-        android:contentDescription="뒤로가기"
-        android:drawableLeft="@android:drawable/ic_media_previous"
-        android:drawablePadding="8dp"
-        android:text=""
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <!--추천 칸 표시 [혼잡도 낮은 칸]-->
 
+    <ImageView
+        android:id="@+id/iv_congestion"
+        android:layout_width="135dp"
+        android:layout_height="123dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/main"
+        app:tint="#54484F"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="281dp" />
+
+    <!--혼잡도표시할 현재 역 텍스트뷰-->
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="혼잡도 표시 영역"
-        android:textSize="24sp"
+        android:layout_width="76dp"
+        android:layout_height="31dp"
+        android:text="현재역"
+        android:textColor="#000000"
+        android:textSize="25dp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="236dp" />
+
+    <View
+        android:layout_width="408dp"
+        android:layout_height="21dp"
+        android:layout_marginBottom="324dp"
+        android:background="#594E59"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <!--추천 칸 표시 [혼잡도 낮은 칸]-->
+    <View
+        android:id="@+id/view3"
+        android:layout_width="110dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="324dp"
+        android:background="#8C7B8C"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:id="@+id/view4"
+        android:layout_width="105dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="304dp"
+        android:layout_marginBottom="324dp"
+        android:background="#8C7B8C"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="보통"
+        android:textColor="#000000"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="41dp"
+        tools:layout_editor_absoluteY="125dp" />
 
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="10dp"
-        android:text="실시간 혼잡도"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/backButton"
-        app:layout_constraintStart_toEndOf="@+id/backButton"
-        app:layout_constraintTop_toTopOf="@+id/backButton" />
+    <View
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginBottom="556dp"
+        android:background="@android:color/holo_green_dark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.043"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="혼잡"
+        android:textColor="#000000"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="42dp"
+        tools:layout_editor_absoluteY="95dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="매우 혼잡"
+        android:textColor="#000000"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="42dp"
+        tools:layout_editor_absoluteY="66dp" />
+
+    <View
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginBottom="616dp"
+        android:background="@android:color/holo_orange_dark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.043"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginBottom="644dp"
+        android:background="@android:color/holo_red_dark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.043"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginBottom="588dp"
+        android:background="#FFFF00"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.043"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="여유"
+        android:textColor="#000000"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="39dp"
+        tools:layout_editor_absoluteY="156dp" />
+
+    <SearchView
+        android:layout_width="328dp"
+        android:layout_height="43dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="12dp"
+        tools:ignore="MissingConstraints" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

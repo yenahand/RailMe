@@ -1,0 +1,604 @@
+Index: app/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>plugins {\r\n    id 'com.android.application'\r\n    id 'kotlin-android'\r\n    id 'androidx.navigation.safeargs.kotlin'\r\n    id (\"com.google.gms.google-services\")\r\n}\r\n\r\nandroid {\r\n    namespace 'com.subway.railme'\r\n    compileSdk 34\r\n\r\n    defaultConfig {\r\n        applicationId \"com.subway.railme\"\r\n        minSdk 31\r\n        targetSdk 34\r\n        versionCode 1\r\n        versionName \"1.0\"\r\n\r\n        testInstrumentationRunner \"androidx.test.runner.AndroidJUnitRunner\"\r\n    }\r\n\r\n    buildTypes {\r\n        release {\r\n            minifyEnabled false\r\n            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'\r\n        }\r\n    }\r\n    compileOptions {\r\n        sourceCompatibility JavaVersion.VERSION_1_8\r\n        targetCompatibility JavaVersion.VERSION_1_8\r\n    }\r\n    viewBinding {\r\n        enabled = true\r\n    }\r\n}\r\n\r\ndependencies {\r\n    implementation 'androidx.appcompat:appcompat:1.6.1'\r\n    implementation 'com.google.android.material:material:1.11.0'\r\n    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'\r\n    implementation 'androidx.navigation:navigation-fragment-ktx:2.7.6'\r\n    implementation 'androidx.navigation:navigation-ui-ktx:2.7.6'\r\n    implementation 'com.google.firebase:firebase-database:20.3.0'\r\n    testImplementation 'junit:junit:4.13.2'\r\n    androidTestImplementation 'androidx.test.ext:junit:1.1.5'\r\n    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'\r\n    implementation(platform(\"com.google.firebase:firebase-bom:32.7.0\"))\r\n    implementation(\"com.google.firebase:firebase-analytics\")\r\n    implementation 'com.caverock:androidsvg:1.4'\r\n    implementation 'com.squareup.retrofit2:retrofit:2.9.0'\r\n    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'\r\n    implementation 'androidx.webkit:webkit:1.9.0'\r\n    implementation 'androidx.fragment:fragment-ktx:1.6.2'\r\n\r\n\r\n\r\n\r\n\r\n    def nav_version = \"2.7.5\"\r\n    //noinspection GradleDependency\r\n    implementation \"androidx.navigation:navigation-fragment-ktx:$nav_version\"\r\n    //noinspection GradleDependency\r\n    implementation \"androidx.navigation:navigation-ui-ktx:$nav_version\"\r\n}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/build.gradle b/app/build.gradle
+--- a/app/build.gradle	
++++ b/app/build.gradle	
+@@ -40,12 +40,12 @@
+     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+     implementation 'androidx.navigation:navigation-fragment-ktx:2.7.6'
+     implementation 'androidx.navigation:navigation-ui-ktx:2.7.6'
+-    implementation 'com.google.firebase:firebase-database:20.3.0'
+     testImplementation 'junit:junit:4.13.2'
+     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+     implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
+-    implementation("com.google.firebase:firebase-analytics")
++    implementation 'com.google.firebase:firebase-analytics'
++    implementation 'com.google.firebase:firebase-database'
+     implementation 'com.caverock:androidsvg:1.4'
+     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+Index: build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>buildscript {\r\n    repositories {\r\n        google()\r\n        mavenCentral()\r\n    }\r\n\r\n    dependencies {\r\n        def nav_version = \"2.7.5\"\r\n        classpath \"androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version\"\r\n        classpath \"com.google.firebase:firebase-bom:32.7.0\"\r\n    }\r\n}\r\n\r\n// Top-level build file where you can add configuration options common to all sub-projects/modules.\r\nplugins {\r\n    id(\"com.google.gms.google-services\") version \"4.4.0\" apply false\r\n    id 'com.android.application' version '8.1.3' apply false\r\n    id 'com.android.library' version '8.1.3' apply false\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/build.gradle b/build.gradle
+--- a/build.gradle	
++++ b/build.gradle	
+@@ -1,7 +1,7 @@
+ buildscript {
+     repositories {
+         google()
+-        mavenCentral()
++        jcenter()
+     }
+ 
+     dependencies {
+Index: app/src/main/java/com/subway/railme/home/HomeFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.subway.railme.home;\r\n\r\nimport android.annotation.SuppressLint;\r\nimport android.os.Bundle;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.webkit.WebSettings;\r\nimport android.webkit.WebView;\r\n\r\nimport androidx.fragment.app.Fragment;\r\n\r\nimport com.subway.railme.R;\r\n\r\npublic class HomeFragment extends Fragment {\r\n\r\n    private WebView webView;\r\n\r\n    @SuppressLint(\"MissingInflatedId\")\r\n    @Override\r\n    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {\r\n        View rootView = inflater.inflate(R.layout.fragment_home, container, false);\r\n        webView = rootView.findViewById(R.id.wv_SubwayMap);\r\n\r\n        initWebView();\r\n\r\n        return rootView;\r\n    }\r\n\r\n    private void initWebView() {\r\n        WebSettings webSettings = webView.getSettings();\r\n        webSettings.setJavaScriptEnabled(true);\r\n\r\n        webView.loadUrl(\"file:///android_asset/subway_map.html\");\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/subway/railme/home/HomeFragment.java b/app/src/main/java/com/subway/railme/home/HomeFragment.java
+--- a/app/src/main/java/com/subway/railme/home/HomeFragment.java	
++++ b/app/src/main/java/com/subway/railme/home/HomeFragment.java	
+@@ -1,36 +1,121 @@
++//api는 일단 연동만해둔 상태고, 사용하려면 역별로 좌표값 하나하나 매핑해야한대서 시간이 오래걸릴 것 같아 아직 덜 됐습니다. (더 괜찮은 방법 있는지 찾는중)
++//api사용하는부분 미완성상태로 실행하니까 오류떠서 주석으로 표시해놨습니다
+ package com.subway.railme.home;
+ 
+ import android.annotation.SuppressLint;
+ import android.os.Bundle;
+-import android.view.LayoutInflater;
+-import android.view.View;
+-import android.view.ViewGroup;
+-import android.webkit.WebSettings;
+-import android.webkit.WebView;
+-
+-import androidx.fragment.app.Fragment;
+-
++import android.view.GestureDetector;
++import android.view.MotionEvent;
++import android.view.ScaleGestureDetector;
++import android.widget.Toast;
++import androidx.appcompat.app.AppCompatActivity;
++import androidx.appcompat.widget.AppCompatEditText;
++import androidx.core.view.GestureDetectorCompat;
+ import com.subway.railme.R;
++import com.subway.railme.home.ApiManager;
++import retrofit2.Call;
++import retrofit2.Callback;
++import retrofit2.Response;
++
++public class HomeFragment extends AppCompatActivity {
++
++    private ImageViewZoomable imageViewZoomable;
++    private AppCompatEditText searchStation;
++    private ScaleGestureDetector scaleGestureDetector;
++    private GestureDetectorCompat gestureDetector;
++
++    @SuppressLint("WrongViewCast")
++    @Override
++    protected void onCreate(Bundle savedInstanceState) {
++        super.onCreate(savedInstanceState);
++        setContentView(R.layout.fragment_home);
++
++        imageViewZoomable = findViewById(R.id.iv_SubwayMap);
++        searchStation = findViewById(R.id.searchStation);
+ 
+-public class HomeFragment extends Fragment {
++        // API 연동
++        // callSubwayApi();
+ 
+-    private WebView webView;
++        // 줌인/줌아웃 및 스크롤 기능 설정
++        scaleGestureDetector = new ScaleGestureDetector(this, new ScaleListener());
++        imageViewZoomable.setOnTouchListener((v, event) -> {
++            scaleGestureDetector.onTouchEvent(event);
++            gestureDetector.onTouchEvent(event);
++            return true;
++        });
+ 
+-    @SuppressLint("MissingInflatedId")
+-    @Override
+-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+-        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+-        webView = rootView.findViewById(R.id.wv_SubwayMap);
+-
+-        initWebView();
+-
+-        return rootView;
++        // 상하좌우 스크롤 기능 설정
++        gestureDetector = new GestureDetectorCompat(this, new ScrollListener());
++    }
++/*
++    private void callSubwayApi() {
++        // TODO: API 호출 로직 (ex. SubwayApi를 사용하여 데이터를 가져오는 코드 등)
++        SubwayApi subwayApi = ApiManager.createApi();
++        Call<ApiResponseModel> call = subwayApi.getSubwayRouteInfo(
++                "$2a$10$Sb/okQVuOfQ1CC9JQWxmeu6OcnkeRL8zS1kemO96dnFiDf8e0Qumu", //서비스키
++                "json",
++                "lnCd_value",
++                "mreaWideCd_value"
++        );
++
++        call.enqueue(new Callback<ApiResponseModel>() {
++            @Override
++            public void onResponse(Call<ApiResponseModel> call, Response<ApiResponseModel> response) {
++                if (response.isSuccessful()) {
++                    ApiResponseModel responseData = response.body();
++                    // UI에 데이터를 적용하는 작업 수행
++                    updateUIWithData(responseData);
++                } else {
++                    // API 호출이 실패한 경우 처리
++                    handleApiError();
++                }
++            }
++
++            @Override
++            public void onFailure(Call<ApiResponseModel> call, Throwable t) {
++                // 네트워크 오류 또는 예외 처리
++                t.printStackTrace();
++               //호출 실패처리 메소드 호출
++                handleApiError();
++            }
++        });
++    }
++*/
++    private class ScaleListener extends ScaleGestureDetector.SimpleOnScaleGestureListener {
++        @Override
++        public boolean onScale(ScaleGestureDetector detector) {
++            float scaleFactor = detector.getScaleFactor();
++            float currentScale = imageViewZoomable.getScaleX();
++            float newScale = currentScale * scaleFactor;
++            newScale = Math.max(0.1f, Math.min(newScale, 5.0f));
++            imageViewZoomable.setScaleX(newScale);
++            imageViewZoomable.setScaleY(newScale);
++            return true;
++        }
+     }
+ 
+-    private void initWebView() {
+-        WebSettings webSettings = webView.getSettings();
+-        webSettings.setJavaScriptEnabled(true);
++    private class ScrollListener extends GestureDetector.SimpleOnGestureListener {
++        @Override
++        public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
++            float currentTranslationX = imageViewZoomable.getTranslationX();
++            float currentTranslationY = imageViewZoomable.getTranslationY();
++            imageViewZoomable.setTranslationX(currentTranslationX - distanceX);
++            imageViewZoomable.setTranslationY(currentTranslationY - distanceY);
++            return true;
++        }
++    }
++/*
++    private void updateUIWithData(ApiResponseModel data) {
++        // 받아온 데이터를 사용하여 UI를 업데이트
++        //요건 저도 잘 이해가 안가는데 일단 추가해두는게 좋대서 해놨습니다
++    }
+ 
+-        webView.loadUrl("file:///android_asset/subway_map.html");
++    // API 호출이 실패했을 때의 처리
++    private void handleApiError() {
++        runOnUiThread(() -> {
++            Toast.makeText(HomeFragment.this, "네트워크 오류가 발생했습니다.", Toast.LENGTH_SHORT).show();// 사용자에게 오류 메시지를 표시(임시)
++        });
+     }
+-}
+\ No newline at end of file
++    */
++}
++
+Index: app/src/main/java/com/subway/railme/congestion/CongestionFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.subway.railme.congestion;\r\n\r\nimport android.os.Bundle;\r\n\r\nimport androidx.fragment.app.Fragment;\r\n\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\n\r\nimport com.subway.railme.R;\r\nimport com.subway.railme.databinding.FragmentCongestionBinding;\r\nimport com.subway.railme.databinding.FragmentHomeBinding;\r\n\r\n\r\npublic class CongestionFragment extends Fragment {\r\n    private FragmentCongestionBinding binding;\r\n    @Override\r\n    public View onCreateView(LayoutInflater inflater, ViewGroup container,\r\n                             Bundle savedInstanceState) {\r\n        binding = FragmentCongestionBinding.inflate(inflater, container, false);\r\n        return binding.getRoot();\r\n    }\r\n    @Override\r\n    public void onDestroyView() {\r\n        super.onDestroyView();\r\n        binding = null;\r\n    }\r\n}///하이
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/subway/railme/congestion/CongestionFragment.java b/app/src/main/java/com/subway/railme/congestion/CongestionFragment.java
+--- a/app/src/main/java/com/subway/railme/congestion/CongestionFragment.java	
++++ b/app/src/main/java/com/subway/railme/congestion/CongestionFragment.java	
+@@ -1,29 +1,77 @@
++//이부분은 chaquo 플러그인이 설치가 안돼서 일단 주석처리 했습니다 ( chaquo 플러그인< 파이썬 연동)
++
++/*
+ package com.subway.railme.congestion;
+ 
++import android.os.AsyncTask;
+ import android.os.Bundle;
+-
+-import androidx.fragment.app.Fragment;
+-
+ import android.view.LayoutInflater;
+ import android.view.View;
+ import android.view.ViewGroup;
++import android.widget.ImageView;
+ 
++import androidx.fragment.app.Fragment;
++
++import com.chaquo.python.PyObject;
++import com.chaquo.python.Python;
+ import com.subway.railme.R;
+ import com.subway.railme.databinding.FragmentCongestionBinding;
+-import com.subway.railme.databinding.FragmentHomeBinding;
+-
+ 
+ public class CongestionFragment extends Fragment {
++
+     private FragmentCongestionBinding binding;
++    private ImageView imageView;
++    private int congestionLevel; // 혼잡도 값을 저장하는 변수
++
+     @Override
+     public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                              Bundle savedInstanceState) {
+         binding = FragmentCongestionBinding.inflate(inflater, container, false);
++        imageView = binding.iv_congestion;
++
++        // AsyncTask를 사용하여 백그라운드에서 혼잡도 값을 가져오기
++        new GetCongestionLevelTask().execute();
++
+         return binding.getRoot();
+     }
++
+     @Override
+     public void onDestroyView() {
+         super.onDestroyView();
+         binding = null;
+     }
+-}///하이
+\ No newline at end of file
++
++    private class GetCongestionLevelTask extends AsyncTask<Void, Void, Integer> {
++        @Override
++        protected Integer doInBackground(Void... voids) {
++            // Python 코드 실행
++            Python python = Python.getInstance();
++            PyObject calculateCongestion = python.getModule("calculate_congestion");
++            PyObject result = calculateCongestion.callAttr("calculate_congestion");
++
++            return result.toInt();
++        }
++
++        @Override
++        protected void onPostExecute(Integer result) {
++            super.onPostExecute(result);
++            congestionLevel = result;
++            //혼잡도 색상 설정 클래스 불러오기
++            setImageViewColor();
++        }
++    }
++
++    //혼잡도 별 지하철아이콘 색상 설정
++    private void setImageViewColor() {
++        if (congestionLevel > 70) {
++            imageView.setColorFilter(getResources().getColor(R.color.red)); // 빨간색
++        } else if (congestionLevel >= 50 && congestionLevel <= 70) {
++            imageView.setColorFilter(getResources().getColor(R.color.orange)); // 주황색
++        } else if (congestionLevel >= 30 && congestionLevel < 50) {
++            imageView.setColorFilter(getResources().getColor(R.color.yellow)); // 노란색
++        } else {
++            imageView.setColorFilter(getResources().getColor(R.color.green)); // 초록색
++        }
++    }
++}
++*/
+\ No newline at end of file
+Index: .idea/gradle.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"GradleSettings\">\r\n    <option name=\"linkedExternalProjectsSettings\">\r\n      <GradleProjectSettings>\r\n        <option name=\"testRunner\" value=\"GRADLE\" />\r\n        <option name=\"distributionType\" value=\"DEFAULT_WRAPPED\" />\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\r\n        <option name=\"gradleJvm\" value=\"jbr-17\" />\r\n        <option name=\"modules\">\r\n          <set>\r\n            <option value=\"$PROJECT_DIR$\" />\r\n            <option value=\"$PROJECT_DIR$/app\" />\r\n          </set>\r\n        </option>\r\n      </GradleProjectSettings>\r\n    </option>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/gradle.xml b/.idea/gradle.xml
+--- a/.idea/gradle.xml	
++++ b/.idea/gradle.xml	
+@@ -1,5 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
++  <component name="GradleMigrationSettings" migrationVersion="1" />
+   <component name="GradleSettings">
+     <option name="linkedExternalProjectsSettings">
+       <GradleProjectSettings>
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ExternalStorageConfigurationManager\" enabled=\"true\" />\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_17\" default=\"true\" project-jdk-name=\"jbr-17\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/build/classes\" />\r\n  </component>\r\n  <component name=\"ProjectType\">\r\n    <option name=\"id\" value=\"Android\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	
++++ b/.idea/misc.xml	
+@@ -1,4 +1,3 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ExternalStorageConfigurationManager" enabled="true" />
+   <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="jbr-17" project-jdk-type="JavaSDK">
+Index: app/src/main/java/com/subway/railme/home/SubwayLine.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.subway.railme.home;\r\n\r\nimport java.util.List;\r\n\r\n\r\npublic class SubwayLine {\r\n    private String lineName;\r\n    private List<SubwayStation> stations;\r\n\r\n    public String getLineName() {\r\n        return lineName;\r\n    }\r\n\r\n    public void setLineName(String lineName) {\r\n        this.lineName = lineName;\r\n    }\r\n\r\n    public List<SubwayStation> getStations() {\r\n        return stations;\r\n    }\r\n\r\n    public void setStations(List<SubwayStation> stations) {\r\n        this.stations = stations;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/subway/railme/home/SubwayLine.java b/app/src/main/java/com/subway/railme/home/SubwayLine.java
+--- a/app/src/main/java/com/subway/railme/home/SubwayLine.java	
++++ b/app/src/main/java/com/subway/railme/home/SubwayLine.java	
+@@ -1,4 +1,4 @@
+-package com.subway.railme.home;
++/*package com.subway.railme.home;
+ 
+ import java.util.List;
+ 
+@@ -23,3 +23,5 @@
+         this.stations = stations;
+     }
+ }
++*/
++//전에 만들어뒀던거 지우고 다시하는 중인데 혹시몰라서 주석처리 해뒀습니다.
+\ No newline at end of file
+Index: app/src/main/res/layout/fragment_congestion.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout\r\n    xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:id=\"@+id/home_container\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\">\r\n\r\n\r\n    <!--지하철 혼잡도 표시공간-->\r\n\r\n    <Button\r\n        android:id=\"@+id/backButton\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_alignParentStart=\"true\"\r\n        android:layout_alignParentTop=\"true\"\r\n        android:layout_marginStart=\"10dp\"\r\n        android:background=\"?android:attr/selectableItemBackground\"\r\n        android:contentDescription=\"뒤로가기\"\r\n        android:drawableLeft=\"@android:drawable/ic_media_previous\"\r\n        android:drawablePadding=\"8dp\"\r\n        android:text=\"\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <TextView\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_centerInParent=\"true\"\r\n        android:text=\"혼잡도 표시 영역\"\r\n        android:textSize=\"24sp\"\r\n        android:textStyle=\"bold\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <!--추천 칸 표시 [혼잡도 낮은 칸]-->\r\n    <TextView\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n\r\n        android:layout_centerHorizontal=\"true\"\r\n        android:layout_marginStart=\"10dp\"\r\n        android:text=\"실시간 혼잡도\"\r\n        android:textSize=\"18sp\"\r\n        app:layout_constraintBottom_toBottomOf=\"@+id/backButton\"\r\n        app:layout_constraintStart_toEndOf=\"@+id/backButton\"\r\n        app:layout_constraintTop_toTopOf=\"@+id/backButton\" />\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/fragment_congestion.xml b/app/src/main/res/layout/fragment_congestion.xml
+--- a/app/src/main/res/layout/fragment_congestion.xml	
++++ b/app/src/main/res/layout/fragment_congestion.xml	
+@@ -10,45 +10,159 @@
+ 
+     <!--지하철 혼잡도 표시공간-->
+ 
+-    <Button
+-        android:id="@+id/backButton"
++    <!--추천 칸 표시 [혼잡도 낮은 칸]-->
++
++    <ImageView
++        android:id="@+id/iv_congestion"
++        android:layout_width="135dp"
++        android:layout_height="123dp"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintHorizontal_bias="0.498"
++        app:layout_constraintStart_toStartOf="parent"
++        app:srcCompat="@drawable/main"
++        app:tint="#54484F"
++        tools:ignore="MissingConstraints"
++        tools:layout_editor_absoluteY="281dp" />
++
++    <!--혼잡도표시할 현재 역 텍스트뷰-->
++    <TextView
++        android:layout_width="76dp"
++        android:layout_height="31dp"
++        android:text="현재역"
++        android:textColor="#000000"
++        android:textSize="25dp"
++        android:textStyle="bold"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintHorizontal_bias="0.498"
++        app:layout_constraintStart_toStartOf="parent"
++        tools:ignore="MissingConstraints"
++        tools:layout_editor_absoluteY="236dp" />
++
++    <View
++        android:layout_width="408dp"
++        android:layout_height="21dp"
++        android:layout_marginBottom="324dp"
++        android:background="#594E59"
++        app:layout_constraintBottom_toBottomOf="parent"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintHorizontal_bias="0.333"
++        app:layout_constraintStart_toStartOf="parent" />
++
++    <View
++        android:id="@+id/view3"
++        android:layout_width="110dp"
++        android:layout_height="20dp"
++        android:layout_marginStart="0dp"
++        android:layout_marginBottom="324dp"
++        android:background="#8C7B8C"
++        app:layout_constraintBottom_toBottomOf="parent"
++        app:layout_constraintStart_toStartOf="parent" />
++
++    <View
++        android:id="@+id/view4"
++        android:layout_width="108dp"
++        android:layout_height="20dp"
++        android:layout_marginStart="304dp"
++        android:layout_marginBottom="324dp"
++        android:background="#8C7B8C"
++        app:layout_constraintBottom_toBottomOf="parent"
++        app:layout_constraintStart_toStartOf="parent" />
++
++    <TextView
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+-        android:layout_alignParentStart="true"
+-        android:layout_alignParentTop="true"
+-        android:layout_marginStart="10dp"
+-        android:background="?android:attr/selectableItemBackground"
+-        android:contentDescription="뒤로가기"
+-        android:drawableLeft="@android:drawable/ic_media_previous"
+-        android:drawablePadding="8dp"
+-        android:text=""
+-        app:layout_constraintStart_toStartOf="parent"
+-        app:layout_constraintTop_toTopOf="parent" />
++        android:text="보통"
++        android:textColor="#000000"
++        tools:ignore="MissingConstraints"
++        tools:layout_editor_absoluteX="41dp"
++        tools:layout_editor_absoluteY="125dp" />
++
++    <View
++        android:layout_width="18dp"
++        android:layout_height="18dp"
++        android:layout_marginBottom="556dp"
++        android:background="@android:color/holo_green_dark"
++        app:layout_constraintBottom_toBottomOf="parent"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintHorizontal_bias="0.043"
++        app:layout_constraintStart_toStartOf="parent" />
+ 
+     <TextView
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+-        android:layout_centerInParent="true"
+-        android:text="혼잡도 표시 영역"
+-        android:textSize="24sp"
+-        android:textStyle="bold"
++        android:text="혼잡"
++        android:textColor="#000000"
++        tools:ignore="MissingConstraints"
++        tools:layout_editor_absoluteX="42dp"
++        tools:layout_editor_absoluteY="95dp" />
++
++    <TextView
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:text="매우 혼잡"
++        android:textColor="#000000"
++        tools:ignore="MissingConstraints"
++        tools:layout_editor_absoluteX="42dp"
++        tools:layout_editor_absoluteY="66dp" />
++
++    <View
++        android:layout_width="18dp"
++        android:layout_height="18dp"
++        android:layout_marginBottom="616dp"
++        android:background="@android:color/holo_orange_dark"
++        app:layout_constraintBottom_toBottomOf="parent"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintHorizontal_bias="0.043"
++        app:layout_constraintStart_toStartOf="parent" />
++
++    <View
++        android:layout_width="18dp"
++        android:layout_height="18dp"
++        android:layout_marginBottom="644dp"
++        android:background="@android:color/holo_red_dark"
++        app:layout_constraintBottom_toBottomOf="parent"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintHorizontal_bias="0.043"
++        app:layout_constraintStart_toStartOf="parent" />
++
++    <View
++        android:layout_width="18dp"
++        android:layout_height="18dp"
++        android:layout_marginBottom="588dp"
++        android:background="#FFFF00"
+         app:layout_constraintBottom_toBottomOf="parent"
+         app:layout_constraintEnd_toEndOf="parent"
+-        app:layout_constraintStart_toStartOf="parent"
+-        app:layout_constraintTop_toTopOf="parent" />
++        app:layout_constraintHorizontal_bias="0.043"
++        app:layout_constraintStart_toStartOf="parent" />
+ 
+-    <!--추천 칸 표시 [혼잡도 낮은 칸]-->
+     <TextView
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
++        android:text="여유"
++        android:textColor="#000000"
++        tools:ignore="MissingConstraints"
++        tools:layout_editor_absoluteX="39dp"
++        tools:layout_editor_absoluteY="156dp" />
++
++    <SearchView
++        android:layout_width="328dp"
++        android:layout_height="43dp"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintStart_toStartOf="parent"
++        tools:layout_editor_absoluteY="12dp"
++        tools:ignore="MissingConstraints" />
+ 
+-        android:layout_centerHorizontal="true"
+-        android:layout_marginStart="10dp"
+-        android:text="실시간 혼잡도"
+-        android:textSize="18sp"
+-        app:layout_constraintBottom_toBottomOf="@+id/backButton"
+-        app:layout_constraintStart_toEndOf="@+id/backButton"
+-        app:layout_constraintTop_toTopOf="@+id/backButton" />
++    <TextView
++        android:id="@+id/textView2"
++        android:layout_width="103dp"
++        android:layout_height="27dp"
++        android:text="현재 혼잡률%"
++        android:textSize="18dp"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintStart_toStartOf="parent"
++        tools:ignore="MissingConstraints"
++        tools:layout_editor_absoluteY="433dp" />
++
+ 
+ </androidx.constraintlayout.widget.ConstraintLayout>
+ 
+Index: app/src/main/java/com/subway/railme/home/SubwayStation.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.subway.railme.home;\r\n\r\nimport java.util.List;\r\n\r\n// SubwayStation.java\r\npublic class SubwayStation {\r\n    private String stationName;\r\n    private List<SubwayStation> connectedStations;\r\n\r\n    public String getStationName() {\r\n        return stationName;\r\n    }\r\n\r\n    public void setStationName(String stationName) {\r\n        this.stationName = stationName;\r\n    }\r\n\r\n    public List<SubwayStation> getConnectedStations() {\r\n        return connectedStations;\r\n    }\r\n\r\n    public void setConnectedStations(List<SubwayStation> connectedStations) {\r\n        this.connectedStations = connectedStations;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/subway/railme/home/SubwayStation.java b/app/src/main/java/com/subway/railme/home/SubwayStation.java
+--- a/app/src/main/java/com/subway/railme/home/SubwayStation.java	
++++ b/app/src/main/java/com/subway/railme/home/SubwayStation.java	
+@@ -1,8 +1,7 @@
+-package com.subway.railme.home;
++/*package com.subway.railme.home;
+ 
+ import java.util.List;
+ 
+-// SubwayStation.java
+ public class SubwayStation {
+     private String stationName;
+     private List<SubwayStation> connectedStations;
+@@ -23,3 +22,5 @@
+         this.connectedStations = connectedStations;
+     }
+ }
++*/
++//전에 만들어뒀던거 지우고 다시하는 중인데 혹시몰라서 주석처리 해뒀습니다.
+\ No newline at end of file
+Index: app/src/main/res/layout/activity_main.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".MainActivity\">\r\n\r\n\r\n\r\n    <androidx.fragment.app.FragmentContainerView\r\n        android:id=\"@+id/my_nav_host\"\r\n        android:name=\"androidx.navigation.fragment.NavHostFragment\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"0dp\"\r\n        android:layout_weight=\"1\"\r\n        app:defaultNavHost=\"true\"\r\n        app:layout_constraintBottom_toTopOf=\"@+id/my_bottom_nav\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:navGraph=\"@navigation/nav_graph\" />\r\n\r\n    <com.google.android.material.bottomnavigation.BottomNavigationView\r\n        android:id=\"@+id/my_bottom_nav\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:background=\"@color/white\"\r\n        app:itemTextColor=\"#020202\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:itemIconSize=\"35dp\"\r\n        app:menu=\"@menu/bottom_nav_menu\" />\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_main.xml b/app/src/main/res/layout/activity_main.xml
+--- a/app/src/main/res/layout/activity_main.xml	
++++ b/app/src/main/res/layout/activity_main.xml	
+@@ -7,7 +7,6 @@
+     tools:context=".MainActivity">
+ 
+ 
+-
+     <androidx.fragment.app.FragmentContainerView
+         android:id="@+id/my_nav_host"
+         android:name="androidx.navigation.fragment.NavHostFragment"
+@@ -17,8 +16,10 @@
+         app:defaultNavHost="true"
+         app:layout_constraintBottom_toTopOf="@+id/my_bottom_nav"
+         app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintHorizontal_bias="0.0"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent"
++        app:layout_constraintVertical_bias="0.0"
+         app:navGraph="@navigation/nav_graph" />
+ 
+     <com.google.android.material.bottomnavigation.BottomNavigationView
