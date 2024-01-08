@@ -1,4 +1,3 @@
-//api연동한 부분은 아직 노선도구현을 이미지로 해논 상태여서 일단 주석처리해놨습니다 (매핑하려면 너무 오래걸릴거같아서 다른방법 찾고있어요)
 
 package com.subway.railme.home;
 
@@ -7,15 +6,24 @@ import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.core.view.GestureDetectorCompat;
 import com.subway.railme.R;
-import com.subway.railme.home.ApiManager;
+import com.subway.railme.home.MetroApiManager;
+import com.subway.railme.home.MetroApiService;
+import com.subway.railme.home.MetroStationInfo;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HomeFragment extends AppCompatActivity {
 
@@ -23,8 +31,11 @@ public class HomeFragment extends AppCompatActivity {
     private AppCompatEditText searchStation;
     private ScaleGestureDetector scaleGestureDetector;
     private GestureDetectorCompat gestureDetector;
+    private ListView stationListView;
+    private ArrayAdapter<String> stationAdapter;
+    private List<MetroStationInfo> stationList;
 
-    @SuppressLint("WrongViewCast")
+    @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,9 +43,14 @@ public class HomeFragment extends AppCompatActivity {
 
         imageViewZoomable = findViewById(R.id.iv_SubwayMap);
         searchStation = findViewById(R.id.searchStation);
+        stationListView = findViewById(R.id.stationListView);
+
+        stationList = new ArrayList<>();
+        stationAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
+        stationListView.setAdapter(stationAdapter);
 
         // API 연동
-        //callSubwayApi();
+        // callSubwayApi();
 
         // 줌인/줌아웃 및 스크롤 기능 설정
         scaleGestureDetector = new ScaleGestureDetector(this, new ScaleListener());
@@ -46,40 +62,60 @@ public class HomeFragment extends AppCompatActivity {
 
         // 상하좌우 스크롤 기능 설정
         gestureDetector = new GestureDetectorCompat(this, new ScrollListener());
-    }
-/*
-    private void callSubwayApi() {
-        // TODO: API 호출 로직 (ex. SubwayApi를 사용하여 데이터를 가져오는 코드 등)
-        SubwayApi subwayApi = ApiManager.createApi();
-        Call<ApiResponseModel> call = subwayApi.getSubwayRouteInfo(
-                "$2a$10$Sb/okQVuOfQ1CC9JQWxmeu6OcnkeRL8zS1kemO96dnFiDf8e0Qumu",
-                "json",
-                "lnCd_value",
-                "mreaWideCd_value"
-        );
 
-        call.enqueue(new Callback<ApiResponseModel>() {
+        searchStation.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onResponse(Call<ApiResponseModel> call, Response<ApiResponseModel> response) {
+            public void beforeTextChanged(CharSequence charSequence, int start, int before, int count) {}
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                // 검색어가 변경될 때마다 역 정보를 검색
+                searchMetroStation(charSequence.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {}
+        });
+    }
+
+    //api키
+    public static class ApiKeyManager {
+        private static ApiKeyManager BuildConfig;
+        public static final String API_KEY = BuildConfig.API_KEY;
+    }
+
+    private void searchMetroStation(String query) {
+        MetroApiService apiService = MetroApiManager.getApiService();
+        Call<List<MetroStationInfo>> call = apiService.getMetroStationInfo(query);
+
+        call.enqueue(new Callback<List<MetroStationInfo>>() {
+            @Override
+            public void onResponse(Call<List<MetroStationInfo>> call, Response<List<MetroStationInfo>> response) {
                 if (response.isSuccessful()) {
-                    ApiResponseModel responseData = response.body();
-                    // UI에 데이터를 적용하는 작업 수행
-                    updateUIWithData(responseData);
+                    stationList.clear();
+                    stationList.addAll(response.body());
+
+                    // 검색 결과를 리스트뷰에 업데이트
+                    updateStationListView();
                 } else {
-                    // API 호출이 실패한 경우 처리
-                    handleApiError();
+                    Toast.makeText(HomeFragment.this, "검색에 실패했습니다.", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<ApiResponseModel> call, Throwable t) {
-                // 네트워크 오류 또는 예외 처리
-                t.printStackTrace();
-                // 사용자에게 오류 메시지를 표시하거나 다른 적절한 조치를 취할 수 있습니다.
-                showErrorToUser();
+            public void onFailure(Call<List<MetroStationInfo>> call, Throwable t) {
+                Toast.makeText(HomeFragment.this, "네트워크 오류: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-    }*/
+    }
+
+    private void updateStationListView() {
+        stationAdapter.clear();
+        for (MetroStationInfo station : stationList) {
+            stationAdapter.add(station.getName());
+        }
+        stationAdapter.notifyDataSetChanged();
+    }
 
     private class ScaleListener extends ScaleGestureDetector.SimpleOnScaleGestureListener {
         @Override
@@ -104,21 +140,4 @@ public class HomeFragment extends AppCompatActivity {
             return true;
         }
     }
-/*
-    private void updateUIWithData(ApiResponseModel data) {
-        // 받아온 데이터를 사용하여 UI를 업데이트하는 예시
-        // 예를 들어, TextView에 데이터를 설정하는 등의 작업을 수행할 수 있습니다.
-    }
-
-    private void handleApiError() {
-        // API 호출이 실패했을 때의 처리
-        showErrorToUser();
-    }
-
-    private void showErrorToUser() {
-        // 사용자에게 오류 메시지를 표시(임시)
-        runOnUiThread(() -> {
-            Toast.makeText(HomeFragment.this, "네트워크 오류가 발생했습니다.", Toast.LENGTH_SHORT).show();
-        });
-    }*/
 }

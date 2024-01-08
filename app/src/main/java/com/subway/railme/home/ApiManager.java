@@ -6,7 +6,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiManager {
-    private static final String BASE_URL = "https://openapi.kric.go.kr/openapi/";
+    private static final String BASE_URL = "http://swopenapi.seoul.go.kr/api/subway/744144704a74706635304c4d6b644e/xml/realtimeStationArrival/ALL";
 
     public static SubwayApi createApi() {
         Retrofit retrofit = new Retrofit.Builder()

@@ -5,4 +5,6 @@
 
     <!-- 카카오 네이티브 앱 키 -->
     <string name="kakao_app_key">641c840c3a49b1f89718aeaa4caf6797</string>
+    <string name="title_activity_arrival_info.xml">activity_arrival_info.xml</string>
+    <string name="api_key">744144704a74706635304c4d6b644e</string>
 </resources>
