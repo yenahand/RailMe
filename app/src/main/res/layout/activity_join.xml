@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".join.JoinActivity">
+
+    <!--맨 위 회원가입 문구-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="회원가입"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.167" />
+
+    <!--사용자 ID 문구-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="ID:"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.116"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.316" />
+
+    <!--사용자 ID 입력 설명과 칸-->
+    <EditText
+        android:id="@+id/et_joinId"
+        android:layout_width="250dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="212dp"
+        android:ems="10"
+        android:hint="아이디 영문, 숫자 혼합 6~10자"
+        android:inputType="numberPassword"
+        android:maxLength="10"
+        android:minLines="6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.652"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <!--사용자 비밀번호 password 문구-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="비밀번호:"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.051"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.412" />
+
+    <!--사용자 비밀번호 입력 설명과 칸-->
+    <EditText
+        android:id="@+id/et_joinPassword"
+        android:layout_width="265dp"
+        android:layout_height="48dp"
+        android:ems="10"
+        android:hint="비밀번호 영문, 숫자 혼합 8~12자"
+        android:inputType="numberPassword"
+        android:maxLines="12"
+        android:minLines="8"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.719"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.409" />
+
+    <!-- 회원가입 버튼 -->
+    <Button
+        android:id="@+id/bt_join_join"
+        android:layout_width="264dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="75dp"
+        android:layout_marginTop="75dp"
+        android:layout_marginEnd="72dp"
+        android:layout_marginBottom="280dp"
+        android:background="@color/white"
+        android:hint="회원가입"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_joinPassword" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

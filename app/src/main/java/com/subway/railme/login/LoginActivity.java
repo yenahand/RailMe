@@ -3,52 +3,55 @@ package com.subway.railme.login;
 import static androidx.constraintlayout.widget.ConstraintLayoutStates.TAG;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.fragment.NavHostFragment;
-import androidx.navigation.ui.NavigationUI;
 
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
-import android.database.Observable;
 import android.os.Bundle;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageButton;
-import android.widget.Toast;
 
 import com.kakao.sdk.auth.model.OAuthToken;
 import com.kakao.sdk.user.UserApiClient;
-import com.kakao.sdk.user.model.Account;
 import com.kakao.sdk.user.model.User;
-import com.subway.railme.R;
+import com.subway.railme.LoginResultActivity;
 import com.subway.railme.databinding.ActivityLoginBinding;
-
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import com.subway.railme.join.JoinActivity;
 
 import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
 
+// 오류 수정 예정
 public class LoginActivity extends AppCompatActivity {
 
     private ActivityLoginBinding binding;
-    private View loginButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        binding.tvLoginText.setText("로그인");
 
-        // binding으로 바로 참조가 가능한데 findviewbyid 써서 지웠습니다.
-        binding.ibKakaoLogin.setOnClickListener(new View.OnClickListener() { // 로그인 버튼 눌렀을 때
+        binding.btLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 사용자가 아이디와 패스워드를 입력한 후 로그인 버튼을 클릭했을 때 값을 받아온다는 의미임
+                String UserId = binding.etLogin.getText().toString();
+                String UserPassword = binding.etPassword.getText().toString();
+
+                Intent intent = new Intent(LoginActivity.this, LoginResultActivity.this);
+            }
+        });
+
+        binding.btLoginJoin.setOnClickListener(new View.OnClickListener() { // 회원가입 버튼 눌렀을 때 화면 전환하기
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), JoinActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        binding.ibKakaoLogin.setOnClickListener(new View.OnClickListener() { // 카카오 로그인 버튼 눌렀을 때
             @Override
             public void onClick(View view) {
-
                 if (UserApiClient.getInstance().isKakaoTalkLoginAvailable(LoginActivity.this)) {
                     UserApiClient.getInstance().loginWithKakaoTalk(LoginActivity.this, callback);
                 } else {
@@ -57,9 +60,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-
-
-    //왜 ibKakaoLogin.setOnClickListener 이게 두번 선언이 되어있죠? binding으로 바로 참고가 가능한데 findviewbyid 써서 지웠습니다. 이거와 이유 같습니다.
 
     // 카카오톡이 설치되어 있는지 확인하는 메서드 (카카오에서 제공 콜백 객체를 이용)
     Function2<OAuthToken, Throwable, Unit> callback = new Function2<OAuthToken, Throwable, Unit>() {
@@ -76,10 +76,6 @@ public class LoginActivity extends AppCompatActivity {
             return null;
         }
     };
-
-    public void clickibkakaologin(View view) {
-    }
-
 
     private void updateKakaoLoginUi() {
         UserApiClient.getInstance().me(new Function2<User, Throwable, Unit>() {
