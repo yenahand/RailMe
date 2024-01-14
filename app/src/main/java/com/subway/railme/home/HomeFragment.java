@@ -1,4 +1,3 @@
-
 package com.subway.railme.home;
 
 import android.annotation.SuppressLint;
@@ -6,18 +5,19 @@ import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+import android.widget.SearchView;
+import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.core.view.GestureDetectorCompat;
 import com.subway.railme.R;
-import com.subway.railme.home.MetroApiManager;
-import com.subway.railme.home.MetroApiService;
-import com.subway.railme.home.MetroStationInfo;
+import com.subway.railme.home.API.ApiManager;
+import com.subway.railme.home.API.ApiResponseModel;
+import com.subway.railme.home.API.RealtimeArrival;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -27,13 +27,13 @@ import java.util.List;
 
 public class HomeFragment extends AppCompatActivity {
 
-    private ImageViewZoomable imageViewZoomable;
+    private ImageView imageViewZoomable;
     private AppCompatEditText searchStation;
     private ScaleGestureDetector scaleGestureDetector;
     private GestureDetectorCompat gestureDetector;
     private ListView stationListView;
     private ArrayAdapter<String> stationAdapter;
-    private List<MetroStationInfo> stationList;
+    private List<RealtimeArrival> stationList;
 
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     @Override
@@ -49,9 +49,6 @@ public class HomeFragment extends AppCompatActivity {
         stationAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
         stationListView.setAdapter(stationAdapter);
 
-        // API 연동
-        // callSubwayApi();
-
         // 줌인/줌아웃 및 스크롤 기능 설정
         scaleGestureDetector = new ScaleGestureDetector(this, new ScaleListener());
         imageViewZoomable.setOnTouchListener((v, event) -> {
@@ -63,58 +60,44 @@ public class HomeFragment extends AppCompatActivity {
         // 상하좌우 스크롤 기능 설정
         gestureDetector = new GestureDetectorCompat(this, new ScrollListener());
 
-        searchStation.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int start, int before, int count) {}
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
-                // 검색어가 변경될 때마다 역 정보를 검색
-                searchMetroStation(charSequence.toString());
+        // SearchView의 검색 이벤트 처리
+        searchStation.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                String stationName = searchStation.getText().toString();
+                if (!stationName.isEmpty()) {
+                    // 검색된 역에 대한 API 호출
+                    callSubwayApi(stationName);
+                } else {
+                    Toast.makeText(HomeFragment.this, "검색어를 입력하세요.", Toast.LENGTH_SHORT).show();
+                }
+                return true;
             }
-
-            @Override
-            public void afterTextChanged(Editable editable) {}
+            return false;
         });
     }
 
-    //api키
-    public static class ApiKeyManager {
-        private static ApiKeyManager BuildConfig;
-        public static final String API_KEY = BuildConfig.API_KEY;
-    }
-
-    private void searchMetroStation(String query) {
-        MetroApiService apiService = MetroApiManager.getApiService();
-        Call<List<MetroStationInfo>> call = apiService.getMetroStationInfo(query);
-
-        call.enqueue(new Callback<List<MetroStationInfo>>() {
+    // API 호출 메서드
+    private void callSubwayApi(String stationName) {
+        Call<ApiResponseModel> call = ApiManager.getRealtimeArrivalInfo(stationName);
+        call.enqueue(new Callback<ApiResponseModel>() {
             @Override
-            public void onResponse(Call<List<MetroStationInfo>> call, Response<List<MetroStationInfo>> response) {
+            public void onResponse(Call<ApiResponseModel> call, Response<ApiResponseModel> response) {
                 if (response.isSuccessful()) {
-                    stationList.clear();
-                    stationList.addAll(response.body());
-
-                    // 검색 결과를 리스트뷰에 업데이트
-                    updateStationListView();
+                    ApiResponseModel apiResponse = response.body();
+                    if (apiResponse != null && apiResponse.getRealtimeArrivalList() != null) {
+                        stationList = apiResponse.getRealtimeArrivalList();
+                        updateStationListView(); // UI 업데이트
+                    }
                 } else {
-                    Toast.makeText(HomeFragment.this, "검색에 실패했습니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(HomeFragment.this, "서버 응답 실패", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<List<MetroStationInfo>> call, Throwable t) {
-                Toast.makeText(HomeFragment.this, "네트워크 오류: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<ApiResponseModel> call, Throwable t) {
+                Toast.makeText(HomeFragment.this, "통신 실패", Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    private void updateStationListView() {
-        stationAdapter.clear();
-        for (MetroStationInfo station : stationList) {
-            stationAdapter.add(station.getName());
-        }
-        stationAdapter.notifyDataSetChanged();
     }
 
     private class ScaleListener extends ScaleGestureDetector.SimpleOnScaleGestureListener {
@@ -130,6 +113,15 @@ public class HomeFragment extends AppCompatActivity {
         }
     }
 
+    // UI 업데이트 메서드
+    private void updateStationListView() {
+        stationAdapter.clear();
+        for (RealtimeArrival station : stationList) {
+            stationAdapter.add(station.getStatnNm());
+        }
+        stationAdapter.notifyDataSetChanged();
+    }
+
     private class ScrollListener extends GestureDetector.SimpleOnGestureListener {
         @Override
         public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
@@ -139,5 +131,10 @@ public class HomeFragment extends AppCompatActivity {
             imageViewZoomable.setTranslationY(currentTranslationY - distanceY);
             return true;
         }
+    }
+
+    // API 키 관리 클래스
+    public static class ApiKeyManager {
+        public static final String API_KEY = "63686678677470663633696757744c";
     }
 }
