@@ -1,3 +1,4 @@
+// 사용자 계정 로그인을 위한 페이지
 package com.subway.railme.login;
 
 import static androidx.constraintlayout.widget.ConstraintLayoutStates.TAG;
@@ -6,15 +7,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 
+import com.google.firebase.Firebase;
 import com.kakao.sdk.auth.model.OAuthToken;
 import com.kakao.sdk.user.UserApiClient;
 import com.kakao.sdk.user.model.User;
-import com.subway.railme.LoginResultActivity;
 import com.subway.railme.databinding.ActivityLoginBinding;
-import com.subway.railme.join.JoinActivity;
 
 import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
@@ -34,10 +36,56 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // 사용자가 아이디와 패스워드를 입력한 후 로그인 버튼을 클릭했을 때 값을 받아온다는 의미임
-                String UserId = binding.etLogin.getText().toString();
-                String UserPassword = binding.etPassword.getText().toString();
+                String ID = binding.etLogin.getText().toString();
+                String Password = binding.etPassword.getText().toString();
 
-                Intent intent = new Intent(LoginActivity.this, LoginResultActivity.this);
+                Intent intent = new Intent(LoginActivity.this, LoginResult.class);
+                Intent.putExtra("ID", ID);
+                Intent.putExtra("Password", Password);
+                startActivity(intent);
+            }
+        });
+
+        // 입력한 값이 올바른지 확인
+        binding.etLogin.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // Log.d("SENTI", s + "," + count);
+                if(s != null) {
+                    inputID = s.toString();
+                    binding.etLogin.setClickable(validation());
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        binding.etPassword.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // Log.d("SENTI", s + "," + count);
+                if(s != null) {
+                    inputPassword = s.toString();
+                    binding.etPassword.setClickable(validation());
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
 
@@ -59,6 +107,10 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public boolean validation() {
+        return inputID.equals(IDOK) && inputPassword.equals(PasswordOK);
     }
 
     // 카카오톡이 설치되어 있는지 확인하는 메서드 (카카오에서 제공 콜백 객체를 이용)

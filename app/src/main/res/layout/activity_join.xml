@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".join.JoinActivity">
+    tools:context=".login.JoinActivity">
 
     <!--맨 위 회원가입 문구-->
     <TextView
@@ -19,50 +19,51 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.167" />
 
-    <!--사용자 ID 문구-->
+    <!--사용자 닉네임 문구-->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="ID:"
+        android:hint="닉네임:"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.116"
+        app:layout_constraintHorizontal_bias="0.077"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.316" />
+        app:layout_constraintVertical_bias="0.279" />
 
     <!--사용자 ID 입력 설명과 칸-->
     <EditText
         android:id="@+id/et_joinId"
         android:layout_width="250dp"
         android:layout_height="48dp"
-        android:layout_marginTop="212dp"
+        android:layout_marginTop="248dp"
         android:ems="10"
         android:hint="아이디 영문, 숫자 혼합 6~10자"
         android:inputType="numberPassword"
         android:maxLength="10"
         android:minLines="6"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.652"
+        app:layout_constraintHorizontal_bias="0.602"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
-    <!--사용자 비밀번호 password 문구-->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="비밀번호:"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <!--사용자 닉네임 입력 설명과 칸-->
+    <EditText
+        android:id="@+id/et_joinNickname"
+        android:layout_width="250dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="188dp"
+        android:ems="10"
+        android:hint="닉네임 한글 1~5자"
+        android:inputType="numberPassword"
+        android:maxLength="5"
+        android:minLines="1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.051"
+        app:layout_constraintHorizontal_bias="0.602"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.412" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!--사용자 비밀번호 입력 설명과 칸-->
     <EditText
@@ -76,10 +77,38 @@
         android:minLines="8"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.719"
+        app:layout_constraintHorizontal_bias="0.664"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.409" />
+        app:layout_constraintVertical_bias="0.464" />
+
+    <!--사용자 ID 문구-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="ID:"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.095"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.367" />
+
+    <!--사용자 비밀번호 password 문구-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="비밀번호:"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.027"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.465" />
 
     <!-- 회원가입 버튼 -->
     <Button
