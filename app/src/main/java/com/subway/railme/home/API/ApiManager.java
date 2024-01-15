@@ -10,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
-
+//레트로핏 통신을 패키지로 분리 해놓았는데 그냥 이렇게 하려고 하시는거죠?
 public class ApiManager {
     private static Retrofit retrofit;
     private static Gson gson;
