@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
+import com.subway.railme.databinding.ActivityLoginBinding;
 import com.subway.railme.databinding.FragmentMyPageBinding;
 
 

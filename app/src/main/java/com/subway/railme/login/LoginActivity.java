@@ -4,6 +4,9 @@ package com.subway.railme.login;
 import static androidx.constraintlayout.widget.ConstraintLayoutStates.TAG;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModel;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,11 +15,12 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 
-import com.google.firebase.Firebase;
+import com.google.firebase.database.MutableData;
 import com.kakao.sdk.auth.model.OAuthToken;
 import com.kakao.sdk.user.UserApiClient;
 import com.kakao.sdk.user.model.User;
 import com.subway.railme.databinding.ActivityLoginBinding;
+import com.subway.railme.databinding.FragmentMyPageBinding;
 
 import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
@@ -31,6 +35,13 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        binding.tvloginArea.observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                binding.tvloginArea.
+            }
+        });
 
         binding.btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,6 +118,11 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public class AutoLogin extends ViewModel() {
+        MutableData<String> binding.tvloginArea = new MutableLiveData<>();
+        private String
     }
 
     public boolean validation() {
