@@ -20,7 +20,7 @@ public class CongestionFragment extends Fragment {
 
     private FragmentCongestionBinding binding;
     private ImageView imageView;
-    private int congestionLevel; // 혼잡도 값을 저장하는 변수
+    private int congestionLevel; // 혼잡도 값을 저장하는 변수(임시)
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

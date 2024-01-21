@@ -8,9 +8,10 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
-import retrofit2.http.Path;
 import retrofit2.http.Query;
 //레트로핏 통신을 패키지로 분리 해놓았는데 그냥 이렇게 하려고 하시는거죠?
+//=>넵. 아직 많이 미숙해서 다른사이트들이랑 GPT참고해서 작성했는데, 혹시 분리 시켜놓으면 문제 생길까요?
+//참고사이트 > https://dotiromoook.tistory.com/8 등등
 public class ApiManager {
     private static Retrofit retrofit;
     private static Gson gson;
@@ -26,7 +27,7 @@ public class ApiManager {
 
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl("http://swopenapi.seoul.go.kr/")
+                    .baseUrl("http://swopenapi.seoul.go.kr/")  //실시간 도착정보
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }

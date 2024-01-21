@@ -27,7 +27,7 @@
     <!--혼잡도표시할 현재 역 텍스트뷰-->
     <TextView
         android:layout_width="76dp"
-        android:layout_height="31dp"
+        android:layout_height="32dp"
         android:text="현재역"
         android:textColor="#000000"
         android:textSize="25dp"
@@ -36,7 +36,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="236dp" />
+        tools:layout_editor_absoluteY="235dp" />
 
     <View
         android:layout_width="408dp"
@@ -151,6 +151,15 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="12dp"
         tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="60dp"
+        android:layout_height="23dp"
+        android:text="혼잡률 %"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="183dp"
+        tools:layout_editor_absoluteY="423dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
