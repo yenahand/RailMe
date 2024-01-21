@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,6 +23,8 @@ import com.kakao.sdk.user.model.User;
 import com.subway.railme.databinding.ActivityLoginBinding;
 import com.subway.railme.databinding.FragmentMyPageBinding;
 
+import javax.annotation.Nullable;
+
 import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
 
@@ -29,6 +32,7 @@ import kotlin.jvm.functions.Function2;
 public class LoginActivity extends AppCompatActivity {
 
     private ActivityLoginBinding binding;
+    private LoginViewModel model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,26 +40,14 @@ public class LoginActivity extends AppCompatActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        binding.tvloginArea.observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(String s) {
-                binding.tvloginArea.
-            }
-        });
+        model = new ViewModelProvider(this).get(LoginViewModel.calss);
 
-        binding.btLogin.setOnClickListener(new View.OnClickListener() {
+        final Observer<String> loginObserver = new Observer<String>() {
             @Override
-            public void onClick(View v) {
-                // 사용자가 아이디와 패스워드를 입력한 후 로그인 버튼을 클릭했을 때 값을 받아온다는 의미임
-                String ID = binding.etLogin.getText().toString();
-                String Password = binding.etPassword.getText().toString();
-
-                Intent intent = new Intent(LoginActivity.this, LoginResult.class);
-                Intent.putExtra("ID", ID);
-                Intent.putExtra("Password", Password);
-                startActivity(intent);
+            public void onChanged(@Nullable final String newlogin) {
+                binding.btLogin.setOnClickListener();
             }
-        });
+        };
 
         // 입력한 값이 올바른지 확인
         binding.etLogin.addTextChangedListener(new TextWatcher() {

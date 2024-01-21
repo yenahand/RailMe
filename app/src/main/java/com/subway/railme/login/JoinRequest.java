@@ -25,10 +25,10 @@ public class JoinRequest extends StringRequest {
     public JoinRequest(EditText ID, EditText Password, EditText Nickname, Response.Listener<String> listener) {
         super(Method.POST,URL,listener,null);
 
-        map.put("ID", ID.getText().toString()); // 사용자 ID
-        map.put("Password", Password.getText().toString()); // 사용자 비밀번호
-        map.put("Nickname", Nickname.getText().toString()); // 사용자 이름
-
+        map = new HashMap<>();
+        map.put("ID", ID); // 사용자 ID
+        map.put("Password", Password); // 사용자 비밀번호
+        map.put("Nickname", Nickname); // 사용자 이름
     }
     @Override
     protected Map<String, String>getParams() throws AuthFailureError{
