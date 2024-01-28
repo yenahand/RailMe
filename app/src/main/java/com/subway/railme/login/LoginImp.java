@@ -1,11 +1,11 @@
 package com.subway.railme.login;
 
-import android.graphics.Paint;
+import androidx.lifecycle.MutableLiveData;
 
-import com.google.gson.JsonObject;
+public class LoginImp<PostJoinData> {
 
-import kotlin.Unit;
-
-public class LoginImp<PostJoinData> implements LoginRepository {
-
+    @Override
+    public MutableLiveData<String> getLogin() {
+        return null;
+    }
 }
