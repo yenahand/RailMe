@@ -19,6 +19,7 @@ import android.widget.Toast;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.fragment.app.Fragment;
 import com.subway.railme.R;
+import com.subway.railme.congestion.CongestionFragment;
 import com.subway.railme.home.API.ApiManager;
 import com.subway.railme.home.API.ApiResponseModel;
 import com.subway.railme.home.API.RealtimeArrival;
@@ -90,7 +91,17 @@ public class HomeFragment extends Fragment {
                         stationList = apiResponse.getRealtimeArrivalList();
                         updateStationListView();
                     }
-                } else {
+                   /* CongestionFragment congestionFragment = new CongestionFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("stationName", stationName);
+                    congestionFragment.setArguments(bundle);
+
+                    getFragmentManager().beginTransaction()
+                            .replace(R.id.fragment_congestion, congestionFragment)
+                            .addToBackStack(null)
+                            .commit();*/
+                }
+                 else {
                     Log.d("HomeFragment", "서버 응답 실패");
                     Toast.makeText(requireContext(), "서버 응답에 실패했습니다.", Toast.LENGTH_SHORT).show();
                 }

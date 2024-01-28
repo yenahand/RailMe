@@ -1,59 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/home_container"
-    xmlns:tools="http://schemas.android.com/tools">
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="11dp">
 
 
     <!--지하철 혼잡도 표시공간-->
 
     <!--추천 칸 표시 [혼잡도 낮은 칸]-->
 
+    <!--혼잡도표시할 현재 역 텍스트뷰-->
+
     <ImageView
         android:id="@+id/iv_congestion"
         android:layout_width="135dp"
         android:layout_height="123dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/main"
         app:tint="#54484F"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="281dp" />
-
-    <!--혼잡도표시할 현재 역 텍스트뷰-->
-    <TextView
-        android:layout_width="76dp"
-        android:layout_height="32dp"
-        android:text="현재역"
-        android:textColor="#000000"
-        android:textSize="25dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="235dp" />
-
-    <View
-        android:layout_width="408dp"
-        android:layout_height="21dp"
-        android:layout_marginBottom="324dp"
-        android:background="#594E59"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.333"
-        app:layout_constraintStart_toStartOf="parent" />
+        tools:layout_editor_absoluteY="300dp" />
 
     <View
         android:id="@+id/view3"
         android:layout_width="110dp"
         android:layout_height="20dp"
-        android:layout_marginStart="0dp"
-        android:layout_marginBottom="324dp"
+        android:layout_marginBottom="304dp"
         android:background="#8C7B8C"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -63,10 +40,44 @@
         android:layout_width="105dp"
         android:layout_height="21dp"
         android:layout_marginStart="304dp"
-        android:layout_marginBottom="324dp"
+        android:layout_marginBottom="304dp"
         android:background="#8C7B8C"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:layout_width="408dp"
+        android:layout_height="21dp"
+        android:layout_marginBottom="304dp"
+        android:background="#594E59"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="97dp"
+        android:layout_height="35dp"
+        android:text="혼잡률 %"
+        android:textSize="23dp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="164dp"
+        tools:layout_editor_absoluteY="442dp" />
+
+    <TextView
+        android:id="@+id/tv_congestionText"
+        android:layout_width="93dp"
+        android:layout_height="43dp"
+        android:text="현재역"
+        android:textColor="#000000"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="16dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -75,12 +86,12 @@
         android:textColor="#000000"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="41dp"
-        tools:layout_editor_absoluteY="125dp" />
+        tools:layout_editor_absoluteY="136dp" />
 
     <View
         android:layout_width="18dp"
         android:layout_height="18dp"
-        android:layout_marginBottom="556dp"
+        android:layout_marginBottom="544dp"
         android:background="@android:color/holo_green_dark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -94,7 +105,7 @@
         android:textColor="#000000"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="42dp"
-        tools:layout_editor_absoluteY="95dp" />
+        tools:layout_editor_absoluteY="106dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -103,12 +114,12 @@
         android:textColor="#000000"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="42dp"
-        tools:layout_editor_absoluteY="66dp" />
+        tools:layout_editor_absoluteY="77dp" />
 
     <View
         android:layout_width="18dp"
         android:layout_height="18dp"
-        android:layout_marginBottom="616dp"
+        android:layout_marginBottom="604dp"
         android:background="@android:color/holo_orange_dark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -118,7 +129,7 @@
     <View
         android:layout_width="18dp"
         android:layout_height="18dp"
-        android:layout_marginBottom="644dp"
+        android:layout_marginBottom="632dp"
         android:background="@android:color/holo_red_dark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -128,7 +139,7 @@
     <View
         android:layout_width="18dp"
         android:layout_height="18dp"
-        android:layout_marginBottom="588dp"
+        android:layout_marginBottom="576dp"
         android:background="#FFFF00"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -142,24 +153,7 @@
         android:textColor="#000000"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="39dp"
-        tools:layout_editor_absoluteY="156dp" />
-
-    <SearchView
-        android:layout_width="328dp"
-        android:layout_height="43dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="12dp"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="60dp"
-        android:layout_height="23dp"
-        android:text="혼잡률 %"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="183dp"
-        tools:layout_editor_absoluteY="423dp" />
+        tools:layout_editor_absoluteY="167dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
