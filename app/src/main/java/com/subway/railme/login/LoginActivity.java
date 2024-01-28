@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -16,6 +17,8 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 
+import com.google.firebase.Firebase;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.MutableData;
 import com.kakao.sdk.auth.model.OAuthToken;
 import com.kakao.sdk.user.UserApiClient;
@@ -30,7 +33,7 @@ import kotlin.jvm.functions.Function2;
 
 // 오류 수정 예정
 public class LoginActivity extends AppCompatActivity {
-
+// mvvm 패턴에서 view 부분
     private ActivityLoginBinding binding;
     private LoginViewModel model;
 
@@ -40,14 +43,27 @@ public class LoginActivity extends AppCompatActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        model = new ViewModelProvider(this).get(LoginViewModel.calss);
+        model = new ViewModelProvider(this).get(LoginViewModel.class);
 
-        final Observer<String> loginObserver = new Observer<String>() {
+        model.getLogin().observe(this, Login -> {
+            // ui 업데이트 되는 거...
+        });
+
+        // 로그인 됐는지 확인하는 관찰자 (LiveData를 관찰)
+        final Observer<String> loginObserver = new Observer<String>() { // 데이터 변경이 이루어졌을 때 실행할 작업
             @Override
-            public void onChanged(@Nullable final String newlogin) {
-                binding.btLogin.setOnClickListener();
+            public void onChanged(@Nullable final String login) {
+                binding.btLogin.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                         = "";
+                        model.getLogin().setValue(anotherName);
+                    }
+                };
             }
         };
+        model.getLogin().observe(this, loginObserver);
+
 
         // 입력한 값이 올바른지 확인
         binding.etLogin.addTextChangedListener(new TextWatcher() {
@@ -110,11 +126,6 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
-    }
-
-    public class AutoLogin extends ViewModel() {
-        MutableData<String> binding.tvloginArea = new MutableLiveData<>();
-        private String
     }
 
     public boolean validation() {

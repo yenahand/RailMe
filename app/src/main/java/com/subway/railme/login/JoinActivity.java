@@ -11,6 +11,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.firebase.Firebase;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.subway.railme.databinding.ActivityJoinBinding;
 
 import org.json.JSONException;
@@ -20,7 +23,7 @@ import okhttp3.Response;
 
 // 추가 작성 예정
 public class JoinActivity extends AppCompatActivity {
-
+    private FirebaseAuth mAuth;
     private ActivityJoinBinding binding;
 
     @Override
@@ -29,7 +32,8 @@ public class JoinActivity extends AppCompatActivity {
         binding = ActivityJoinBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-
+        mAuth = FirebaseAuth.getInstance(); // 비밀번호를 사용하는 신규 사용자를 위해 추가
+        
 
         binding.btJoinJoin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,5 +77,10 @@ public class JoinActivity extends AppCompatActivity {
             // RequestGueue queue = Volley.newRequestGueue(JoinRequest.this);
             // queue.add(JoinRequest);
         });
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        FirebaseUser LoginUser = mAuth.getLoginUser();
     }
 }

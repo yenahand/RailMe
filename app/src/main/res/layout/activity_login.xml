@@ -28,14 +28,13 @@
         android:layout_height="48dp"
         android:layout_marginTop="176dp"
         android:ems="10"
-        android:hint="아이디 영문, 숫자 혼합 6~10자"
+        android:hint="가입한 이메일"
         android:inputType="numberPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:minLines="6"
-        android:maxLength="10"/>
+        android:minLines="2"/>
 
     <!--비밀번호 입력 설명과 칸-->
     <EditText
