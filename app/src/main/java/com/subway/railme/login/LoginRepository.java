@@ -4,7 +4,8 @@ import androidx.lifecycle.MutableLiveData;
 
 import java.util.Objects;
 
-public class LoginRepository {
+public class LoginRepository { //레포지토리는 인터페이스로 만들어줘야 다른곳에서도 사용하기 편리할텐데요 고려해주세요
+    //클래스로만 만들게 되면 패턴적용이 안될거에요
 
     private _LoginNotice = MutableLiveData<String>();
 
