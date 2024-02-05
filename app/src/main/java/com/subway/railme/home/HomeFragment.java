@@ -14,6 +14,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.AppCompatEditText;
@@ -44,6 +45,8 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);  // 뷰 바인딩 초기화
+
+        ProgressBar progressBar = binding.progressBar;
         View view = binding.getRoot();
 
         ImageView imageViewZoomable = binding.ivSubwayMap; //노선도
@@ -64,6 +67,9 @@ public class HomeFragment extends Fragment {
         gestureDetector = new GestureDetector(requireContext(), new ScrollListener());
 
         searchStation.setOnEditorActionListener((v, actionId, event) -> {
+
+            binding.progressBar.setVisibility(View.VISIBLE);
+
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 String stationName = searchStation.getText().toString();
                 if (!stationName.isEmpty()) {
@@ -85,12 +91,23 @@ public class HomeFragment extends Fragment {
         call.enqueue(new Callback<ApiResponseModel>() {
             @Override
             public void onResponse(Call<ApiResponseModel> call, Response<ApiResponseModel> response) {
+
+                binding.progressBar.setVisibility(View.GONE);
+
                 if (response.isSuccessful()) {
                     ApiResponseModel apiResponse = response.body();
                     if (apiResponse != null && apiResponse.getRealtimeArrivalList() != null) {
                         stationList = apiResponse.getRealtimeArrivalList();
-                        updateStationListView();
+
+                        if (stationList.isEmpty()) {
+                            Toast.makeText(requireContext(), "검색 결과가 없습니다.", Toast.LENGTH_SHORT).show();
+                        } else {
+                            updateStationListView();
+                        }
                     }
+
+
+                    //검색한 역 CongestionFragment로 넘기기
                    /* CongestionFragment congestionFragment = new CongestionFragment();
                     Bundle bundle = new Bundle();
                     bundle.putString("stationName", stationName);
@@ -109,6 +126,8 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onFailure(Call<ApiResponseModel> call, Throwable t) {
+                binding.progressBar.setVisibility(View.GONE);
+
                 Log.d("HomeFragment", "통신 실패", t);
                 Toast.makeText(requireContext(), "통신에 실패했습니다.", Toast.LENGTH_SHORT).show();
             }

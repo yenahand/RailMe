@@ -2,12 +2,15 @@
 //일단 혼잡도는 홈프래그먼트에서 역을 검색하면 그 역으로 설정해서 혼잡도를 표시하도록 구현중입니다
 package com.subway.railme.congestion;
 
+import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 
 import androidx.fragment.app.Fragment;
 
@@ -28,8 +31,7 @@ public class CongestionFragment extends Fragment {
         binding = FragmentCongestionBinding.inflate(inflater, container, false);
         imageView = binding.ivCongestion;
 
-        // AsyncTask를 사용하여 백그라운드에서 혼잡도 값을 가져오기
-       // new GetCongestionLevelTask().execute();
+        // new GetCongestionLevelTask().execute();
 
         return binding.getRoot();
     }
@@ -40,7 +42,7 @@ public class CongestionFragment extends Fragment {
         binding = null;
     }
 
-   /* private class GetCongestionLevelTask extends AsyncTask<Void, Void, Integer> {
+   /*private class GetCongestionLevelTask extends AsyncTask<Void, Void, Integer> {
         @Override
         protected Integer doInBackground(Void... voids) {
             // Python 코드 실행
@@ -72,4 +74,27 @@ public class CongestionFragment extends Fragment {
             imageView.setColorFilter(getResources().getColor(R.color.green)); // 초록색
         }
     }*/
+
+    //정보설명창(팝업창)
+    private void showCongestionInfoPopup(View view) {
+        LayoutInflater inflater = (LayoutInflater) requireContext().getSystemService(requireContext().LAYOUT_INFLATER_SERVICE);
+        View popupView = inflater.inflate(R.layout.popup, null);
+
+        int width = ViewGroup.LayoutParams.WRAP_CONTENT;
+        int height = ViewGroup.LayoutParams.WRAP_CONTENT;
+        boolean focusable = true;
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+
+        // 팝업 창 위치
+        popupWindow.showAtLocation(view, 0, 50, 200); //변경예정
+
+        // 팝업 창 닫기 버튼
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) Button closeButton = popupView.findViewById(R.id.popup_back);
+        closeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+            }
+        });
+    }
 }

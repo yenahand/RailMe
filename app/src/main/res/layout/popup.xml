@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/info_popup"
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="-22dp">
 
@@ -143,7 +144,7 @@
 
     <!--뒤로가기 버튼-->
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/popup_back"
         android:layout_width="30dp"
         android:layout_height="26dp"
         android:background="#cfc8d3"

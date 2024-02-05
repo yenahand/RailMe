@@ -155,6 +155,16 @@
         tools:layout_editor_absoluteX="39dp"
         tools:layout_editor_absoluteY="167dp" />
 
+    <ImageButton
+        android:id="@+id/ib_CongestionInfo"
+        android:layout_width="33dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/baseline_info_24" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
