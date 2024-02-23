@@ -66,7 +66,7 @@
         tools:layout_editor_absoluteY="442dp" />
 
     <TextView
-        android:id="@+id/tv_congestionText"
+        android:id="@+id/congestionText"
         android:layout_width="93dp"
         android:layout_height="43dp"
         android:text="현재역"

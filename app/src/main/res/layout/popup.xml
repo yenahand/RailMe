@@ -12,7 +12,7 @@
     <!--혼잡률에 대한 정보를 설명하는 팝업창-->
 
     <TextView
-        android:id="@+id/textView13"
+        android:id="@+id/level01"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="여유 "
@@ -22,7 +22,6 @@
         tools:layout_editor_absoluteY="333dp" />
 
     <TextView
-        android:id="@+id/textView10"
         android:layout_width="298dp"
         android:layout_height="43dp"
         android:text="혼잡률 30% 이하로
@@ -32,7 +31,6 @@
         tools:layout_editor_absoluteY="353dp" />
 
     <TextView
-        android:id="@+id/textView9"
         android:layout_width="298dp"
         android:layout_height="43dp"
         android:text="칸 혼잡률 30~50%로
@@ -82,7 +80,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/level04"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="매우 혼잡 "
@@ -92,7 +90,7 @@
         tools:layout_editor_absoluteY="72dp" />
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/level03"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="혼잡 "
@@ -102,7 +100,7 @@
         tools:layout_editor_absoluteY="164dp" />
 
     <TextView
-        android:id="@+id/textView12"
+        android:id="@+id/level02"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="보통 "
@@ -113,7 +111,6 @@
 
 
     <TextView
-        android:id="@+id/textView7"
         android:layout_width="310dp"
         android:layout_height="40dp"
         android:text="혼잡률 70% 초과, 통로에 승객들이
@@ -123,7 +120,6 @@
         tools:layout_editor_absoluteY="105dp" />
 
     <TextView
-        android:id="@+id/textView8"
         android:layout_width="298dp"
         android:layout_height="43dp"
         android:text="혼잡률50~70%로
@@ -156,7 +152,6 @@
         tools:layout_editor_absoluteY="9dp" />
 
     <TextView
-        android:id="@+id/textView14"
         android:layout_width="105dp"
         android:layout_height="32dp"
         android:text="혼잡률 정보"

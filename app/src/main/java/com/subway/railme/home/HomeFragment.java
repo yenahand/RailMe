@@ -103,26 +103,27 @@ public class HomeFragment extends Fragment {
                             Toast.makeText(requireContext(), "검색 결과가 없습니다.", Toast.LENGTH_SHORT).show();
                         } else {
                             updateStationListView();
+
+                            // 검색한 역의 이름을 CongestionFragment로 직접 전달
+                            CongestionFragment congestionFragment = new CongestionFragment();
+                            Bundle bundle = new Bundle();
+                            bundle.putString("stationName", stationName);
+                            congestionFragment.setArguments(bundle);
+
+                            getFragmentManager().beginTransaction()
+                                    //.replace(R.id.tv_congestionText, congestionFragment)
+                                    .addToBackStack(null)
+                                    .commit();
                         }
                     }
 
-
-                    //검색한 역 CongestionFragment로 넘기기
-                   /* CongestionFragment congestionFragment = new CongestionFragment();
-                    Bundle bundle = new Bundle();
-                    bundle.putString("stationName", stationName);
-                    congestionFragment.setArguments(bundle);
-
-                    getFragmentManager().beginTransaction()
-                            .replace(R.id.fragment_congestion, congestionFragment)
-                            .addToBackStack(null)
-                            .commit();*/
                 }
                  else {
                     Log.d("HomeFragment", "서버 응답 실패");
                     Toast.makeText(requireContext(), "서버 응답에 실패했습니다.", Toast.LENGTH_SHORT).show();
                 }
             }
+
 
             @Override
             public void onFailure(Call<ApiResponseModel> call, Throwable t) {

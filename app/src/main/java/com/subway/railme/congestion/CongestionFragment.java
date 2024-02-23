@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
@@ -24,14 +25,23 @@ public class CongestionFragment extends Fragment {
     private FragmentCongestionBinding binding;
     private ImageView imageView;
     private int congestionLevel; // 혼잡도 값을 저장하는 변수(임시)
+    private TextView stationNameTextView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentCongestionBinding.inflate(inflater, container, false);
         imageView = binding.ivCongestion;
+        stationNameTextView = binding.congestionText;
 
-        // new GetCongestionLevelTask().execute();
+        // HomeFragment로부터 전달받은 역 이름을 표시
+        Bundle arguments = getArguments();
+        if (arguments != null) {
+            String stationName = arguments.getString("stationName");
+            if (stationName != null) {
+                stationNameTextView.setText(stationName);
+            }
+        }
 
         return binding.getRoot();
     }
