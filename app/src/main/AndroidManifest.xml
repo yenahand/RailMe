@@ -16,31 +16,40 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RailMe"
         tools:targetApi="31">
-
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
 
-                <data android:host="oauth"
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="oauth"
                     android:scheme="kakao641c840c3a49b1f89718aeaa4caf6797" />
             </intent-filter>
         </activity>
         <activity
             android:name=".login.LoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:parentActivityName=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".login.JoinActivity"
+            android:parentActivityName=".login.LoginActivity" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true" />
+
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="641c840c3a49b1f89718aeaa4caf6797"/>
     </application>
 
 </manifest>

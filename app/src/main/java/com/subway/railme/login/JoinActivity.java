@@ -1,29 +1,26 @@
 // 사용자 회원가입을 위한 페이지
 package com.subway.railme.login;
 
-import static android.os.Build.ID;
-
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.Toast;
 
-import com.google.firebase.Firebase;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.subway.railme.databinding.ActivityJoinBinding;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import okhttp3.Response;
-
-// 추가 작성 예정
 public class JoinActivity extends AppCompatActivity {
-    private FirebaseAuth mAuth;
+    private FirebaseAuth firebaseAuth; // 파이어베이스 인증
+    private DatabaseReference databaseReference; // 실시간 데이터베이스
     private ActivityJoinBinding binding;
 
     @Override
@@ -32,55 +29,40 @@ public class JoinActivity extends AppCompatActivity {
         binding = ActivityJoinBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        mAuth = FirebaseAuth.getInstance(); // 비밀번호를 사용하는 신규 사용자를 위해 추가
-        
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); // 뒤로가기 버튼
+        firebaseAuth = FirebaseAuth.getInstance(); // 비밀번호를 사용하는 신규 사용자를 위해 추가
+        databaseReference = FirebaseDatabase.getInstance().getReference("railme");
 
         binding.btJoinJoin.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-//                final String ID = binding.etJoinId.getText().toString(); 변수명을 추가하던 XML을 추가하던 하나만 하세요
-                final String Password = binding.etJoinPassword.getText().toString();
-                final String Nickname = binding.etJoinNickname.getText().toString();
-//                Intent intent = new Intent(getApplicationContext(), JoinRequest.class);
-//                startActivity(intent);
+            public void onClick(View v) { // 회원가입 처리 시작
+                String Email = binding.etJoinEmail.getText().toString().trim(); // trim() = 공백인 부분을 제거하고 보여줌
+                String Password = binding.etJoinPassword.getText().toString().trim();
+                Intent intent = new Intent(getApplicationContext(), JoinUserAccount.class);
+                startActivity(intent);
+                firebaseAuth.createUserWithEmailAndPassword(Email, Password)
+                        .addOnCompleteListener(JoinActivity.this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (binding.etJoinEmail.length() > 0 && binding.etJoinPassword.length() > 7 && binding.etJoinPassword.length() < 13) {
+                                    if (task.isSuccessful()) {
+                                        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+                                        JoinUserAccount account = new JoinUserAccount();
+                                        account.setIdToken(firebaseUser.getUid());
+                                        account.setEmail(firebaseUser.getEmail());
+                                        account.setPassword(Password);
+                                        databaseReference.child("joinUserAccount").child(firebaseUser.getUid()).setValue(account);
+                                        Intent intent = new Intent(JoinActivity.this, LoginActivity.class);
+                                        startActivity(intent);
+                                        Toast.makeText(JoinActivity.this, "회원가입에 성공하셨습니다.", Toast.LENGTH_SHORT).show();
+                                        finish();
+                                    } else {
+                                        Toast.makeText(JoinActivity.this, "회원가입에 실패하셨습니다.", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            }
+                        });
             }
-
-//            if(binding.etJoinId.equals("") || binding.etJoinPassword.equals("") || binding.etJoinNickname.equals("")) {
-//                AlertDialog.Builder builder = new AlertDialog.Builder(JoinActivity.this);
-//                dialog = builder.setMessage("입력하지 않은 칸이 존재합니다. 확인해 주세요.").setNegativeButton("확인", null).create();
-//                dialog.show();
-//                return;
-//            }
-
-//            Response.Listener<String>responseListener=new Response.Listener<String>() {
-//                @Override
-//                public void onResponse(String response) {
-//                    try{
-//                        JSONObject jsonObject = new JSONObject(response);
-//                        boolean success = jsonObject.getBoolean("success");
-//
-//                        if(success) { // 회원가입 성공시
-//                            Toast.makeText(getApplicationContext(), "성공", Toast.LENGTH_SHORT).show();
-//                            Intent intent = new Intent(JoinActivity.this, LoginActivity.class);
-//                            startActivity(intent);
-//                        } else { // 회원가입 실패시
-//                            Toast.makeText(getApplicationContext(), "실패", Toast.LENGTH_SHORT).show();
-//                            return;
-//                        }
-//                    } catch(JSONException e){
-//                        e.printStackTrace();
-//                    }
-//                }
-//            };
-
-//            JoinRequest joinRequest = new JoinRequest(ID, Password, Nickname, responseListener);
-            // RequestGueue queue = Volley.newRequestGueue(JoinRequest.this);
-            // queue.add(JoinRequest);
         });
-    }
-    @Override
-    public void onStart() {
-        super.onStart();
-//        FirebaseUser LoginUser = mAuth.getLoginUser();
     }
 }
