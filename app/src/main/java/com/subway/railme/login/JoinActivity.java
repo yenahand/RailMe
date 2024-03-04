@@ -38,42 +38,42 @@ public class JoinActivity extends AppCompatActivity {
         binding.btJoinJoin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String ID = binding.etJoinId.getText().toString();
+//                final String ID = binding.etJoinId.getText().toString(); 변수명을 추가하던 XML을 추가하던 하나만 하세요
                 final String Password = binding.etJoinPassword.getText().toString();
                 final String Nickname = binding.etJoinNickname.getText().toString();
-                Intent intent = new Intent(getApplicationContext(), JoinRequest.class);
-                startActivity(intent);
+//                Intent intent = new Intent(getApplicationContext(), JoinRequest.class);
+//                startActivity(intent);
             }
 
-            if(binding.etJoinId.equals("") || binding.etJoinPassword.equals("") || binding.etJoinNickname.equals("")) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(JoinActivity.this);
-                dialog = builder.setMessage("입력하지 않은 칸이 존재합니다. 확인해 주세요.").setNegativeButton("확인", null).create();
-                dialog.show();
-                return;
-            }
+//            if(binding.etJoinId.equals("") || binding.etJoinPassword.equals("") || binding.etJoinNickname.equals("")) {
+//                AlertDialog.Builder builder = new AlertDialog.Builder(JoinActivity.this);
+//                dialog = builder.setMessage("입력하지 않은 칸이 존재합니다. 확인해 주세요.").setNegativeButton("확인", null).create();
+//                dialog.show();
+//                return;
+//            }
 
-            Response.Listener<String>responseListener=new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    try{
-                        JSONObject jsonObject = new JSONObject(response);
-                        boolean success = jsonObject.getBoolean("success");
+//            Response.Listener<String>responseListener=new Response.Listener<String>() {
+//                @Override
+//                public void onResponse(String response) {
+//                    try{
+//                        JSONObject jsonObject = new JSONObject(response);
+//                        boolean success = jsonObject.getBoolean("success");
+//
+//                        if(success) { // 회원가입 성공시
+//                            Toast.makeText(getApplicationContext(), "성공", Toast.LENGTH_SHORT).show();
+//                            Intent intent = new Intent(JoinActivity.this, LoginActivity.class);
+//                            startActivity(intent);
+//                        } else { // 회원가입 실패시
+//                            Toast.makeText(getApplicationContext(), "실패", Toast.LENGTH_SHORT).show();
+//                            return;
+//                        }
+//                    } catch(JSONException e){
+//                        e.printStackTrace();
+//                    }
+//                }
+//            };
 
-                        if(success) { // 회원가입 성공시
-                            Toast.makeText(getApplicationContext(), "성공", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(JoinActivity.this, LoginActivity.class);
-                            startActivity(intent);
-                        } else { // 회원가입 실패시
-                            Toast.makeText(getApplicationContext(), "실패", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                    } catch(JSONException e){
-                        e.printStackTrace();
-                    }
-                }
-            };
-
-            JoinRequest joinRequest = new JoinRequest(ID, Password, Nickname, responseListener);
+//            JoinRequest joinRequest = new JoinRequest(ID, Password, Nickname, responseListener);
             // RequestGueue queue = Volley.newRequestGueue(JoinRequest.this);
             // queue.add(JoinRequest);
         });
@@ -81,6 +81,6 @@ public class JoinActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        FirebaseUser LoginUser = mAuth.getLoginUser();
+//        FirebaseUser LoginUser = mAuth.getLoginUser();
     }
 }

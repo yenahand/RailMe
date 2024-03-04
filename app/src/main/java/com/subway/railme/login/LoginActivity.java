@@ -35,7 +35,7 @@ import kotlin.jvm.functions.Function2;
 public class LoginActivity extends AppCompatActivity {
 // mvvm 패턴에서 view 부분
     private ActivityLoginBinding binding;
-    private LoginViewModel model;
+//    private LoginViewModel model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,11 +43,11 @@ public class LoginActivity extends AppCompatActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        model = new ViewModelProvider(this).get(LoginViewModel.class);
+//        model = new ViewModelProvider(this).get(LoginViewModel.class);
 
-        model.getLogin().observe(this, Login -> {
-            // ui 업데이트 되는 거...
-        });
+//        model.getLogin().observe(this, Login -> {
+//            // ui 업데이트 되는 거...
+//        });
 
         // 로그인 됐는지 확인하는 관찰자 (LiveData를 관찰)
         final Observer<String> loginObserver = new Observer<String>() { // 데이터 변경이 이루어졌을 때 실행할 작업
@@ -56,13 +56,13 @@ public class LoginActivity extends AppCompatActivity {
                 binding.btLogin.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                         = "";
-                        model.getLogin().setValue(anotherName);
+//                         = "";
+//                        model.getLogin().setValue(anotherName);
                     }
-                };
+                });
             }
         };
-        model.getLogin().observe(this, loginObserver);
+//        model.getLogin().observe(this, loginObserver);
 
 
         // 입력한 값이 올바른지 확인
@@ -76,8 +76,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 // Log.d("SENTI", s + "," + count);
                 if(s != null) {
-                    inputID = s.toString();
-                    binding.etLogin.setClickable(validation());
+//                    inputID = s.toString();
+                   /* binding.etLogin.setClickable(validation());*/
                 }
             }
 
@@ -97,8 +97,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 // Log.d("SENTI", s + "," + count);
                 if(s != null) {
-                    inputPassword = s.toString();
-                    binding.etPassword.setClickable(validation());
+//                    inputPassword = s.toString();
+                 /*   binding.etPassword.setClickable(validation());*/
                 }
             }
 
@@ -128,9 +128,9 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    public boolean validation() {
-        return inputID.equals(IDOK) && inputPassword.equals(PasswordOK);
-    }
+//    public boolean validation() {
+//        return inputID.equals(IDOK) && inputPassword.equals(PasswordOK);
+//    }
 
     // 카카오톡이 설치되어 있는지 확인하는 메서드 (카카오에서 제공 콜백 객체를 이용)
     Function2<OAuthToken, Throwable, Unit> callback = new Function2<OAuthToken, Throwable, Unit>() {
