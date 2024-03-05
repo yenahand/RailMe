@@ -17,6 +17,15 @@
         android:theme="@style/Theme.RailMe"
         tools:targetApi="31">
         <activity
+            android:name=".mypage.MpFavoritesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".mypage.MpTimeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".mypage.MpNoticeActivity"
+            android:exported="false" />
+        <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true">
             <intent-filter>
@@ -49,7 +58,7 @@
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
-            android:value="641c840c3a49b1f89718aeaa4caf6797"/>
+            android:value="641c840c3a49b1f89718aeaa4caf6797" />
     </application>
 
 </manifest>

@@ -54,39 +54,41 @@
         android:minLines="8"
         android:maxLines="12"/>
 
-    <!--로그인 버튼-->
-    <Button
-        android:id="@+id/bt_login"
-        android:layout_width="264dp"
-        android:layout_height="48dp"
-        android:background="@color/연보라"
-        android:hint="로그인"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.51"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.399" />
+        <!--로그인 버튼-->
+        <Button
+            android:id="@+id/bt_login"
+            android:layout_width="264dp"
+            android:layout_height="48dp"
+            android:background="@color/연보라"
+            android:hint="로그인"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.51"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.448" />
 
-    <!-- 회원가입 버튼 -->
-    <Button
-        android:id="@+id/bt_login_join"
-        android:layout_width="264dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="75dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="72dp"
-        android:layout_marginBottom="229dp"
-        android:background="@color/white"
-        android:hint="회원가입"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bt_login" />
+        <!-- 회원가입 버튼 -->
+        <Button
+            android:id="@+id/bt_login_join"
+            android:layout_width="264dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="75dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="72dp"
+            android:layout_marginBottom="229dp"
+            android:background="@color/white"
+            android:hint="회원가입"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/textView2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bt_login"
+            app:layout_constraintVertical_bias="0.0" />
 
-    <!--간편 회원가입 문구-->
+        <!--간편 회원가입 문구-->
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
@@ -110,6 +112,15 @@
         app:srcCompat="@drawable/kakao_login_medium_narrow"
         android:contentDescription="kakaologin"
         tools:ignore="InvalidId"/>
+
+        <!--자동 로그인 선택 버튼-->
+        <CheckBox
+            android:id="@+id/cb_autologin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="자동 로그인"
+            tools:layout_editor_absoluteX="55dp"
+            tools:layout_editor_absoluteY="266dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

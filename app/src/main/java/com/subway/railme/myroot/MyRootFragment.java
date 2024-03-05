@@ -15,16 +15,16 @@ import com.subway.railme.databinding.FragmentMyRootBinding;
 
 public class MyRootFragment extends Fragment {
 
-    private FragmentMyRootBinding binding;
+    private FragmentMyRootBinding binding_r;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentMyRootBinding.inflate(inflater, container, false);
-        return binding.getRoot();
+        binding_r = FragmentMyRootBinding.inflate(inflater, container, false);
+        return binding_r.getRoot();
     }
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        binding = null;
+        binding_r = null;
     }
 }

@@ -36,8 +36,6 @@
 
 
     <!--도착시간 표시 ( 출발시간 + 소요시간 )-->
-
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/stationPathList"
         android:layout_width="match_parent"

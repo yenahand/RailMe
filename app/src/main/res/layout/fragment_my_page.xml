@@ -6,15 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".home.HomeFragment">
 
-
-
     <!-- 로그인 영역 -->
     <LinearLayout
         android:id="@+id/loginArea"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/연보라"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,17 +20,17 @@
 
         <TextView
             android:id="@+id/tv_loginArea"
-            android:layout_width="wrap_content"
+            android:layout_width="70dp"
             android:layout_height="40dp"
             android:text="로그인"
             android:textSize="22sp"
             android:textStyle="bold" />
 
+
+
     </LinearLayout>
 
     <!-- 카테고리별 설정 텍스트 -->
-
-
     <TextView
         android:id="@+id/categorySettingsText"
         android:layout_width="wrap_content"
@@ -121,4 +119,3 @@
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
