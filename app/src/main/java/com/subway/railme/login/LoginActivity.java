@@ -4,11 +4,18 @@ package com.subway.railme.login;
 import static androidx.constraintlayout.widget.ConstraintLayoutStates.TAG;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceManager;
+
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -32,6 +39,8 @@ public class LoginActivity extends AppCompatActivity {
     private FragmentMyPageBinding binding_;
     private FirebaseAuth firebaseAuth; // 파이어베이스 인증
     private DatabaseReference databaseReference; // 실시간 데이터베이스
+    private SharedPreferencesManager preferencesManager;
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,27 +52,39 @@ public class LoginActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); // 뒤로가기 버튼
         firebaseAuth = FirebaseAuth.getInstance(); // firebaseAuth의 인스턴스를 가져옴
 
-        binding.btLogin.setOnClickListener(new View.OnClickListener() { // 로그인 버튼 눌렀을 때
-            @Override
-            public void onClick(View v) {
-                String Email = binding.etLogin.getText().toString().trim();
-                String Password = binding.etPassword.getText().toString().trim();
+            binding.btLogin.setOnClickListener(new View.OnClickListener() { // 로그인 버튼 눌렀을 때
+                @Override
+                public void onClick(View v) {
+                    String Email = binding.etLogin.getText().toString().trim();
+                    String Password = binding.etPassword.getText().toString().trim();
 
-                firebaseAuth.signInWithEmailAndPassword(Email, Password)
-                        .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                    startActivity(intent);
-                                    finish();
-                                } else {
-                                    Toast.makeText(LoginActivity.this, "로그인에 실패하였습니다. 다시 시도해 주세요.", Toast.LENGTH_SHORT).show();
+                    firebaseAuth.signInWithEmailAndPassword(Email, Password)
+                            .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    } else {
+                                        Toast.makeText(LoginActivity.this, "로그인에 실패하였습니다. 다시 시도해 주세요.", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
-                            }
-                        });
+                            });
+                    }
+            });
+
+            binding.cbAutologin.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if(isChecked) {
+                        SharedPreferencesManager.getLoginInfo();
+                    } else {
+                        editor.clear();
+                    }
                 }
-        });
+            });
+
 
         binding.btLoginJoin.setOnClickListener(new View.OnClickListener() { // 회원가입 버튼 눌렀을 때 화면 전환하기
             @Override

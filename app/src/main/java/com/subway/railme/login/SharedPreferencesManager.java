@@ -24,7 +24,7 @@ public class SharedPreferencesManager {
     }
 
     public static void setLoginInfo(OnCompleteListener<AuthResult> context, String Email, String Password){
-        SharedPreferences prefs = getPreferences(context);
+        SharedPreferences prefs = getPreferences((Context) context);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString("Email", Email);
         editor.putString("Password", Password);
@@ -33,7 +33,7 @@ public class SharedPreferencesManager {
     }
 
     public static Map<String, String> getLoginInfo(OnCompleteListener<AuthResult> context){
-        SharedPreferences prefs = getPreferences(context);
+        SharedPreferences prefs = getPreferences((Context) context);
         Map<String, String> LoginInfo = new HashMap<>();
         String Email = prefs.getString("Email", "");
         String Password = prefs.getString("Password", "");
