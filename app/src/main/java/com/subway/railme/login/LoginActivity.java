@@ -8,10 +8,12 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -41,23 +43,38 @@ public class LoginActivity extends AppCompatActivity {
     private DatabaseReference databaseReference; // 실시간 데이터베이스
     private SharedPreferencesManager preferencesManager;
     SharedPreferences.Editor editor;
+    private Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        mContext = this;
 
         MyPageFragment myPageFragment = new MyPageFragment(); // 프래그먼트와 연결을 위해 프래그먼트 선언
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); // 뒤로가기 버튼
         firebaseAuth = FirebaseAuth.getInstance(); // firebaseAuth의 인스턴스를 가져옴
 
-            binding.btLogin.setOnClickListener(new View.OnClickListener() { // 로그인 버튼 눌렀을 때
-                @Override
-                public void onClick(View v) {
-                    String Email = binding.etLogin.getText().toString().trim();
-                    String Password = binding.etPassword.getText().toString().trim();
+        boolean boo = preferencesManager.getBoolean(mContext, "check");
+        if(boo) {
+            binding.etLogin.setText(SharedPreferencesManager.getString(mContext, "Email"));
+            binding.etPassword.setText(SharedPreferencesManager.getString(mContext, "Password"));
+            binding.cbAutologin.setChecked(true);
+        }
 
+        binding.btLogin.setOnClickListener(new View.OnClickListener() { // 로그인 버튼 눌렀을 때
+            @Override
+            public void onClick(View v) {
+                SharedPreferencesManager.setString(mContext, "Email", binding.etLogin.getText().toString());
+                SharedPreferencesManager.setString(mContext, "Password", binding.etPassword.getText().toString());
+
+                String Email = SharedPreferencesManager.getString(mContext, "Email");
+                String Password = SharedPreferencesManager.getString(mContext, "Password");
+
+                if(TextUtils.isEmpty(Email) || TextUtils.isEmpty(Password)) {
+                    Toast.makeText(LoginActivity.this, "아이디/비밀번호를 입력해 주세요.", Toast.LENGTH_SHORT).show();
+                } else {
                     firebaseAuth.signInWithEmailAndPassword(Email, Password)
                             .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                                 @Override
@@ -72,19 +89,22 @@ public class LoginActivity extends AppCompatActivity {
                                 }
                             });
                     }
-            });
-
-            binding.cbAutologin.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if(isChecked) {
-                        SharedPreferencesManager.getLoginInfo();
-                    } else {
-                        editor.clear();
-                    }
                 }
-            });
+        });
 
+        binding.cbAutologin.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked) {
+                    SharedPreferencesManager.setString(mContext, "Email", binding.etLogin.getText().toString());
+                    SharedPreferencesManager.setString(mContext, "Password", binding.etPassword.getText().toString());
+                    SharedPreferencesManager.setBoolean(mContext, "check", binding.cbAutologin.isChecked());
+                } else {
+                    SharedPreferencesManager.setBoolean(mContext, "check", binding.cbAutologin.isChecked());
+                    SharedPreferencesManager.clearPreferences(mContext);
+                }
+            }
+        });
 
         binding.btLoginJoin.setOnClickListener(new View.OnClickListener() { // 회원가입 버튼 눌렀을 때 화면 전환하기
             @Override
