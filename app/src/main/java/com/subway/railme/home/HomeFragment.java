@@ -82,14 +82,6 @@ public class HomeFragment extends Fragment {
             return false;
         });
 
-        binding.searchStation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                HomeFragment homeFragment = getActivity().getSupportFragmentManager().beginTransaction();
-
-            }
-        });
-
         return view;
     }
 
