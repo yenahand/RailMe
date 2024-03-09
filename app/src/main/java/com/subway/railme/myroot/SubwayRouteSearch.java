@@ -6,32 +6,33 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.nio.Buffer;
 
 public class SubwayRouteSearch {
-    public static void main(String[] args) {
-        String key = "8HQEUx0Pb4tEOMkK4DuvM9Wfr+huydyVWlSu7gGc3qU";
-        String result = "";
+    public static void main(String[] args) throws IOException {
+        String key = "8HQEUx0Pb4tEOMkK4DuvM9Wfr%2BhuydyVWlSu7gGc3qU";
+        String urlInfo = "https://api.odsay.com/v1/api/subwayPath?lang=1000&CID=1000&Sopt=1&key=" + URLEncoder.encode(key, "UTF-8");
+        URL url = new URL(urlInfo);
+        HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+        connection.setRequestMethod("GET");
+        connection.setRequestProperty("Content-type", "application/json");
 
-        try {
-            URL url = new URL("https://api.odsay.com/v1/api/subwayPath" + key + "");
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
-            BufferedReader bufferedReader;
-            bufferedReader = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"));
-
-            result = bufferedReader.readLine();
-
-            JsonParser jsonParser = new JsonParser();
-            JSONObject jsonObject = (JSONObject)jsonParser.parse(result);
-            JSONObject subwayInfoResult = (JSONObject)jsonObject.get("subwayInfoResult");
-            JSONObject subwayInfo = (JSONObject)subwayInfoResult.get("subwayInfo");
-
-            JSONArray jsonArray = (JSONArray)subwayInfo.get("jsonArray");
-
-        } catch () {
-
+        StringBuilder stringBuilder = new StringBuilder();
+        String line;
+        while ((line = bufferedReader.readLine()) != null) {
+            stringBuilder.append(line);
         }
+        bufferedReader.close();
+        connection.disconnect();
+
+        System.out.println(stringBuilder.toString());
+
     }
 }
