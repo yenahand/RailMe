@@ -59,6 +59,11 @@
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="641c840c3a49b1f89718aeaa4caf6797" />
+
+        <meta-data
+            android:name="com.google.firebase.ml.vision.DEPENDENCIES"
+            android:value="label" />
+
     </application>
 
 </manifest>
