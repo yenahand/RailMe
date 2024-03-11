@@ -9,6 +9,7 @@ buildscript {
         def nav_version = "2.7.5"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
         classpath "com.google.firebase:firebase-bom:32.7.0"
+        classpath 'com.android.tools.build:gradle:4.1.0' //텐서플로우
     }
 }
 

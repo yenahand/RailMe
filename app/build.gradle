@@ -66,6 +66,8 @@ dependencies {
     implementation 'com.caverock:androidsvg:1.4'
     implementation "com.kakao.sdk:v2-user:2.19.0" // 카카오 로그인
 
+    implementation 'org.tensorflow:tensorflow-lite:2.8.0' //텐서플로우
+
     def nav_version = "2.7.5"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"

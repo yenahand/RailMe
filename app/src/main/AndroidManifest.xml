@@ -38,6 +38,8 @@
                     android:host="oauth"
                     android:scheme="kakao641c840c3a49b1f89718aeaa4caf6797" />
             </intent-filter>
+
+
         </activity>
         <activity
             android:name=".login.LoginActivity"

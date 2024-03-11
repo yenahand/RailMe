@@ -1,4 +1,4 @@
-package com.subway.railme.myroot;
+package com.subway.railme.myroot.myroot_API;
 
 public class Station {
     int code;

@@ -1,8 +1,6 @@
-package com.subway.railme.myroot;
+package com.subway.railme.myroot.myroot_API;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.subway.railme.myroot.myroot_API.OdsayApiKey;
 
 import java.io.BufferedReader;
 import java.io.IOException;

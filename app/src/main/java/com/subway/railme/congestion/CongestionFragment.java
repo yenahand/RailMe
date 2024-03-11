@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.content.res.AssetManager;
+import org.tensorflow.lite.Interpreter;
 
 import androidx.fragment.app.Fragment;
 
