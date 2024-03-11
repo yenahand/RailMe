@@ -1,8 +1,7 @@
 package com.subway.railme.myroot;
 
-import com.google.gson.JsonParser;
-
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -11,12 +10,11 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.nio.Buffer;
 
 public class SubwayRouteSearch {
     public static void main(String[] args) throws IOException {
-        String key = "8HQEUx0Pb4tEOMkK4DuvM9Wfr%2BhuydyVWlSu7gGc3qU";
-        String urlInfo = "https://api.odsay.com/v1/api/subwayPath?lang=1000&CID=1000&Sopt=1&key=" + URLEncoder.encode(key, "UTF-8");
+        String key = OdsayApiKey.key.toString();
+        String urlInfo = "https://api.odsay.com/v1/api/subwayPath?lang=0&CID=1000&Sopt=1&key=" + URLEncoder.encode(key, "UTF-8");
         URL url = new URL(urlInfo);
         HttpURLConnection connection = (HttpURLConnection)url.openConnection();
         connection.setRequestMethod("GET");
@@ -33,6 +31,5 @@ public class SubwayRouteSearch {
         connection.disconnect();
 
         System.out.println(stringBuilder.toString());
-
     }
 }

@@ -8,8 +8,8 @@
 
     <LinearLayout
         android:id="@+id/bt_favorites"
-        android:layout_width="match_parent"
-        android:layout_height="460dp"
+        android:layout_width="414dp"
+        android:layout_height="546dp"
         android:layout_marginTop="188dp"
         android:background="@color/연보라"
         android:orientation="vertical"

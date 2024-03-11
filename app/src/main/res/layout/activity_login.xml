@@ -78,7 +78,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="72dp"
             android:layout_marginBottom="229dp"
-            android:background="@color/white"
+            android:background="#594E60"
             android:hint="회원가입"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/textView2"
