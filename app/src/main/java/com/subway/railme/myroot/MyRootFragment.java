@@ -30,7 +30,7 @@ public class MyRootFragment extends Fragment {
         binding_r = FragmentMyRootBinding.inflate(inflater, container, false);
         return binding_r.getRoot();
 
-        binding_r.btFindRoot.setOnClickListener(new View.OnClickListener() {
+     /*   binding_r.btFindRoot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -47,14 +47,13 @@ public class MyRootFragment extends Fragment {
                         buffer.append(line + "\n");
                         line = bufferedReader.readLine();
                     }
-                    String jsonData = buffer.toString();
-
+                    String jsonData = buffer.toString();rr
                     //   binding_r.tvFindResult.setText("출발역: " + startName + "\n" + "도착역: " + endName + "\n" + "총 역 수: " + stationCount + "개 역 경유\n" + "총 시간: " + travelTime + "분 소요\n" + "빠른 환승: " + fastDoor + "\n");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
-        });
+        });*/
     }
     @Override
     public void onDestroyView() {
