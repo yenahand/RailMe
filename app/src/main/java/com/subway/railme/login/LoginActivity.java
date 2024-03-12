@@ -53,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
         mContext = this;
 
         MyPageFragment myPageFragment = new MyPageFragment(); // 프래그먼트와 연결을 위해 프래그먼트 선언
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true); // 뒤로가기 버튼
+        /*getSupportActionBar().setDisplayHomeAsUpEnabled(true); // 뒤로가기 버튼*/
         firebaseAuth = FirebaseAuth.getInstance(); // firebaseAuth의 인스턴스를 가져옴
 
         boolean boo = preferencesManager.getBoolean(mContext, "check");
