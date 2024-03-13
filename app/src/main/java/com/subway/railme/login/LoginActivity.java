@@ -11,7 +11,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ipsec.ike.IkeSessionCallback;
 import android.os.Bundle;
+import android.os.UserManager;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
@@ -34,6 +36,7 @@ import com.subway.railme.databinding.FragmentMyPageBinding;
 import com.subway.railme.mypage.MyPageFragment;
 
 import kotlin.Unit;
+import kotlin.io.path.OnErrorResult;
 import kotlin.jvm.functions.Function2;
 
 public class LoginActivity extends AppCompatActivity {
@@ -44,6 +47,8 @@ public class LoginActivity extends AppCompatActivity {
     private SharedPreferencesManager preferencesManager;
     SharedPreferences.Editor editor;
     private Context mContext;
+
+    private ISessionCallback iSessionCallback;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
