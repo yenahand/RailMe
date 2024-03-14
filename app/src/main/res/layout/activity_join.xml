@@ -38,16 +38,17 @@
         android:id="@+id/et_joinEmail"
         android:layout_width="250dp"
         android:layout_height="48dp"
-        android:layout_marginTop="208dp"
         android:ems="10"
         android:hint="가입할 이메일"
         android:inputType="textEmailAddress"
         android:maxLength="10"
         android:minLines="6"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.602"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.306" />
 
     <!--사용자 비밀번호 입력 설명과 칸-->
     <EditText
@@ -88,7 +89,6 @@
         android:layout_marginStart="75dp"
         android:layout_marginTop="75dp"
         android:layout_marginEnd="72dp"
-        android:layout_marginBottom="280dp"
         android:background="#594E60"
         android:hint="회원가입"
         android:textStyle="bold"
@@ -96,7 +96,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_joinPassword"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.501" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

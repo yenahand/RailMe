@@ -3,39 +3,40 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    sw<androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".login.LoginActivity">
 
     <!--맨 위 로그인 문구-->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="로그인"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.131" />
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="로그인"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.131" />
 
     <!--로그인 입력 설명과 칸-->
     <EditText
         android:id="@+id/et_Login"
         android:layout_width="299dp"
         android:layout_height="48dp"
-        android:layout_marginTop="176dp"
         android:ems="10"
         android:hint="가입한 이메일"
         android:inputType="textEmailAddress"
+        android:minLines="2"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:minLines="2"/>
+        app:layout_constraintVertical_bias="0.237" />
 
     <!--비밀번호 입력 설명과 칸-->
     <EditText
@@ -45,17 +46,17 @@
         android:ems="10"
         android:hint="비밀번호 영문, 숫자 혼합 8~12자"
         android:inputType="textPassword"
+        android:maxLines="12"
+        android:minLines="8"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.317"
-        android:minLines="8"
-        android:maxLines="12"/>
+        app:layout_constraintVertical_bias="0.307" />
 
-        <!--로그인 버튼-->
-        <Button
+    <!--로그인 버튼-->
+    <Button
             android:id="@+id/bt_login"
             android:layout_width="264dp"
             android:layout_height="48dp"
@@ -75,21 +76,20 @@
             android:layout_width="264dp"
             android:layout_height="48dp"
             android:layout_marginStart="75dp"
-            android:layout_marginTop="10dp"
             android:layout_marginEnd="72dp"
             android:layout_marginBottom="229dp"
             android:background="#594E60"
             android:hint="회원가입"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/textView2"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/bt_login"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.808" />
 
         <!--간편 회원가입 문구-->
-    <TextView
+        <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -105,22 +105,28 @@
         android:id="@+id/ib_kakao_login"
         android:layout_width="192dp"
         android:layout_height="48dp"
-        android:layout_marginBottom="48dp"
+        android:contentDescription="kakaologin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.935"
         app:srcCompat="@drawable/kakao_login_medium_narrow"
-        android:contentDescription="kakaologin"
-        tools:ignore="InvalidId"/>
+        tools:ignore="InvalidId" />
 
-        <!--자동 로그인 선택 버튼-->
-        <CheckBox
+    <!--자동 로그인 선택 버튼-->
+    <CheckBox
             android:id="@+id/cb_autologin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="자동 로그인"
-            tools:layout_editor_absoluteX="55dp"
-            tools:layout_editor_absoluteY="266dp" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.176"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.379" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
