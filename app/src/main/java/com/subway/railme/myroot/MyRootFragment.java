@@ -1,92 +1,7 @@
 package com.subway.railme.myroot;
 
-import static android.content.Context.LOCATION_SERVICE;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
-import android.content.res.AssetManager;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
-import android.os.Bundle;
-
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
-
-import com.subway.railme.R;
-import com.subway.railme.databinding.FragmentMyPageBinding;
-import com.subway.railme.databinding.FragmentMyRootBinding;
-
-import org.json.JSONException;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-
-
-public class MyRootFragment extends Fragment {
-
-    private FragmentMyRootBinding binding_r;
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        binding_r = FragmentMyRootBinding.inflate(inflater, container, false);
-        return binding_r.getRoot();
-    }
-
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding_r = null;
-    }
-
-    private final ActivityResultLauncher<String[]> locationPermissionRequest = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(),
-            result -> {
-        Boolean fineLocationGranted = result.get(Manifest.permission.ACCESS_FINE_LOCATION);
-        Boolean coarseLocationGranted = result.get(Manifest.permission.ACCESS_COARSE_LOCATION);
-
-        if(fineLocationGranted != null && fineLocationGranted) {
-            startLocationUpdates();
-        } else if(coarseLocationGranted != null && coarseLocationGranted) {
-            startLocationUpdates();
-        } else {
-            Toast.makeText(this, "Unable to launch app because lacation permissions are denied.", Toast.LENGTH_SHORT).show();
-            finish();
-        }
-            });
-
-    private  void checkLocationPermission() {
-        boolean coarseLocationGranted = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED;
-
-        boolean fineLocationGranted = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
-
-        if(!coarseLocationGranted && !fineLocationGranted) {
-            locationPermissionRequest.launch(new String[]{
-                    Manifest.permission.ACCESS_FINE_LOCATION,
-                    Manifest.permission.ACCESS_COARSE_LOCATION
-            });
-        } else {
-            startLocationUpdates();
-        }
-    }
-}
-
-
-//일단 이부분 혜림이가 하던거랑 합치기가 좀 애매해서 일단 주석처리하고 잠시 따로 빼놧습니다
-/*
+import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -94,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.subway.railme.R;
 import com.subway.railme.myroot.myroot_API.OdsayApiKey;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -105,7 +22,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
-public class MainActivity extends AppCompatActivity {
+public class MyRootFragment extends AppCompatActivity {
 
     private EditText etDepartureTime;
     private EditText etDeparture;
@@ -113,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView tvFindResult;
     private Button btFindRoot;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -217,4 +135,90 @@ public class MainActivity extends AppCompatActivity {
     }
 }
 
+//혜림이꺼 일단 주석처리 해두고 제부분 하고있습니다
+/*
+import static android.content.Context.LOCATION_SERVICE;
+
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.content.res.AssetManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.Bundle;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
+
+import com.subway.railme.R;
+import com.subway.railme.databinding.FragmentMyPageBinding;
+import com.subway.railme.databinding.FragmentMyRootBinding;
+
+import org.json.JSONException;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
+
+public class MyRootFragment extends Fragment {
+
+    private FragmentMyRootBinding binding_r;
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        binding_r = FragmentMyRootBinding.inflate(inflater, container, false);
+        return binding_r.getRoot();
+    }
+
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding_r = null;
+    }
+
+    private final ActivityResultLauncher<String[]> locationPermissionRequest = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(),
+            result -> {
+        Boolean fineLocationGranted = result.get(Manifest.permission.ACCESS_FINE_LOCATION);
+        Boolean coarseLocationGranted = result.get(Manifest.permission.ACCESS_COARSE_LOCATION);
+
+        if(fineLocationGranted != null && fineLocationGranted) {
+            startLocationUpdates();
+        } else if(coarseLocationGranted != null && coarseLocationGranted) {
+            startLocationUpdates();
+        } else {
+            Toast.makeText(this, "Unable to launch app because lacation permissions are denied.", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+            });
+
+    private  void checkLocationPermission() {
+        boolean coarseLocationGranted = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED;
+
+        boolean fineLocationGranted = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
+
+        if(!coarseLocationGranted && !fineLocationGranted) {
+            locationPermissionRequest.launch(new String[]{
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+            });
+        } else {
+            startLocationUpdates();
+        }
+    }
+}
 */
+

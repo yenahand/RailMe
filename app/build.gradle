@@ -48,7 +48,8 @@ dependencies {
     implementation 'com.android.car.ui:car-ui-lib:2.6.0'
     implementation 'com.google.firebase:firebase-firestore:24.10.1'
     implementation 'com.google.firebase:firebase-messaging:23.4.0'
-    implementation 'com.android.volley:volley:1.2.1'// 푸쉬메시지
+    implementation 'com.android.volley:volley:1.2.1'
+    implementation 'androidx.room:room-compiler:2.6.1'// 푸쉬메시지
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     implementation 'com.squareup.retrofit2:retrofit:2.6.0'

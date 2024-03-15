@@ -9,14 +9,14 @@ buildscript {
         def nav_version = "2.7.5"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
         classpath "com.google.firebase:firebase-bom:32.7.0"
-        classpath 'com.android.tools.build:gradle:8.0.2' //텐서플로우
+        classpath 'com.android.tools.build:gradle:8.1.3' //텐서플로우
     }
 }
 
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
     id("com.google.gms.google-services") version "4.4.0" apply false
-    id 'com.android.application' version '8.0.2' apply false
-    id 'com.android.library' version '8.0.2' apply false
+    id 'com.android.application' version '8.1.3' apply false
+    id 'com.android.library' version '8.1.3' apply false
     id 'org.jetbrains.kotlin.android' version '1.8.10' apply false
 }

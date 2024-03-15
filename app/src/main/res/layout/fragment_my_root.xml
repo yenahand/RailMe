@@ -8,61 +8,71 @@
     tools:layout_editor_absoluteX="1dp"
     tools:layout_editor_absoluteY="-14dp">
 
-    <EditText
-        android:id="@+id/et_StarringTime"
-        android:layout_width="182dp"
-        android:layout_height="49dp"
-        android:hint="출발시간"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="115dp"
-        tools:layout_editor_absoluteY="169dp" />
-
     <View
-        android:layout_width="414dp"
-        android:layout_height="39dp"
-        android:layout_marginBottom="696dp"
+        android:layout_width="416dp"
+        android:layout_height="52dp"
+        android:layout_marginBottom="680dp"
         android:background="#594E59"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/et_Destination"
-        android:layout_width="181dp"
-        android:layout_height="45dp"
-        android:hint="도착역"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="116dp"
-        tools:layout_editor_absoluteY="112dp" />
-
-    <EditText
         android:id="@+id/et_Departure"
-        android:layout_width="183dp"
-        android:layout_height="43dp"
+        android:layout_width="191dp"
+        android:layout_height="48dp"
         android:hint="출발역"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="115dp"
-        tools:layout_editor_absoluteY="59dp" />
+        tools:layout_editor_absoluteX="110dp"
+        tools:layout_editor_absoluteY="64dp" />
+
+    <EditText
+        android:id="@+id/et_Destination"
+        android:layout_width="192dp"
+        android:layout_height="51dp"
+        android:hint="도착역"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="111dp"
+        tools:layout_editor_absoluteY="122dp" />
+
+    <EditText
+        android:id="@+id/et_StarringTime"
+        android:layout_width="192dp"
+        android:layout_height="53dp"
+        android:hint="출발시간"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="110dp"
+        tools:layout_editor_absoluteY="179dp" />
 
     <Button
         android:id="@+id/bt_FindRoot"
-        android:layout_width="239dp"
-        android:layout_height="46dp"
+        android:layout_width="276dp"
+        android:layout_height="59dp"
         android:onClick="onSearchButtonClick"
         android:text="길찾기"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="86dp"
-        tools:layout_editor_absoluteY="240dp" />
+        tools:layout_editor_absoluteX="67dp"
+        tools:layout_editor_absoluteY="256dp" />
 
     <TextView
         android:id="@+id/tv_FindResult"
-        android:layout_width="324dp"
-        android:layout_height="269dp"
+        android:layout_width="325dp"
+        android:layout_height="305dp"
         android:text="길찾기 결과표시"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="43dp"
-        tools:layout_editor_absoluteY="342dp" />
+        tools:layout_editor_absoluteY="357dp" />
+
+    <TextView
+        android:layout_width="92dp"
+        android:layout_height="26dp"
+        android:text="길찾기 🔍"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="159dp"
+        tools:layout_editor_absoluteY="16dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -111,7 +111,7 @@ public class HomeFragment extends Fragment {
                             congestionFragment.setArguments(bundle);
 
                             getFragmentManager().beginTransaction()
-                                    //.replace(R.id.tv_congestionText, congestionFragment)
+                                    .replace(R.id.tv_CurrentStation, congestionFragment)
                                     .addToBackStack(null)
                                     .commit();
                         }
