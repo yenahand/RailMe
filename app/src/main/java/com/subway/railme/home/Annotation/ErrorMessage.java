@@ -1,3 +1,4 @@
+/*
 //서버에서 발생한 오류정보 표시
 package com.subway.railme.home.API;
 
@@ -149,3 +150,4 @@ public class ErrorMessage {
     }
 
 }
+*/

@@ -1,3 +1,4 @@
+/*
 //Retrofit을 사용한 API 매니저 클래스
 package com.subway.railme.home.API;
 
@@ -47,6 +48,7 @@ public class ApiManager {
 
     // API 키
     public static String getApiKey() {
-        return "63686678677470663633696757744c";
+        return "59436b514a74706633314b69617558";
     }
 }
+*/

@@ -3,10 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
+
     <application
+
+        android:usesCleartextTraffic="true"
         android:name=".login.EasyLogin"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -18,6 +22,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RailMe"
         tools:targetApi="31">
+
         <activity
             android:name=".mypage.MpFavoritesActivity"
             android:exported="false" />
@@ -34,16 +39,19 @@
             android:parentActivityName=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity
             android:name=".login.JoinActivity"
             android:parentActivityName=".login.LoginActivity" />
+
         <activity
             android:name=".MainActivity"
-            android:exported="true" />
+            android:exported="true" >
+        </activity>
+
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
@@ -52,6 +60,16 @@
         <meta-data
             android:name="com.google.firebase.ml.vision.DEPENDENCIES"
             android:value="label" />
+
+        <receiver
+            android:name="com.google.android.gms.tagmanager.InstallReferrerReceiver"
+            android:enabled="true"
+            android:exported="false"
+            tools:ignore="MissingClass,WrongManifestParent">
+            <intent-filter>
+                <action android:name="com.android.vending.INSTALL_REFERRER" />
+            </intent-filter>
+        </receiver>
 
     </application>
 

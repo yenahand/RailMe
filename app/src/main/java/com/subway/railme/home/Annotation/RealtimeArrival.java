@@ -1,4 +1,4 @@
-package com.subway.railme.home.API;
+/*package com.subway.railme.home.API;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -556,3 +556,5 @@ public class RealtimeArrival {
     }
 
 }
+
+*/

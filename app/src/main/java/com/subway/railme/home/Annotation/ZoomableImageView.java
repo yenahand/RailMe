@@ -1,3 +1,4 @@
+/*
 package com.subway.railme.home;
 
 import android.content.Context;
@@ -9,7 +10,7 @@ import android.view.ScaleGestureDetector;
 
 import androidx.appcompat.widget.AppCompatImageView;
 
-public class ImageViewZoomable extends AppCompatImageView {
+public class ZoomableImageView extends AppCompatImageView {
 
     private Matrix matrix = new Matrix();
     private float scale = 1.0f;
@@ -20,15 +21,22 @@ public class ImageViewZoomable extends AppCompatImageView {
     private ScaleGestureDetector scaleGestureDetector;
     private GestureDetector gestureDetector;
 
-    public ImageViewZoomable(Context context, AttributeSet attrs) {
+    public ZoomableImageView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        setScaleType(ScaleType.MATRIX);
         init(context);
     }
 
     private void init(Context context) {
+        setScaleType(ScaleType.MATRIX); // 이미지 뷰의 스케일 타입을 Matrix로 설정
         scaleGestureDetector = new ScaleGestureDetector(context, new ScaleListener());
         gestureDetector = new GestureDetector(context, new GestureListener());
+    }
+
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        matrix.setScale(scale, scale, getWidth() / 2f, getHeight() / 2f);
+        setImageMatrix(matrix);
     }
 
     @Override
@@ -44,7 +52,7 @@ public class ImageViewZoomable extends AppCompatImageView {
             scale *= detector.getScaleFactor();
             scale = Math.max(MIN_SCALE, Math.min(scale, MAX_SCALE));
 
-            matrix.setScale(scale, scale);
+            matrix.setScale(scale, scale, getWidth() / 2f, getHeight() / 2f); // 이미지 중심을 기준으로 확대/축소
             setImageMatrix(matrix);
 
             return true;
@@ -54,18 +62,17 @@ public class ImageViewZoomable extends AppCompatImageView {
     private class GestureListener extends GestureDetector.SimpleOnGestureListener {
         @Override
         public boolean onDoubleTap(MotionEvent e) {
-            //더블탭하면 줌인
             if (scale < MAX_SCALE) {
                 scale *= 2.0f;
-                matrix.setScale(scale, scale, e.getX(), e.getY());
+                matrix.setScale(scale, scale, getWidth() / 2f, getHeight() / 2f); // 이미지 중심을 기준으로 확대
                 setImageMatrix(matrix);
             } else {
-               //이미 줌인 최대상태면 다시 돌아감
                 scale = 1.0f;
-                matrix.reset();
+                matrix.reset(); // 이미지를 원래 크기로 되돌림
                 setImageMatrix(matrix);
             }
             return true;
         }
     }
 }
+*/
