@@ -9,7 +9,6 @@
 
 
     <application
-
         android:usesCleartextTraffic="true"
         android:name=".login.EasyLogin"
         android:allowBackup="true"
@@ -35,14 +34,9 @@
 
         <activity
             android:name=".login.LoginActivity"
-            android:exported="true"
-            android:parentActivityName=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:exported="false"
+            android:parentActivityName=".MainActivity"/>
 
-        </activity>
         <activity
             android:name=".login.JoinActivity"
             android:parentActivityName=".login.LoginActivity" />
@@ -50,6 +44,11 @@
         <activity
             android:name=".MainActivity"
             android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
         </activity>
 
 
