@@ -1,7 +1,13 @@
 package com.subway.railme.home.API;
 
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.TextView;
+
+import com.tickaroo.tikxml.TikXml;
+import com.tickaroo.tikxml.retrofit.TikXmlConverterFactory;
+
+import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
@@ -9,7 +15,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import java.io.IOException;
 
 public class SearchTask extends AsyncTask<String, Void, String> {
-    private static final String BASE_URL = "http://swopenAPI.seoul.go.kr";
+    private static final String BASE_URL = "https://swopenAPI.seoul.go.kr/";
     private static final String API_KEY = "59436b514a74706633314b69617558";
     private TextView textView;
 
@@ -21,7 +27,8 @@ public class SearchTask extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... strings) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(TikXmlConverterFactory.create(new TikXml.Builder().exceptionOnUnreadXml(false).build()))
+                .client(new OkHttpClient())
                 .build();
 
         SubwayService service = retrofit.create(SubwayService.class);
@@ -38,13 +45,17 @@ public class SearchTask extends AsyncTask<String, Void, String> {
                             .append("도착지방면: ").append(arrival.getTrainLineNm()).append("\n")
                             .append("열차도착예정시간: ").append(arrival.getBarvlDt()).append("\n\n");
                 }
+                Log.d("SearchTask", "API 호출 성공: " + result.toString());
                 return result.toString();
             } else {
-                return "API 호출 실패: " + response.code();
+                String errorMessage = "API 호출 실패: " + response.code();
+                Log.e("SearchTask", errorMessage);
+                return errorMessage;
             }
         } catch (IOException e) {
-            e.printStackTrace();
-            return "API 호출 실패: " + e.getMessage();
+            String errorMessage = "API 호출 실패: " + e.getMessage();
+            Log.e("SearchTask", errorMessage, e);
+            return errorMessage;
         }
     }
 
