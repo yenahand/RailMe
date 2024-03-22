@@ -3,6 +3,7 @@ package com.subway.railme.login;
 
 import static androidx.constraintlayout.widget.ConstraintLayoutStates.TAG;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
@@ -14,7 +15,7 @@ import android.content.SharedPreferences;
 import android.net.ipsec.ike.IkeSessionCallback;
 import android.os.Bundle;
 import android.os.UserManager;
-import android.support.annotation.NonNull;
+
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -48,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
     SharedPreferences.Editor editor;
     private Context mContext;
 
-    private ISessionCallback iSessionCallback;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
