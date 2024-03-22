@@ -73,7 +73,10 @@ dependencies {
     implementation 'org.tensorflow:tensorflow-lite:2.8.0' //텐서플로우
     implementation 'org.jsoup:jsoup:1.17.2'
 
-
+    //xml parser
+    implementation 'com.tickaroo.tikxml:annotation:0.8.13'
+    implementation 'com.tickaroo.tikxml:core:0.8.13'
+    implementation 'com.tickaroo.tikxml:retrofit-converter:0.8.13'
 
 
     def nav_version = "2.7.5"
