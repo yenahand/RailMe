@@ -1,11 +1,12 @@
 // 사용자 회원가입을 위한 페이지
 package com.subway.railme.login;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+
 import android.view.View;
 import android.widget.Toast;
 
