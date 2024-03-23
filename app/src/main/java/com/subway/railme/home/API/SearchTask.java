@@ -11,11 +11,10 @@ import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 import java.io.IOException;
 
 public class SearchTask extends AsyncTask<String, Void, String> {
-    private static final String BASE_URL = "https://swopenAPI.seoul.go.kr/";
+    private static final String BASE_URL = "http://swopenapi.seoul.go.kr/";
     private static final String API_KEY = "59436b514a74706633314b69617558";
     private TextView textView;
 
@@ -27,12 +26,12 @@ public class SearchTask extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... strings) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
-                .addConverterFactory(TikXmlConverterFactory.create(new TikXml.Builder().exceptionOnUnreadXml(false).build()))
+                .addConverterFactory(TikXmlConverterFactory.create(buildTikXml()))
                 .client(new OkHttpClient())
                 .build();
 
         SubwayService service = retrofit.create(SubwayService.class);
-        Call<RealtimeStationArrivalResponse> call = service.getRealtimeStationArrival(strings[0], API_KEY);
+        Call<RealtimeStationArrivalResponse> call = service.getRealtimeStationArrival(API_KEY, "stationName");
 
         try {
             Response<RealtimeStationArrivalResponse> response = call.execute();
@@ -62,5 +61,12 @@ public class SearchTask extends AsyncTask<String, Void, String> {
     @Override
     protected void onPostExecute(String result) {
         textView.setText(result);
+    }
+
+    private TikXml buildTikXml() {
+        return new TikXml.Builder()
+
+                .exceptionOnUnreadXml(false)
+                .build();
     }
 }

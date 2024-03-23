@@ -1,18 +1,20 @@
 package com.subway.railme.home.API;
 
-import com.google.gson.annotations.SerializedName;
+import com.tickaroo.tikxml.annotation.Attribute;
+import com.tickaroo.tikxml.annotation.Xml;
 
+@Xml
 public class RealtimeStationArrival {
-    @SerializedName("updnLine")
+    @Attribute(name = "updnLine")
     private String updnLine;
 
-    @SerializedName("trainLineNm")
+    @Attribute(name = "trainLineNm")
     private String trainLineNm;
 
-    @SerializedName("statnNm")
+    @Attribute(name = "statnNm")
     private String statnNm;
 
-    @SerializedName("barvlDt")
+    @Attribute(name = "barvlDt")
     private String barvlDt;
 
     public String getUpdnLine() {

@@ -1,10 +1,13 @@
 package com.subway.railme.home.API;
 
-import com.google.gson.annotations.SerializedName;
+import com.tickaroo.tikxml.annotation.Element;
+import com.tickaroo.tikxml.annotation.Xml;
+
 import java.util.List;
 
+@Xml(name = "response")
 public class RealtimeStationArrivalResponse {
-    @SerializedName("realtimeArrivalList")
+    @Element(name = "realtimeArrivalList")
     private List<RealtimeStationArrival> realtimeArrivalList;
 
     public List<RealtimeStationArrival> getRealtimeArrivalList() {

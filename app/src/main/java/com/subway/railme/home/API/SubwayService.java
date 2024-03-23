@@ -6,9 +6,9 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface SubwayService {
-    @GET("api/subway/sample/xml/realtimeStationArrival/0/5/{stationName}")
+    @GET("api/subway/{apiKey}/xml/realtimeStationArrival/0/1/{stationName}")
     Call<RealtimeStationArrivalResponse> getRealtimeStationArrival(
-            @Path("stationName") String stationName,
-            @Query("apiKey") String apiKey
+            @Path("apiKey") String apiKey,
+            @Path("stationName") String stationName
     );
 }
