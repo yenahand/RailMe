@@ -21,12 +21,22 @@ public class MyPageFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding_ = FragmentMyPageBinding.inflate(inflater, container, false);
         return binding_.getRoot();
+    }
 
-        Intent intent = getIntent();
-        strNick = intent.getStringExtra("name");
-        strEmail = intent.getStringExtra("Email");
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-        binding_.tvLoginArea.setText(strNick);
+        // Fragment를 호스팅하는 Activity에서 Intent를 가져옵니다.
+        Intent intent = getActivity().getIntent();
+        if (intent != null) {
+            // Intent에서 데이터를 가져옵니다.
+            strNick = intent.getStringExtra("name");
+            strEmail = intent.getStringExtra("Email");
+
+            // 가져온 데이터를 TextView에 설정합니다.
+            binding_.tvLoginArea.setText(strNick);
+        }
     }
 
     @Override

@@ -2,7 +2,6 @@
    괜찮은 해결방안 있을까요? */
 package com.subway.railme.home;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import androidx.fragment.app.Fragment;
@@ -20,7 +18,7 @@ import com.subway.railme.home.API.SearchTask;
 
 
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements SearchTask.SearchTaskListener {
 
     private EditText searchEditText;
     private TextView searchResultTextView;
@@ -36,20 +34,20 @@ public class HomeFragment extends Fragment {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                executeSearch();
+                performSearch();
             }
         });
 
         return view;
     }
 
-    private void executeSearch() {
-        String searchKeyword = searchEditText.getText().toString();
-        if (!searchKeyword.isEmpty()) {
-            // AsyncTask 실행
-            new SearchTask(searchResultTextView).execute(searchKeyword);
-        } else {
-            Toast.makeText(getContext(), "검색어를 입력하세요.", Toast.LENGTH_SHORT).show();
-        }
+
+    private void performSearch() {
+        // TextView와 SearchTaskListener를 모두 전달하여 SearchTask 인스턴스 생성
+        new SearchTask(searchResultTextView, this).execute();
+    }
+    @Override
+    public void onSearchTaskComplete(String result) {
+        searchResultTextView.setText(result);
     }
 }

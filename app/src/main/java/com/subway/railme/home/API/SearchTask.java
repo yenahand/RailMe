@@ -8,22 +8,27 @@ import com.tickaroo.tikxml.TikXml;
 import com.tickaroo.tikxml.retrofit.TikXmlConverterFactory;
 
 import okhttp3.OkHttpClient;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import java.io.IOException;
 
-public class SearchTask extends AsyncTask<String, Void, String> {
+import java.io.IOException;
+import java.util.List;
+
+public class SearchTask extends AsyncTask<Void, Void, String> {
     private static final String BASE_URL = "http://swopenapi.seoul.go.kr/";
     private static final String API_KEY = "59436b514a74706633314b69617558";
     private TextView textView;
+    private SearchTaskListener listener;
 
-    public SearchTask(TextView textView) {
+    public SearchTask(TextView textView, SearchTaskListener listener) {
         this.textView = textView;
+        this.listener = listener;
     }
 
     @Override
-    protected String doInBackground(String... strings) {
+    protected String doInBackground(Void... voids) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(TikXmlConverterFactory.create(buildTikXml()))
@@ -37,8 +42,9 @@ public class SearchTask extends AsyncTask<String, Void, String> {
             Response<RealtimeStationArrivalResponse> response = call.execute();
             if (response.isSuccessful() && response.body() != null) {
                 RealtimeStationArrivalResponse arrivalResponse = response.body();
+                List<RealtimeStationArrival> arrivals = arrivalResponse.getRealtimeArrivalList();
                 StringBuilder result = new StringBuilder();
-                for (RealtimeStationArrival arrival : arrivalResponse.getRealtimeArrivalList()) {
+                for (RealtimeStationArrival arrival : arrivals) {
                     result.append("지하철역명: ").append(arrival.getStatnNm()).append("\n")
                             .append("상하행선구분: ").append(arrival.getUpdnLine()).append("\n")
                             .append("도착지방면: ").append(arrival.getTrainLineNm()).append("\n")
@@ -60,13 +66,18 @@ public class SearchTask extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPostExecute(String result) {
-        textView.setText(result);
+        if (listener != null) {
+            listener.onSearchTaskComplete(result);
+        }
     }
 
     private TikXml buildTikXml() {
         return new TikXml.Builder()
-
                 .exceptionOnUnreadXml(false)
                 .build();
+    }
+
+    public interface SearchTaskListener {
+        void onSearchTaskComplete(String result);
     }
 }

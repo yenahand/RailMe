@@ -10,7 +10,6 @@
 
 
     <application
-        android:usesCleartextTraffic="true"
         android:name=".login.CustomApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"

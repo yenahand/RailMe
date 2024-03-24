@@ -28,9 +28,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
+import com.kakao.auth.ISessionCallback;
+import com.kakao.auth.Session;
 import com.kakao.sdk.auth.model.OAuthToken;
 import com.kakao.sdk.user.UserApiClient;
 import com.kakao.sdk.user.model.User;
+import com.kakao.util.exception.KakaoException;
 import com.subway.railme.MainActivity;
 import com.subway.railme.databinding.ActivityLoginBinding;
 import com.subway.railme.databinding.FragmentMyPageBinding;
@@ -42,14 +45,36 @@ import kotlin.jvm.functions.Function2;
 
 public class LoginActivity extends AppCompatActivity {
     private ActivityLoginBinding binding;
-    private FragmentMyPageBinding binding_;
-    private FirebaseAuth firebaseAuth; // 파이어베이스 인증
-    private DatabaseReference databaseReference; // 실시간 데이터베이스
-    private SharedPreferencesManager preferencesManager;
-    SharedPreferences.Editor editor;
+    private FirebaseAuth firebaseAuth;
     private Context mContext;
 
-
+    // Kakao 로그인 세션 콜백 객체
+    private ISessionCallback iSessionCallback = new ISessionCallback() {
+        @Override
+        public void onSessionOpened() {
+            // Kakao 로그인 성공 시 처리
+            UserApiClient.getInstance().me(new Function2<User, Throwable, Unit>() {
+                @Override
+                public Unit invoke(User user, Throwable throwable) {
+                    if (user != null) {
+                        // 로그인 성공 시 할 작업
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                        Toast.makeText(LoginActivity.this, "카카오 로그인 성공", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(LoginActivity.this, "카카오 사용자 정보 가져오기 실패", Toast.LENGTH_SHORT).show();
+                    }
+                    return null;
+                }
+            });
+        }
+        @Override
+        public void onSessionOpenFailed(KakaoException exception) {
+            // Kakao 로그인 실패 시 처리
+            Toast.makeText(LoginActivity.this, "카카오 로그인 실패", Toast.LENGTH_SHORT).show();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,136 +83,62 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         mContext = this;
 
-        MyPageFragment myPageFragment = new MyPageFragment(); // 프래그먼트와 연결을 위해 프래그먼트 선언
-        /*getSupportActionBar().setDisplayHomeAsUpEnabled(true); // 뒤로가기 버튼*/
-        firebaseAuth = FirebaseAuth.getInstance(); // firebaseAuth의 인스턴스를 가져옴
+        firebaseAuth = FirebaseAuth.getInstance(); // Firebase 인증 객체 초기화
 
-        iSessionCallback = new ISessionCallback() {
-            @Override
-            public void onSessionOpened() {
-                UserManagement.getInstance().me(new MeV2ResponseCallback() { // 로그인 요청
-                    @Override
-                    public void onFailure(ErrorResult errorResult) {
-                        Toast.makeText(LoginActivity.this, "로그인이 실패하였습니다. 다시 시도해 주세요.", Toast.LENGTH_SHORT).show();
-                    }
-                    @Override
-                    public void onSessionClosed(ErrorResult errorResult) {
-                        Toast.makeText(LoginActivity.this, "세션이 닫혔습니다. 다시 시도해 주세요.", Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onSucess(MeV2Response result) {
-                        Intent intent = new Intent(LoginActivity.this, MyPageFragment.class);
-                        Intent.putExtra("name", result.getKakaoAccount().getProfile().getNickname());
-                        Intent.putExtra("Email", result.getEmail());
-                        startActivity(intent);
-
-                        Toast.makeText(LoginActivity.this, "로그인에 성공하였습니다!", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-            @Override
-            public void onSessionOpenFailed(KakaoException kakaoException) {
-                Toast.makeText(LoginActivity.this, "onSessionOpenFailed", )
-            }
-        };
-
+        // Kakao 로그인 세션에 콜백 객체 등록
         Session.getCurrentSession().addCallback(iSessionCallback);
-        Session.getCurrentSession().checkAdnImplicitOpen
+        // Kakao 로그인 세션 오픈 여부 확인
+        Session.getCurrentSession().checkAndImplicitOpen();
 
-        boolean boo = preferencesManager.getBoolean(mContext, "check");
-        if(boo) {
-            binding.etLogin.setText(SharedPreferencesManager.getString(mContext, "Email"));
-            binding.etPassword.setText(SharedPreferencesManager.getString(mContext, "Password"));
-            binding.cbAutologin.setChecked(true);
-        }
-
-        binding.btLogin.setOnClickListener(new View.OnClickListener() { // 로그인 버튼 눌렀을 때
+        // 로그인 버튼 클릭 시 동작
+        binding.btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferencesManager.setString(mContext, "Email", binding.etLogin.getText().toString());
-                SharedPreferencesManager.setString(mContext, "Password", binding.etPassword.getText().toString());
+                // 이메일과 비밀번호 가져오기
+                String email = binding.etLogin.getText().toString().trim();
+                String password = binding.etPassword.getText().toString().trim();
 
-                String Email = SharedPreferencesManager.getString(mContext, "Email");
-                String Password = SharedPreferencesManager.getString(mContext, "Password");
-
-                if(TextUtils.isEmpty(Email) || TextUtils.isEmpty(Password)) {
-                    Toast.makeText(LoginActivity.this, "아이디/비밀번호를 입력해 주세요.", Toast.LENGTH_SHORT).show();
-                } else {
-                    firebaseAuth.signInWithEmailAndPassword(Email, Password)
-                            .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                    if (task.isSuccessful()) {
-                                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                        startActivity(intent);
-                                        finish();
-                                    } else {
-                                        Toast.makeText(LoginActivity.this, "로그인에 실패하였습니다. 다시 시도해 주세요.", Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                            });
-                    }
+                // 이메일 또는 비밀번호가 비어있는지 확인
+                if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
+                    Toast.makeText(LoginActivity.this, "이메일과 비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show();
+                    return;
                 }
+
+                // Firebase에 이메일과 비밀번호로 로그인 요청
+                firebaseAuth.signInWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    // 로그인 성공 시 MainActivity로 이동
+                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                } else {
+                                    // 로그인 실패 시 메시지 출력
+                                    Toast.makeText(LoginActivity.this, "이메일 또는 비밀번호가 올바르지 않습니다.", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+            }
         });
 
+        // 자동 로그인 체크박스 클릭 시 동작
         binding.cbAutologin.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked) {
-                    SharedPreferencesManager.setString(mContext, "Email", binding.etLogin.getText().toString());
-                    SharedPreferencesManager.setString(mContext, "Password", binding.etPassword.getText().toString());
-                    SharedPreferencesManager.setBoolean(mContext, "check", binding.cbAutologin.isChecked());
-                } else {
-                    SharedPreferencesManager.setBoolean(mContext, "check", binding.cbAutologin.isChecked());
-                    SharedPreferencesManager.clearPreferences(mContext);
-                }
+                // 자동 로그인 여부에 따라 SharedPreferences에 저장
+                SharedPreferencesManager.setBoolean(mContext, "check", isChecked);
             }
         });
 
-        binding.btLoginJoin.setOnClickListener(new View.OnClickListener() { // 회원가입 버튼 눌렀을 때 화면 전환하기
+        // 회원가입 버튼 클릭 시 동작
+        binding.btLoginJoin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // 회원가입 액티비티로 이동
                 Intent intent = new Intent(getApplicationContext(), JoinActivity.class);
                 startActivity(intent);
-            }
-        });
-
-
-
-    }
-
-    // 카카오톡이 설치되어 있는지 확인하는 메서드 (카카오에서 제공 콜백 객체를 이용)
-    Function2<OAuthToken, Throwable, Unit> callback = new Function2<OAuthToken, Throwable, Unit>() {
-        @Override
-        public Unit invoke(OAuthToken oAuthToken, Throwable throwable) {
-            // 이때 토큰이 전달되면 로그인 성공, 토큰이 전달되지 않는다면 로그인 실패
-            if (oAuthToken != null) {
-
-            }
-            if (throwable != null) {
-
-            }
-            updateKakaoLoginUi();
-            return null;
-        }
-    };
-
-    private void updateKakaoLoginUi() {
-        UserApiClient.getInstance().me(new Function2<User, Throwable, Unit>() {
-            @Override
-            public Unit invoke(User user, Throwable throwable) {
-                // 로그인이 되어있으면
-                if (user != null) {
-                    // 유저 아이디
-                    Log.d(TAG, "invoke: id" + user.getId());
-                    // 유저 이메일
-                    Log.d(TAG, "invoke: email" + user.getKakaoAccount().getEmail());
-                } else {
-                    // 로그인 되어 있지 않을때
-                    Log.d(TAG, "로그인이 되어 있지 않습니다. 다시 한번 확인해 주시길 바랍니다.");
-                }
-                return null;
             }
         });
     }

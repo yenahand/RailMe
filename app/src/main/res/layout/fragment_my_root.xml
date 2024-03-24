@@ -9,70 +9,84 @@
     tools:layout_editor_absoluteY="-14dp">
 
     <View
+        android:id="@+id/view"
         android:layout_width="416dp"
         android:layout_height="52dp"
-        android:layout_marginBottom="680dp"
         android:background="#594E59"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/et_Departure"
         android:layout_width="191dp"
         android:layout_height="48dp"
+        android:layout_marginTop="12dp"
         android:hint="출발역"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="110dp"
-        tools:layout_editor_absoluteY="64dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view"
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/et_Destination"
         android:layout_width="192dp"
         android:layout_height="51dp"
+        android:layout_marginTop="10dp"
         android:hint="도착역"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="111dp"
-        tools:layout_editor_absoluteY="122dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_Departure"
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/et_StarringTime"
         android:layout_width="192dp"
         android:layout_height="53dp"
         android:hint="출발시간"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="110dp"
-        tools:layout_editor_absoluteY="179dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_Destination"
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/bt_FindRoot"
         android:layout_width="276dp"
         android:layout_height="59dp"
+        android:layout_marginTop="30dp"
         android:onClick="onSearchButtonClick"
         android:text="길찾기"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="67dp"
-        tools:layout_editor_absoluteY="256dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_StarringTime"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/tv_FindResult"
         android:layout_width="325dp"
         android:layout_height="305dp"
+        android:layout_marginTop="42dp"
         android:text="길찾기 결과표시"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="43dp"
-        tools:layout_editor_absoluteY="357dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bt_FindRoot"
+        tools:ignore="MissingConstraints" />
 
     <TextView
+        android:id="@+id/textView3"
         android:layout_width="92dp"
         android:layout_height="26dp"
+        android:layout_marginBottom="26dp"
         android:text="길찾기 🔍"
         android:textColor="@color/white"
         android:textSize="20dp"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="159dp"
-        tools:layout_editor_absoluteY="16dp" />
+        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

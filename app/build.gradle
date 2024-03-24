@@ -44,7 +44,9 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.7.5'
     implementation 'androidx.navigation:navigation-ui-ktx:2.7.5'
-    implementation 'com.google.firebase:firebase-database:20.3.0' // 실시간 데이터베이스
+    implementation platform("com.google.firebase:firebase-bom:32.7.0")
+    implementation 'com.google.firebase:firebase-database-ktx'
+
     implementation 'com.android.car.ui:car-ui-lib:2.6.0'
     implementation 'com.google.firebase:firebase-firestore:24.10.1'
     implementation 'com.google.firebase:firebase-messaging:23.4.0'
@@ -69,6 +71,7 @@ dependencies {
     implementation("com.google.firebase:firebase-auth") // 인증
     implementation 'com.caverock:androidsvg:1.4'
     implementation "com.kakao.sdk:v2-all:2.19.0" // 카카오 로그인
+    implementation group: project.KAKAO_SDK_GROUP, name: 'usermgmt', version: project.KAKAO_SDK_VERSION
 
     implementation 'org.tensorflow:tensorflow-lite:2.8.0' //텐서플로우
     implementation 'org.jsoup:jsoup:1.17.2'
@@ -83,4 +86,7 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 }
+
+
+
 

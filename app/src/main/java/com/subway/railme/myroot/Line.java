@@ -1,6 +1,7 @@
 package com.subway.railme.myroot;
 
-import java.lang.reflect.Array;
+import com.subway.railme.myroot.myroot_API.Station;
+
 import java.util.ArrayList;
 
 public class Line {
@@ -15,7 +16,7 @@ public class Line {
     public static ArrayList<Station> line8;
     public static ArrayList<Station> line9;
 
-    public line() {
+    public void line() {
         AllLine = new ArrayList<ArrayList<Station>>();
         line1 = new ArrayList<Station>();
         line2 = new ArrayList<Station>();
