@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.subway.railme">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
@@ -10,12 +11,13 @@
 
     <application
         android:usesCleartextTraffic="true"
-        android:name=".login.EasyLogin"
+        android:name=".login.CustomApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:usesCleartextTraffic="true"
         android:networkSecurityConfig="@xml/network_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -54,7 +56,7 @@
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
-            android:value="	641c840c3a49b1f89718aeaa4caf6797" />
+            android:value="@string/kakao_app_key" />
 
         <meta-data
             android:name="com.google.firebase.ml.vision.DEPENDENCIES"

@@ -62,6 +62,39 @@ public class LoginActivity extends AppCompatActivity {
         /*getSupportActionBar().setDisplayHomeAsUpEnabled(true); // 뒤로가기 버튼*/
         firebaseAuth = FirebaseAuth.getInstance(); // firebaseAuth의 인스턴스를 가져옴
 
+        iSessionCallback = new ISessionCallback() {
+            @Override
+            public void onSessionOpened() {
+                UserManagement.getInstance().me(new MeV2ResponseCallback() { // 로그인 요청
+                    @Override
+                    public void onFailure(ErrorResult errorResult) {
+                        Toast.makeText(LoginActivity.this, "로그인이 실패하였습니다. 다시 시도해 주세요.", Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public void onSessionClosed(ErrorResult errorResult) {
+                        Toast.makeText(LoginActivity.this, "세션이 닫혔습니다. 다시 시도해 주세요.", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onSucess(MeV2Response result) {
+                        Intent intent = new Intent(LoginActivity.this, MyPageFragment.class);
+                        Intent.putExtra("name", result.getKakaoAccount().getProfile().getNickname());
+                        Intent.putExtra("Email", result.getEmail());
+                        startActivity(intent);
+
+                        Toast.makeText(LoginActivity.this, "로그인에 성공하였습니다!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+            @Override
+            public void onSessionOpenFailed(KakaoException kakaoException) {
+                Toast.makeText(LoginActivity.this, "onSessionOpenFailed", )
+            }
+        };
+
+        Session.getCurrentSession().addCallback(iSessionCallback);
+        Session.getCurrentSession().checkAdnImplicitOpen
+
         boolean boo = preferencesManager.getBoolean(mContext, "check");
         if(boo) {
             binding.etLogin.setText(SharedPreferencesManager.getString(mContext, "Email"));
@@ -120,16 +153,8 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        binding.ibKakaoLogin.setOnClickListener(new View.OnClickListener() { // 카카오 로그인 버튼 눌렀을 때
-            @Override
-            public void onClick(View view) {
-                if (UserApiClient.getInstance().isKakaoTalkLoginAvailable(LoginActivity.this)) {
-                    UserApiClient.getInstance().loginWithKakaoTalk(LoginActivity.this, callback);
-                } else {
-                    UserApiClient.getInstance().loginWithKakaoAccount(LoginActivity.this, callback);
-                }
-            }
-        });
+
+
     }
 
     // 카카오톡이 설치되어 있는지 확인하는 메서드 (카카오에서 제공 콜백 객체를 이용)

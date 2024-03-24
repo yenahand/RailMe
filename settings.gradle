@@ -10,8 +10,10 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        maven { url 'https://devrepo.kakao.com/nexus/content/groups/public/' }
+        jcenter()
+        maven { url 'https://devrepo.kakao.com:8088/nexus/content/groups/public/' }
     }
 }
 rootProject.name = "RailMe"
 include ':app'
+include ':kakao-android-sdk-rx-2.19.0'

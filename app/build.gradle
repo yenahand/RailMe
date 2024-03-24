@@ -68,7 +68,7 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics") // 에널리틱스
     implementation("com.google.firebase:firebase-auth") // 인증
     implementation 'com.caverock:androidsvg:1.4'
-    implementation "com.kakao.sdk:v2-user:2.19.0" // 카카오 로그인
+    implementation "com.kakao.sdk:v2-all:2.19.0" // 카카오 로그인
 
     implementation 'org.tensorflow:tensorflow-lite:2.8.0' //텐서플로우
     implementation 'org.jsoup:jsoup:1.17.2'

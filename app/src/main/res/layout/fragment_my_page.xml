@@ -26,6 +26,8 @@
             android:textSize="22sp"
             android:textStyle="bold" />
 
+
+
     </LinearLayout>
 
     <!-- 카테고리별 설정 텍스트 -->

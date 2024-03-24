@@ -5,9 +5,11 @@ import android.app.Application;
 import com.kakao.sdk.common.KakaoSdk;
 
 public class EasyLogin extends Application {
-    @Override
+    /*@Override
     public void onCreate() {
         super.onCreate();
-        KakaoSdk.init(this, "641c840c3a49b1f89718aeaa4caf6797");
-    }
+        KakaoSdk.init(this, "8c38182120bfba3a8e9b9cc350ff986b");
+    }*/
+
+
 }
