@@ -1,55 +1,39 @@
 // 사용자 계정 로그인을 위한 페이지
 package com.subway.railme.login;
 
-import static androidx.constraintlayout.widget.ConstraintLayoutStates.TAG;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceManager;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.net.ipsec.ike.IkeSessionCallback;
 import android.os.Bundle;
-import android.os.UserManager;
-
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
-import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
+
 import com.kakao.auth.ISessionCallback;
 import com.kakao.auth.Session;
-import com.kakao.sdk.auth.model.OAuthToken;
 import com.kakao.sdk.user.UserApiClient;
 import com.kakao.sdk.user.model.User;
+
 import com.kakao.util.exception.KakaoException;
 import com.subway.railme.MainActivity;
 import com.subway.railme.databinding.ActivityLoginBinding;
-import com.subway.railme.databinding.FragmentMyPageBinding;
-import com.subway.railme.mypage.MyPageFragment;
-
 import kotlin.Unit;
-import kotlin.io.path.OnErrorResult;
 import kotlin.jvm.functions.Function2;
 
 public class LoginActivity extends AppCompatActivity {
     private ActivityLoginBinding binding;
     private FirebaseAuth firebaseAuth;
     private Context mContext;
-
-    // Kakao 로그인 세션 콜백 객체
-    private ISessionCallback iSessionCallback = new ISessionCallback() {
+    private final ISessionCallback iSessionCallback = new ISessionCallback() {
         @Override
         public void onSessionOpened() {
             // Kakao 로그인 성공 시 처리
@@ -57,7 +41,6 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public Unit invoke(User user, Throwable throwable) {
                     if (user != null) {
-                        // 로그인 성공 시 할 작업
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
                         finish();
@@ -69,11 +52,12 @@ public class LoginActivity extends AppCompatActivity {
                 }
             });
         }
+
         @Override
         public void onSessionOpenFailed(KakaoException exception) {
-            // Kakao 로그인 실패 시 처리
             Toast.makeText(LoginActivity.this, "카카오 로그인 실패", Toast.LENGTH_SHORT).show();
         }
+
     };
 
     @Override
@@ -87,8 +71,9 @@ public class LoginActivity extends AppCompatActivity {
 
         // Kakao 로그인 세션에 콜백 객체 등록
         Session.getCurrentSession().addCallback(iSessionCallback);
-        // Kakao 로그인 세션 오픈 여부 확인
         Session.getCurrentSession().checkAndImplicitOpen();
+
+
 
         // 로그인 버튼 클릭 시 동작
         binding.btLogin.setOnClickListener(new View.OnClickListener() {

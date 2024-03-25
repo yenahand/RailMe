@@ -7,12 +7,12 @@ plugins {
 
 android {
     namespace 'com.subway.railme'
-    compileSdk 34
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.subway.railme"
         minSdk 29
-        targetSdk 34
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -42,11 +42,9 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.5.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.7.5'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.7.5'
     implementation platform("com.google.firebase:firebase-bom:32.7.0")
     implementation 'com.google.firebase:firebase-database-ktx'
-
+    implementation "androidx.constraintlayout:constraintlayout:2.1.3"
     implementation 'com.android.car.ui:car-ui-lib:2.6.0'
     implementation 'com.google.firebase:firebase-firestore:24.10.1'
     implementation 'com.google.firebase:firebase-messaging:23.4.0'
@@ -55,13 +53,7 @@ dependencies {
     annotationProcessor 'androidx.room:room-compiler:2.6.1'// 푸쉬메시지
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    implementation 'com.squareup.retrofit2:retrofit:2.6.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
-    implementation 'com.squareup.okhttp3:okhttp:4.9.3'
-    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.2'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.0'
-    implementation 'com.fasterxml.jackson.core:jackson-core:2.13.0'
     implementation 'javax.annotation:javax.annotation-api:1.3.2'
     implementation 'com.android.support:support-annotations:28.0.0'
 
@@ -71,18 +63,23 @@ dependencies {
     implementation("com.google.firebase:firebase-auth") // 인증
     implementation 'com.caverock:androidsvg:1.4'
     implementation "com.kakao.sdk:v2-all:2.19.0" // 카카오 로그인
+    implementation 'com.kakao.sdk:usermgmt:1.30.7'
     implementation group: project.KAKAO_SDK_GROUP, name: 'usermgmt', version: project.KAKAO_SDK_VERSION
 
     implementation 'org.tensorflow:tensorflow-lite:2.8.0' //텐서플로우
     implementation 'org.jsoup:jsoup:1.17.2'
 
+
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.10.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.2'
     //xml parser
     implementation 'com.tickaroo.tikxml:annotation:0.8.13'
     implementation 'com.tickaroo.tikxml:core:0.8.13'
     implementation 'com.tickaroo.tikxml:retrofit-converter:0.8.13'
 
-
-    def nav_version = "2.7.5"
+    def nav_version = "2.5.3"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 }

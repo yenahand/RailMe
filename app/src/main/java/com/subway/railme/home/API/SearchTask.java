@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class SearchTask extends AsyncTask<Void, Void, String> {
-    private static final String BASE_URL = "http://swopenapi.seoul.go.kr/";
+    private static final String BASE_URL = "https://swopenapi.seoul.go.kr/";
     private static final String API_KEY = "59436b514a74706633314b69617558";
     private TextView textView;
     private SearchTaskListener listener;
@@ -29,10 +29,10 @@ public class SearchTask extends AsyncTask<Void, Void, String> {
 
     @Override
     protected String doInBackground(Void... voids) {
+        TikXml parser = new TikXml.Builder().exceptionOnUnreadXml(false).build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
-                .addConverterFactory(TikXmlConverterFactory.create(buildTikXml()))
-                .client(new OkHttpClient())
+                .addConverterFactory(TikXmlConverterFactory.create(parser))
                 .build();
 
         SubwayService service = retrofit.create(SubwayService.class);
