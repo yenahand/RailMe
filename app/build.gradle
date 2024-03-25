@@ -34,7 +34,7 @@ android {
     }
 
     dataBinding {
-        enable = true
+        enabled = true
     }
 }
 
@@ -62,7 +62,7 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics") // 에널리틱스
     implementation("com.google.firebase:firebase-auth") // 인증
     implementation 'com.caverock:androidsvg:1.4'
-    implementation "com.kakao.sdk:v2-all:2.19.0" // 카카오 로그인
+
     implementation 'com.kakao.sdk:usermgmt:1.30.7'
     implementation group: project.KAKAO_SDK_GROUP, name: 'usermgmt', version: project.KAKAO_SDK_VERSION
 

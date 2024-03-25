@@ -26,11 +26,12 @@ import com.kakao.sdk.user.model.User;
 import com.kakao.util.exception.KakaoException;
 import com.subway.railme.MainActivity;
 import com.subway.railme.databinding.ActivityLoginBinding;
+
 import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
 
 public class LoginActivity extends AppCompatActivity {
-    private ActivityLoginBinding binding;
+    private ActivityLoginBindg binding;
     private FirebaseAuth firebaseAuth;
     private Context mContext;
     private final ISessionCallback iSessionCallback = new ISessionCallback() {
@@ -105,7 +106,7 @@ public class LoginActivity extends AppCompatActivity {
                                 }
                             }
                         });
-            }
+                }
         });
 
         // 자동 로그인 체크박스 클릭 시 동작
