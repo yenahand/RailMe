@@ -78,6 +78,7 @@ dependencies {
     implementation 'com.tickaroo.tikxml:annotation:0.8.13'
     implementation 'com.tickaroo.tikxml:core:0.8.13'
     implementation 'com.tickaroo.tikxml:retrofit-converter:0.8.13'
+    annotationProcessor 'com.tickaroo.tikxml:auto-value-tikxml:0.8.15'
 
     def nav_version = "2.5.3"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
