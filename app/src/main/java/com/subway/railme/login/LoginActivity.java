@@ -17,49 +17,20 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-
-import com.kakao.auth.ISessionCallback;
-import com.kakao.auth.Session;
-import com.kakao.sdk.user.UserApiClient;
-import com.kakao.sdk.user.model.User;
-
-import com.kakao.util.exception.KakaoException;
+import com.kakao.sdk.common.KakaoSdk;
 import com.subway.railme.MainActivity;
 import com.subway.railme.databinding.ActivityLoginBinding;
 
 import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
 
+/**
+ * 로그인 액티비티  바로 켜지게 & 간편 로그인 텍스트만 누르면 그냥 Main으로 넘어감
+ */
 public class LoginActivity extends AppCompatActivity {
-    private ActivityLoginBindg binding;
+    private ActivityLoginBinding binding;
     private FirebaseAuth firebaseAuth;
     private Context mContext;
-    private final ISessionCallback iSessionCallback = new ISessionCallback() {
-        @Override
-        public void onSessionOpened() {
-            // Kakao 로그인 성공 시 처리
-            UserApiClient.getInstance().me(new Function2<User, Throwable, Unit>() {
-                @Override
-                public Unit invoke(User user, Throwable throwable) {
-                    if (user != null) {
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        startActivity(intent);
-                        finish();
-                        Toast.makeText(LoginActivity.this, "카카오 로그인 성공", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(LoginActivity.this, "카카오 사용자 정보 가져오기 실패", Toast.LENGTH_SHORT).show();
-                    }
-                    return null;
-                }
-            });
-        }
-
-        @Override
-        public void onSessionOpenFailed(KakaoException exception) {
-            Toast.makeText(LoginActivity.this, "카카오 로그인 실패", Toast.LENGTH_SHORT).show();
-        }
-
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,14 +38,7 @@ public class LoginActivity extends AppCompatActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         mContext = this;
-
         firebaseAuth = FirebaseAuth.getInstance(); // Firebase 인증 객체 초기화
-
-        // Kakao 로그인 세션에 콜백 객체 등록
-        Session.getCurrentSession().addCallback(iSessionCallback);
-        Session.getCurrentSession().checkAndImplicitOpen();
-
-
 
         // 로그인 버튼 클릭 시 동작
         binding.btLogin.setOnClickListener(new View.OnClickListener() {
@@ -90,6 +54,9 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
 
+                /**
+                 * 솔지히 이건 필요없지 않나요 파베 안쓰잖아
+                 */
                 // Firebase에 이메일과 비밀번호로 로그인 요청
                 firebaseAuth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
@@ -97,6 +64,9 @@ public class LoginActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
                                     // 로그인 성공 시 MainActivity로 이동
+                                    /**
+                                     * 카카오 로그인 성공시로 바꿔야하지 않나 싶네요
+                                     */
                                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                     startActivity(intent);
                                     finish();
@@ -106,7 +76,20 @@ public class LoginActivity extends AppCompatActivity {
                                 }
                             }
                         });
-                }
+            }
+        });
+
+        /**
+         * 간편로그인 텍스트 누르면 메인 엑티비티로 넘어감
+         */
+        binding.textView2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+
+            }
         });
 
         // 자동 로그인 체크박스 클릭 시 동작
