@@ -11,8 +11,7 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         jcenter()
-        maven { url 'http://devrepo.kakao.com:8088/nexus/content/groups/public/'
-            allowInsecureProtocol true}
+        maven { url 'https://devrepo.kakao.com/nexus/content/groups/public/'}
         maven {
             url 'http://oss.sonatype.org/content/repositories/snapshots'
             allowInsecureProtocol true
