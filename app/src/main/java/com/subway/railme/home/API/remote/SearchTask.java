@@ -1,14 +1,13 @@
-package com.subway.railme.home.API;
+package com.subway.railme.home.API.remote;
 
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.subway.railme.home.API.SubwayService;
 import com.tickaroo.tikxml.TikXml;
 import com.tickaroo.tikxml.retrofit.TikXmlConverterFactory;
 
-import okhttp3.OkHttpClient;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
