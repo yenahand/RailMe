@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import com.subway.railme.R;
@@ -20,10 +21,22 @@ public class MpTimeActivity extends AppCompatActivity {
         binding = ActivityMpTimeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        HomeFragment homeFragment = new HomeFragment();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.add(R.id.layout.frameLayout, HomeFragment());
+        fragmentTransaction.commit();
+
+        binding.bttimelog.setOnClickListener(new View.OnClickListener() {
+            // fragmentTransaction = getSupportFragmentManager().beginTransaction();
+
+            fragmentTransaction.replace(R.id.layout.frameLayout, HomeFragment);
+            fragmentTransaction.commit()
+        });
     }
 
-    //@Override
-    //public void sendMessage(String s) {
+    @Override
+    public void SearchData() {
 
-    //}
+    }
+
 }

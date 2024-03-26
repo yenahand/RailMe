@@ -10,13 +10,13 @@ import com.subway.railme.databinding.ActivityMpTimeBinding;
 
 public class MpFavoritesActivity extends AppCompatActivity {
 
-    private ActivityMpFavoritesBinding binding_f;
+    private ActivityMpFavoritesBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding_f = ActivityMpFavoritesBinding.inflate(getLayoutInflater());
-        setContentView(binding_f.getRoot());
+        binding = ActivityMpFavoritesBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
 
     }

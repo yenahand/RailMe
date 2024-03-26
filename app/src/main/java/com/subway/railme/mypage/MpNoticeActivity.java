@@ -12,15 +12,15 @@ import com.subway.railme.databinding.ActivityMpNoticeBinding;
 
 public class MpNoticeActivity extends AppCompatActivity {
 
-    private ActivityMpNoticeBinding binding_n;
+    private ActivityMpNoticeBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding_n = ActivityMpNoticeBinding.inflate(getLayoutInflater());
-        setContentView(binding_n.getRoot());
+        binding = ActivityMpNoticeBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        binding_n.swNotice.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        binding.swNotice.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
