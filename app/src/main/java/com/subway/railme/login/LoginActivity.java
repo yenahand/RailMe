@@ -5,10 +5,12 @@ package com.subway.railme.login;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.accounts.Account;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Toast;
@@ -56,6 +58,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 /**
                  * 솔지히 이건 필요없지 않나요 파베 안쓰잖아
+                 * - 기본 로그인에는 파이어베이스를 이용해서 로그인하는 걸로 이용해서 구현한 것이고,swe 카카오 간편 로그인은 따로 간편 로그인 구동할 수 있게 하려고 둘이 따로 한 것입니다!
                  */
                 // Firebase에 이메일과 비밀번호로 로그인 요청
                 firebaseAuth.signInWithEmailAndPassword(email, password)
@@ -76,6 +79,17 @@ public class LoginActivity extends AppCompatActivity {
                                 }
                             }
                         });
+            }
+        });
+
+        binding.ibkakaologin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(UserApiClient.getInstance().isKakaoTalkLoginAvailable(LoginActivity.this)) {
+                    kakaologin();
+                } else {
+                    accountLogin();
+                }
             }
         });
 
@@ -109,6 +123,49 @@ public class LoginActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), JoinActivity.class);
                 startActivity(intent);
             }
+        });
+    }
+
+    public void kakaologin() {
+        String TAG = "kakaologin()";
+        UserApiClient.getInstance().loginWithKakaoTalk(LoginActivity.this,(oAuthToken, error) -> {
+            if(error != null) {
+                Log.e(TAG, "로그인에 실패하였습니다.", error);
+            } else if(oAuthTOken != null) {
+                Log.i(TAG, "로그인에 성공하였습니다!(토큰): " + oAuthToken.getAccessToken());
+                getUserInfo();
+            }
+            return null;
+        });
+    }
+
+    public void accountLogin() {
+        String TAG = "accountLogin()";
+        UserApiCilent.getInstance().loginWithKakaoAccount(LoginActivity.this,(oAuthToken, error) -> {
+            if(error != null) {
+                Log.e(TAG, "로그인에 실패하였습니다.", error);
+            } else if (oAuthToken != null) {
+                Log.i(TAG, "로그인에 성공하였습니다!(토큰): " + oAuthToken.getAccessToken());
+            }
+            return null;
+        });
+    }
+
+    public void getUserInfo() {
+        String TAG = "getUserInfo()";
+        UserApiClient.getInstance().me((user, meError) -> {
+            if(meError != null) {
+                Log.e(TAG, "사용자 정보 요청에 실패하였습니다.", meError);
+            } else {
+                System.out.println("로그인 완료되었습니다.");
+                Log.i(TAG, user.toString());
+                {
+                    Log.i(TAG, "사용자 정보 요청에 성공하였습니다." + "\n 이메일:" + user.getKakaoAccount().getEmail());
+                }
+                Account user1 = user.getKakaoAccount();
+                System.out.println("사용자 계정" + user1);
+            }
+            return null;
         });
     }
 }
