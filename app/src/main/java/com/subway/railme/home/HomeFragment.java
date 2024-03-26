@@ -14,7 +14,7 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.subway.railme.R;
-import com.subway.railme.home.API.SearchTask;
+import com.subway.railme.home.API.remote.SearchTask;
 
 
 
