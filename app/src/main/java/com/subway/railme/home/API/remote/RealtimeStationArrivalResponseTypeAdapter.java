@@ -1,4 +1,4 @@
-package com.subway.railme.home.API;
+package com.subway.railme.home.API.remote;
 
 import com.tickaroo.tikxml.TikXmlConfig;
 import com.tickaroo.tikxml.XmlReader;
