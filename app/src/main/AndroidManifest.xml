@@ -10,7 +10,7 @@
 
 
     <application
-        android:name=".login.CustomApplication"
+        android:name=".login.GlobalApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -35,23 +35,20 @@
 
         <activity
             android:name=".login.LoginActivity"
-            android:exported="false"
-            android:parentActivityName=".MainActivity"/>
-
-        <activity
-            android:name=".login.JoinActivity"
-            android:parentActivityName=".login.LoginActivity" />
-
-        <activity
-            android:name=".MainActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
+                <data
+                    android:host="oauth"
+                    android:scheme="641c840c3a49b1f89718aeaa4caf6797" />
+            </intent-filter>
         </activity>
 
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
