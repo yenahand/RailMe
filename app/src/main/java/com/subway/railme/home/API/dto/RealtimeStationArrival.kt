@@ -1,8 +1,8 @@
 package com.subway.railme.home.API.dto
 
-import android.inputmethodservice.Keyboard
 import com.tickaroo.tikxml.annotation.Element
 import com.tickaroo.tikxml.annotation.Xml
+
 
 
 @Xml(name = "realtimeStationArrival")
@@ -11,7 +11,7 @@ data class RealtimeStationArrival(
     var result: Result? = null,
 
     @Element(name = "row")
-    var rows: Row? = null
+    var rows: List<Row>? = null
 )
 
 data class Result(
@@ -104,4 +104,5 @@ data class Row(
 
     @Element(name = "arvlCd")
     var arvlCd: Int? = null
-)
+                                                                                                                                                                                                                                                                ) {
+}
