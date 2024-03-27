@@ -17,13 +17,14 @@ object RetrofitClient {
             val httpClient = OkHttpClient.Builder().addInterceptor { chain ->
                 val request: Request = chain.request()
                     .newBuilder()
-                    .addHeader("Authorization", API)
+                    .addHeader("Authorization",API)
                     .build()
                 chain.proceed(request)
             }.build()
 
             return Retrofit.Builder()
                 .baseUrl(BASE_URL)
+                .client(httpClient)
                 .addConverterFactory(TikXmlConverterFactory.create(TikXml.Builder().exceptionOnUnreadXml(false).build()))
                 .build()
         }
