@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.widget.CompoundButton;
 import android.widget.Toast;
 
-import com.subway.railme.R;
-import com.subway.railme.databinding.ActivityMpFavoritesBinding;
 import com.subway.railme.databinding.ActivityMpNoticeBinding;
 
 public class MpNoticeActivity extends AppCompatActivity {
