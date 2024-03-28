@@ -1,18 +1,21 @@
 package com.subway.railme.home.subwayapi
 
+import com.subway.railme.Unit
+import com.subway.railme.Unit.API
+import com.subway.railme.Unit.TYPE
 import com.subway.railme.home.API.dto.RealtimeStationArrival
-import com.subway.railme.home.domain.model.ArrivalModel
-import com.tickaroo.tikxml.annotation.Path
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface RetrofitInterface {
-    @GET("api/subway/{apiKey}/xml/realtimeStationArrival/0/1/{stationName}")
+    @GET("sample/json/realtimeStationArrival/")
     suspend fun getSubway(
-        @Query("key") key: String,
-        @Query("type") type: String,
-        @Query("startIndex") startIndex: Int,
-        @Query("endIndex") endIndex: Int,
-        @Query("stationName") stationName: String,
-    ): RealtimeStationArrival
+        @Query("KEY") key: String = API,
+        @Query("TYPE") TYPE: String = "json",
+        @Query("SERVICE") service: String = "realtimeStationArrival",
+        @Query("START_INDEX") startIndex: Int = 0,
+        @Query("END_INDEX") endIndex: Int = 1,
+        @Query("statnNm") stationName: String? = null
+    ): Response<RealtimeStationArrival>
 }
