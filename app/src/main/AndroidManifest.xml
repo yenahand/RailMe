@@ -24,12 +24,6 @@
         tools:targetApi="31">
 
         <activity
-            android:name=".mypage.MpFavoritesActivity"
-            android:exported="false" />
-        <activity
-            android:name=".mypage.MpTimeActivity"
-            android:exported="false" />
-        <activity
             android:name=".mypage.MpNoticeActivity"
             android:exported="false" />
 

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".mypage.MpFavoritesActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".mypage.MpTimeFragment">
 
     <LinearLayout
-        android:id="@+id/bt_favorites"
+        android:id="@+id/bt_timelog"
         android:layout_width="414dp"
-        android:layout_height="546dp"
+        android:layout_height="964dp"
         android:layout_marginTop="188dp"
         android:background="@color/연보라"
         android:orientation="vertical"
@@ -20,13 +20,20 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/tv_favorites"
+            android:id="@+id/tv_timelog"
             android:layout_width="90dp"
             android:layout_height="40dp"
-            android:text="즐겨찾기"
+            android:text="검색 기록"
             android:textSize="22sp"
             android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/tv_rootTimeLog"
+            android:layout_width="match_parent"
+            android:layout_height="464dp"
+            android:text="TextView" />
+
+
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

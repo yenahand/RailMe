@@ -119,16 +119,16 @@
 
     <!--자동 로그인 선택 버튼-->
     <CheckBox
-            android:id="@+id/cb_autologin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="자동 로그인"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.176"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.379" />
+    android:id="@+id/cb_autologin"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="자동 로그인"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.176"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_bias="0.379" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
