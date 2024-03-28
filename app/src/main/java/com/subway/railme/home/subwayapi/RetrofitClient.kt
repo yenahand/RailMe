@@ -2,10 +2,9 @@ package com.subway.railme.home.subwayapi
 
 import com.subway.railme.Unit.API
 import com.subway.railme.Unit.BASE_URL
-import com.tickaroo.tikxml.TikXml
-import com.tickaroo.tikxml.retrofit.TikXmlConverterFactory
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -14,18 +13,24 @@ object RetrofitClient {
 
     private val instance: Retrofit
         get() {
-            val httpClient = OkHttpClient.Builder().addInterceptor { chain ->
-                val request: Request = chain.request()
-                    .newBuilder()
-                    .addHeader("Authorization",API)
-                    .build()
-                chain.proceed(request)
-            }.build()
+            val interceptor = HttpLoggingInterceptor().apply {
+                level = HttpLoggingInterceptor.Level.BODY // 로그 수준 설정 (NONE, BASIC, HEADERS, BODY)
+            }
+            val okHttpClient = OkHttpClient.Builder()
+                .addInterceptor(interceptor) // 로깅 인터셉터 추가
+                .addInterceptor { chain ->
+                    val request: Request = chain.request()
+                        .newBuilder()
+                        .addHeader("Authorization", API)
+                        .build()
+                    chain.proceed(request)
+                }
+                .build()
 
             return Retrofit.Builder()
                 .baseUrl(BASE_URL)
-                .client(httpClient)
-                .addConverterFactory(TikXmlConverterFactory.create(TikXml.Builder().exceptionOnUnreadXml(false).build()))
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(okHttpClient)
                 .build()
         }
 

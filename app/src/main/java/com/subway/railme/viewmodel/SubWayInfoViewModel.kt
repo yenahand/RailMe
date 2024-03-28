@@ -1,24 +1,26 @@
 package com.subway.railme.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.subway.railme.home.API.dto.RealtimeStationArrival
 import com.subway.railme.home.domain.model.ArrivalModel
 import com.subway.railme.home.domain.repository.SubWayRepository
 import com.subway.railme.home.domain.repository.SubwayRepositoryImpl
 import com.subway.railme.home.subwayapi.RetrofitClient
 import kotlinx.coroutines.launch
+import okhttp3.ResponseBody
 
 class SubWayInfoViewModel(
-    private val subWayRepository: SubWayRepository
+    private val subWayRepository: SubWayRepository,
 ) : ViewModel(){
     private var subWay :String = ""
 
-    private val _searchWay:MutableLiveData<List<ArrivalModel>?> = MutableLiveData()
-    val searchWay : LiveData<List<ArrivalModel>?> get() = _searchWay
-
+    private val _searchWay: MutableLiveData<List<ArrivalModel>?> = MutableLiveData()
+    val searchWay: LiveData<List<ArrivalModel>?> get() = _searchWay
 
     init{
         viewModelScope.launch {
@@ -26,10 +28,11 @@ class SubWayInfoViewModel(
         }
     }
         fun setSubwayInfo(statnNm:String){
+            Log.d("SubWayInfoViewModel", "Input word: $statnNm")
         subWay = statnNm
         viewModelScope.launch {
-            val response = subWayRepository.getSubwayInfo(statnNm)
-            _searchWay.value=response
+            val arrivalModels = subWayRepository.getSubwayInfo(statnNm)
+            _searchWay.value = arrivalModels
         }
     }
 

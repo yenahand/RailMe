@@ -19,7 +19,7 @@ import javax.annotation.Nullable;
 
 public class MyPageFragment extends Fragment {
 
-    //private FragmentMyPageBinding binding_;
+    private FragmentMyPageBinding binding;
     private LinearLayout timelog;
     private LinearLayout favorites;
     private TextView loginArea;
@@ -29,14 +29,11 @@ public class MyPageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        //binding_ = FragmentMyPageBinding.inflate(inflater, container, false);
+        binding = FragmentMyPageBinding.inflate(inflater, container, false);
         View view = inflater.inflate(R.layout.fragment_my_page, container, false);
-        // return binding_.getRoot();
+         return binding.getRoot();
 
-        timelog = view.findViewById(R.id.timelog);
-        favorites = view.findViewById(R.id.favorites);
-
-        timelog.setOnClickListener(new View.OnClickListener() {
+    /*    binding.timelog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 MyPageFragment myPageFragment = new MyPageFragment();
@@ -49,24 +46,21 @@ public class MyPageFragment extends Fragment {
 
                 fragmentTransaction.commit();
             }
-        });
+        });*/
 
-        favorites.setOnClickListener(new View.OnClickListener() {
+ /*       favorites.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 MyPageFragment myPageFragment = new MyPageFragment();
-                MpFavoritesFragment mpFavoritesFragment = new MpFavoritesFragment();
 
                 FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.add(R.id.fragment_mypage, myPageFragment);
-                fragmentTransaction.add(R.id.fragment_mypage, mpFavoritesFragment);
 
                 fragmentTransaction.commit();
             }
-        });
+        });*/
 
-        return view;
     }
 
     @Override
