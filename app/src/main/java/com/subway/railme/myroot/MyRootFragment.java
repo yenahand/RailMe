@@ -1,6 +1,5 @@
 package com.subway.railme.myroot;
 
-
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -10,20 +9,22 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import androidx.appcompat.app.AppCompatActivity;
+
 import androidx.fragment.app.Fragment;
 
 import com.subway.railme.R;
+import com.subway.railme.myroot.myroot_API.ApiResponse;
+import com.subway.railme.myroot.myroot_API.ApiService;
+import com.subway.railme.myroot.myroot_API.APIRetrofit;
 import com.subway.railme.myroot.myroot_API.OdsayApiKey;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import java.io.BufferedReader;
+import com.subway.railme.myroot.myroot_API.SubPath;
+
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.net.URLEncoder;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MyRootFragment extends Fragment {
 
@@ -48,14 +49,14 @@ public class MyRootFragment extends Fragment {
         btFindRoot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onSearchButtonClick(v);
+                onSearchButtonClick();
             }
         });
 
         return rootView;
     }
 
-    public void onSearchButtonClick(View view) {
+    private void onSearchButtonClick() {
         String departureTime = etDepartureTime.getText().toString();
         String departureStation = etDeparture.getText().toString();
         String destinationStation = etDestination.getText().toString();
@@ -64,34 +65,33 @@ public class MyRootFragment extends Fragment {
         new OdysseyApiTask().execute(departureTime, departureStation, destinationStation);
     }
 
-    private class OdysseyApiTask extends AsyncTask<String, Void, String> {
+    private class OdysseyApiTask extends AsyncTask<String, Void, ApiResponse> {
 
         @Override
-        protected String doInBackground(String... params) {
+        protected ApiResponse doInBackground(String... params) {
             String departureTime = params[0];
             String departureStation = params[1];
             String destinationStation = params[2];
             String apiKey = OdsayApiKey.key;
 
             try {
-                // Odyssey API 호출 및 응답 받기
-                URL url = new URL("https://api.odsay.com/v1/api/subwayPath?lang=0&CID=1000&Sopt=1" +
-                        "&apiKey=" + URLEncoder.encode(apiKey, "UTF-8") +
-                        "&startStationID=" + URLEncoder.encode(departureStation, "UTF-8") +
-                        "&endStationID=" + URLEncoder.encode(destinationStation, "UTF-8") +
-                        "&departureTime=" + URLEncoder.encode(departureTime, "UTF-8"));
-                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-                try {
-                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-                    StringBuilder stringBuilder = new StringBuilder();
-                    String line;
-                    while ((line = bufferedReader.readLine()) != null) {
-                        stringBuilder.append(line).append("\n");
-                    }
-                    bufferedReader.close();
-                    return stringBuilder.toString();
-                } finally {
-                    urlConnection.disconnect();
+                ApiService service = APIRetrofit.getClient().create(ApiService.class);
+
+                Call<ApiResponse> call = service.getSubwayPath(
+                        0, // lang (언어: 한국어)
+                        1000, // CID (도시코드:수도권)
+                        1, // Sopt (1로하면 최단거리,2로하면 최소환승입니다)
+                        apiKey, // api키
+                        departureStation, // 출발역ID
+                        destinationStation, //도착역ID
+                        departureTime //소요시간
+                );
+
+                Response<ApiResponse> response = call.execute();
+                if (response.isSuccessful()) {
+                    return response.body();
+                } else {
+                    return null;
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -100,49 +100,42 @@ public class MyRootFragment extends Fragment {
         }
 
         @Override
-        protected void onPostExecute(String result) {
+        protected void onPostExecute(ApiResponse result) {
             if (result != null) {
-                // 최단경로를 텍스트로 표시하는 메소드 호출
                 displayShortestPath(result);
             } else {
-                tvFindResult.setText("API 호출에 실패했습니다.");
+                tvFindResult.setText("API 호출 실패 ｡°(°´ᯅ`°)°｡");
             }
         }
     }
 
-    private void displayShortestPath(String apiResponse) {
-        try {
-            // API 응답 데이터에서 최단 경로 정보 추출
-            JSONObject jsonResponse = new JSONObject(apiResponse);
-            JSONArray pathArray = jsonResponse.getJSONArray("subPath");
+    //텍스트뷰에 길찾기 환승정보 표시 (최단거리 기준)
+    private void displayShortestPath(ApiResponse apiResponse) {
+        SubPath[] subPaths = apiResponse.getSubPaths();
 
-            // 최단 경로를 텍스트로 변환
+        if (subPaths != null && subPaths.length > 0) {
             StringBuilder pathText = new StringBuilder();
-            for (int i = 0; i < pathArray.length(); i++) {
-                JSONObject pathStep = pathArray.getJSONObject(i);
-                String stationName = pathStep.getString("stationName");
-                String transferInfo = pathStep.optString("way", "");
+            for (int i = 0; i < subPaths.length; i++) {
+                SubPath pathStep = subPaths[i];
+                String stationName = pathStep.getStationName();
+                String transferInfo = pathStep.getWay();
 
                 if (i > 0) {
                     pathText.append(" --> ");
                 }
 
                 pathText.append(stationName);
-                if (!transferInfo.isEmpty()) {
+                if (transferInfo != null && !transferInfo.isEmpty()) {
                     pathText.append(" (").append(transferInfo).append(")");
                 }
             }
 
-            // 총 소요시간
-            String totalTime = jsonResponse.optString("totalTime", "");
+            String totalTime = apiResponse.getTotalTime();
             pathText.append("\n\n총 소요시간: ").append(totalTime);
 
-            // 텍스트뷰에 최단 경로 표시
             tvFindResult.setText(pathText.toString());
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-            tvFindResult.setText("최단 경로 표시에 실패했습니다.");
+        } else {
+            tvFindResult.setText("최단경로 정보가 없습니다...");
         }
     }
 }
