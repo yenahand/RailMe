@@ -41,6 +41,10 @@
         </activity>
 
         <activity
+            android:name=".login.JoinActivity"
+            android:exported="false" />
+
+        <activity
             android:name=".MainActivity"
             android:exported="false" />
 

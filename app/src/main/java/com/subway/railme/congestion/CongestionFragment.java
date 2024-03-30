@@ -39,7 +39,12 @@ public class CongestionFragment extends Fragment {
         }
 
         // 팝업창 보이기
-        showCongestionInfoPopup(binding.getRoot());
+        binding.ibCongestionInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showCongestionInfoPopup(binding.getRoot());
+            }
+        });
 
         return binding.getRoot();
     }
