@@ -1,7 +1,7 @@
 package com.subway.railme
 
 object Unit {
-    const val API = "465048444173736836336172594177"
+    const val API = "6652784653737368353358467a616b"
     const val BASE_URL = "http://swopenapi.seoul.go.kr/api/subway/"
-    const val TYPE = "application/json"
+    const val TYPE = "json"
 }
