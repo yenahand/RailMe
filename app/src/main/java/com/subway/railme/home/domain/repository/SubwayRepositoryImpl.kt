@@ -2,7 +2,7 @@ package com.subway.railme.home.domain.repository
 
 
 import android.util.Log
-import com.subway.railme.Unit.API
+import com.subway.railme.unit.Unit.API
 import com.subway.railme.home.domain.dto.RealtimeStationArrival
 import com.subway.railme.home.domain.model.ArrivalModel
 import com.subway.railme.home.subwayapi.RetrofitClient

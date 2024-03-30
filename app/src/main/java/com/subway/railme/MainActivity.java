@@ -24,9 +24,6 @@ import java.security.NoSuchAlgorithmException;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding _binding;
-    private FragmentMyPageBinding binding_;
-    FragmentManager fragmentManager;
-    MyPageFragment myPageFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         _binding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = _binding.getRoot();
         setContentView(view);
-        Log.d("GetKey",getKeyHash());
+        Log.d("GetKey", getKeyHash());
 
         //Component 네비게이션 바텀 하단바 적용
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.my_nav_host);
@@ -42,24 +39,24 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(_binding.myBottomNav, navController);
 
 
-
     }
 
-    private String getKeyHash() {  try{
-        PackageInfo packageInfo = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);
-        if(packageInfo == null) return null;
-        for(Signature signature: packageInfo.signatures){
-            try{
-                MessageDigest md = MessageDigest.getInstance("SHA");
-                md.update(signature.toByteArray());
-                return android.util.Base64.encodeToString(md.digest(), Base64.NO_WRAP);
-            }catch (NoSuchAlgorithmException e){
-                Log.w("getKeyHash", "Unable to get MessageDigest. signature="+signature, e);
+    private String getKeyHash() {
+        try {
+            PackageInfo packageInfo = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);
+            if (packageInfo == null) return null;
+            for (Signature signature : packageInfo.signatures) {
+                try {
+                    MessageDigest md = MessageDigest.getInstance("SHA");
+                    md.update(signature.toByteArray());
+                    return android.util.Base64.encodeToString(md.digest(), Base64.NO_WRAP);
+                } catch (NoSuchAlgorithmException e) {
+                    Log.w("getKeyHash", "Unable to get MessageDigest. signature=" + signature, e);
+                }
             }
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.w("getPackageInfo", "Unable to getPackageInfo");
         }
-    }catch(PackageManager.NameNotFoundException e){
-        Log.w("getPackageInfo", "Unable to getPackageInfo");
-    }
         return null;
     }
 

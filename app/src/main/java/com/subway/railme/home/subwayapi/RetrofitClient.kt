@@ -1,7 +1,7 @@
 package com.subway.railme.home.subwayapi
 
-import com.subway.railme.Unit.API
-import com.subway.railme.Unit.BASE_URL
+import com.subway.railme.unit.Unit.API
+import com.subway.railme.unit.Unit.BASE_URL
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.logging.HttpLoggingInterceptor
