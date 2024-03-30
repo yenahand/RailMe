@@ -1,21 +1,19 @@
 package com.subway.railme.home.subwayapi
 
-import com.subway.railme.Unit
-import com.subway.railme.Unit.API
-import com.subway.railme.Unit.TYPE
-import com.subway.railme.home.API.dto.RealtimeStationArrival
+import com.subway.railme.home.domain.dto.RealtimeStationArrival
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface RetrofitInterface {
-    @GET("sample/json/realtimeStationArrival/")
+    @GET("{apiKey}/json/realtimeStationArrival/{startIndex}/{endIndex}/{statnNm}")
     suspend fun getSubway(
-        @Query("KEY") key: String = API,
-        @Query("TYPE") TYPE: String = "json",
-        @Query("SERVICE") service: String = "realtimeStationArrival",
-        @Query("START_INDEX") startIndex: Int = 0,
-        @Query("END_INDEX") endIndex: Int = 1,
-        @Query("statnNm") stationName: String? = null
+        @Path("apiKey") apiKey: String,
+        @Path("startIndex") startIndex: Int = 0,
+        @Path("endIndex") endIndex: Int = 2, // 페이지 수
+        @Path("statnNm") stationName: String,
+        @Query("TYPE") type: String = "json",
+        @Query("SERVICE") service: String = "realtimeStationArrival"
     ): Response<RealtimeStationArrival>
 }
