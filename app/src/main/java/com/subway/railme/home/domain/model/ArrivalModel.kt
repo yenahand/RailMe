@@ -6,5 +6,8 @@ data class ArrivalModel(
     val statnId: String?,// 지하철역ID
     val statnNm: String?,// 지하철역명
     val btrainSttus: String?,// 열차 종류
-    val barvlDt: Int,// 열차 도착 예정 시간
+    val barvlDt: String?, // 열차 도착 예정 시간
+    val arvlMsg2: String?,
+    val arvlMsg3: String?,
+    val arvlCd: String?
 )
