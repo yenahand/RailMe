@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.subway.railme.databinding.FragmentHomeKBinding
+import com.subway.railme.home.dialog.ArrivalInfoDialog
 import com.subway.railme.viewmodel.SubWayInfoViewModel
 import com.subway.railme.viewmodel.SubWayInfoViewModelFactory
 

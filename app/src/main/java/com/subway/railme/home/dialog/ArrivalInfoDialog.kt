@@ -1,4 +1,4 @@
-package com.subway.railme.home
+package com.subway.railme.home.dialog
 
 import android.app.Dialog
 import android.content.Context
