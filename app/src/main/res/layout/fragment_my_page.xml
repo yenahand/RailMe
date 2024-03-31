@@ -10,9 +10,9 @@
     <!-- 로그인 영역 -->
     <LinearLayout
         android:id="@+id/loginArea"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/연보라"
+        android:layout_width="419dp"
+        android:layout_height="112dp"
+        android:background="@color/찐보라"
         android:orientation="horizontal"
         android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,110 +21,75 @@
 
         <TextView
             android:id="@+id/tv_loginArea"
-            android:layout_width="70dp"
-            android:layout_height="40dp"
-            android:text="로그인"
-            android:textSize="22sp"
-            android:textStyle="bold" />
+            android:layout_width="wrap_content"
+            android:layout_height="52dp"
+            android:layout_marginLeft="95dp"
+            android:layout_marginTop="17dp"
+            android:text="로그인 해주세요"
+            android:textColor="@color/white"
+            android:textSize="28sp" />
+
+        <ImageView
+            android:layout_width="103dp"
+            android:layout_height="75dp"
+            android:layout_weight="1"
+            android:src="@drawable/baseline_login_24"
+            tools:ignore="MissingConstraints" />
 
 
     </LinearLayout>
+
+    <ImageView
+        android:layout_width="94dp"
+        android:layout_height="93dp"
+        android:layout_weight="1"
+        android:src="@drawable/page"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="9dp"
+        tools:layout_editor_absoluteY="13dp" />
 
     <!-- 카테고리별 설정 텍스트 -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview"
-        android:layout_width="414dp"
-        android:layout_height="546dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp" />
 
-    <TextView
-        android:id="@+id/categorySettingsText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/loginArea"
-        android:layout_centerHorizontal="true"
-        android:text="카테고리별 설정"
+    <!--즐겨찾기-->
 
-        android:textColor="@android:color/darker_gray"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.472" />
+    <!--타임로그-->
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/loginArea"
-        android:orientation="horizontal"
+    <!--알림 설정 -->
+    <ImageButton
+        android:id="@+id/ib_notice"
+        android:layout_width="120dp"
+        android:layout_height="94dp"
+        android:background="@drawable/rounded_mypage"
+        android:scaleType="centerCrop"
         android:padding="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginArea">
+        android:src="@drawable/notice"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="275dp"
+        tools:layout_editor_absoluteY="144dp" />
 
-        <!-- 즐겨찾기  -->
-        <LinearLayout
-            android:id="@+id/favorites"
-            android:layout_width="0dp"
-            android:layout_height="72dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_weight="1"
-            android:background="@color/찐보라"
-            android:gravity="center"
-            android:orientation="vertical">
+    <ImageButton
+        android:id="@+id/ib_timelog"
+        android:layout_width="120dp"
+        android:layout_height="94dp"
+        android:background="@drawable/rounded_mypage"
+        android:scaleType="centerCrop"
+        android:padding="16dp"
+        android:src="@drawable/time"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="145dp"
+        tools:layout_editor_absoluteY="144dp" />
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/star" />
+    <ImageButton
+        android:id="@+id/ib_favorite"
+        android:layout_width="120dp"
+        android:layout_height="94dp"
+        android:background="@drawable/rounded_mypage"
+        android:scaleType="centerCrop"
+        android:padding="16dp"
+        android:src="@drawable/star"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="144dp" />
 
-        </LinearLayout>
-
-        <!-- 알림설정  -->
-        <LinearLayout
-            android:id="@+id/notice"
-            android:layout_width="0dp"
-            android:layout_height="72dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_weight="1"
-            android:background="@color/찐보라"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/notice" />
-
-        </LinearLayout>
-
-        <!-- 타임로그  -->
-        <LinearLayout
-            android:id="@+id/timelog"
-            android:layout_width="0dp"
-            android:layout_height="72dp"
-            android:layout_marginTop="8dp"
-            android:layout_weight="1"
-            android:background="@color/찐보라"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/time" />
-
-
-        </LinearLayout>
-
-    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -6,34 +5,119 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".mypage.MpTimeFragment">
 
-    <LinearLayout
-        android:id="@+id/bt_timelog"
-        android:layout_width="414dp"
-        android:layout_height="964dp"
-        android:layout_marginTop="188dp"
-        android:background="@color/연보라"
-        android:orientation="vertical"
-        android:padding="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/tv_timelog"
-            android:layout_width="90dp"
-            android:layout_height="40dp"
-            android:text="검색 기록"
-            android:textSize="22sp"
-            android:textStyle="bold" />
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="448dp"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="250dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/rounded_popup" />
 
-        <TextView
-            android:id="@+id/tv_rootTimeLog"
-            android:layout_width="match_parent"
-            android:layout_height="464dp"
-            android:text="TextView" />
+    <!--1-->
+    <View
+        android:layout_width="323dp"
+        android:layout_height="74dp"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="500dp"
+        android:background="@drawable/rounded_mini"
+        android:backgroundTint="@color/white" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="135dp"
+        android:layout_marginTop="520dp"
+        android:text="성환역 > 수원역"
+        android:textColor="@color/찐보라"
+        android:textSize="23dp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:layout_width="53dp"
+        android:layout_height="52dp"
+        android:layout_marginLeft="300dp"
+        android:layout_marginTop="510dp"
+        android:src="@drawable/baseline_star_24" />
+
+    <ImageView
+        android:layout_width="66dp"
+        android:layout_height="57dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="510dp"
+        android:src="@drawable/baseline_directions_subway_24" />
+
+    <!--2-->
+    <View
+        android:layout_width="323dp"
+        android:layout_height="74dp"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="300dp"
+        android:background="@drawable/rounded_mini"
+        android:backgroundTint="@color/white" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="135dp"
+        android:layout_marginTop="320dp"
+        android:text="병점역 > 오산역"
+        android:textColor="@color/찐보라"
+        android:textSize="23dp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:layout_width="49dp"
+        android:layout_height="49dp"
+        android:layout_marginLeft="300dp"
+        android:layout_marginTop="310dp"
+        android:src="@drawable/baseline_star_24" />
+
+    <ImageView
+        android:layout_width="66dp"
+        android:layout_height="57dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="310dp"
+        android:src="@drawable/baseline_directions_subway_24" />
+
+    <!--3-->
+    <View
+        android:layout_width="323dp"
+        android:layout_height="74dp"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="400dp"
+        android:background="@drawable/rounded_mini"
+        android:backgroundTint="@color/white" />
+
+    <TextView
+        android:layout_width="206dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="115dp"
+        android:layout_marginTop="420dp"
+        android:text="성환역 > 홍대입구역"
+        android:textColor="@color/찐보라"
+        android:textSize="23dp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:layout_width="49dp"
+        android:layout_height="48dp"
+        android:layout_marginLeft="310dp"
+        android:layout_marginTop="410dp"
+        android:src="@drawable/baseline_star_24" />
+
+    <ImageView
+        android:layout_width="66dp"
+        android:layout_height="57dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="410dp"
+        android:src="@drawable/baseline_directions_subway_24" />
 
 
-    </LinearLayout>
+
 
 </FrameLayout>

@@ -2,8 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="연보라">#a49ab8</color>
-    <color name="찐보라">#3c3648</color>
+    <color name="연보라">#A790AF</color>
+    <color name="찐보라">#5E4F63</color>
     <color name="보라버튼">#3c3648</color>
     <color name="보라버튼누름">#3c3648</color>
 </resources>
