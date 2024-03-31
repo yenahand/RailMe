@@ -9,136 +9,19 @@
     tools:layout_editor_absoluteY="-22dp">
 
 
-    <!--혼잡률에 대한 정보를 설명하는 팝업창-->
-
-    <TextView
-        android:id="@+id/level01"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="여유 "
-        android:textColor="@color/black"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="47dp"
-        tools:layout_editor_absoluteY="333dp" />
-
-    <TextView
-        android:layout_width="298dp"
-        android:layout_height="43dp"
-        android:text="혼잡률 30% 이하로
-        무조건 좌석에 앉을 수 있는 상태 입니다"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="47dp"
-        tools:layout_editor_absoluteY="353dp" />
-
-    <TextView
-        android:layout_width="298dp"
-        android:layout_height="43dp"
-        android:text="칸 혼잡률 30~50%로
-         빈 좌석이 1~2개 있거나, 통로에 승객이 간간이 서있는 상태입니다"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="47dp"
-        tools:layout_editor_absoluteY="277dp" />
+    <!--뒤로가기 버튼-->
 
     <View
-        android:layout_width="18dp"
-        android:layout_height="18dp"
-        android:layout_marginBottom="636dp"
-        android:background="@android:color/holo_red_dark"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.043"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <View
-        android:layout_width="18dp"
-        android:layout_height="18dp"
-        android:layout_marginBottom="544dp"
-        android:background="@android:color/holo_orange_dark"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.04"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <View
-        android:layout_width="18dp"
-        android:layout_height="18dp"
-        android:layout_marginBottom="460dp"
-        android:background="#FFFF00"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.043"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <View
-        android:layout_width="18dp"
-        android:layout_height="18dp"
-        android:layout_marginBottom="376dp"
-        android:background="@android:color/holo_green_dark"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.04"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/level04"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="매우 혼잡 "
-        android:textColor="@color/black"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="47dp"
-        tools:layout_editor_absoluteY="72dp" />
-
-    <TextView
-        android:id="@+id/level03"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="혼잡 "
-        android:textColor="@color/black"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="47dp"
-        tools:layout_editor_absoluteY="164dp" />
-
-    <TextView
-        android:id="@+id/level02"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="보통 "
-        android:textColor="@color/black"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="47dp"
-        tools:layout_editor_absoluteY="252dp" />
-
-
-    <TextView
-        android:layout_width="310dp"
-        android:layout_height="40dp"
-        android:text="혼잡률 70% 초과, 통로에 승객들이
-빽빽하게 서있어서 이동이 불가능한 상태입니다 "
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="47dp"
-        tools:layout_editor_absoluteY="105dp" />
-
-    <TextView
-        android:layout_width="298dp"
-        android:layout_height="43dp"
-        android:text="혼잡률50~70%로
-          통로에 승객들이 서 있어서 이동에 영향을 미치는 상태입니다"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="47dp"
-        tools:layout_editor_absoluteY="185dp" />
-
-    <View
+        android:id="@+id/view10"
         android:layout_width="414dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="688dp"
         android:background="#594E59"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/view15"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.666"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!--뒤로가기 버튼-->
     <Button
         android:id="@+id/popup_back"
         android:layout_width="30dp"
@@ -147,18 +30,201 @@
         android:text="X"
         android:textColor="#463d4b"
         android:textSize="20dp"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="371dp"
-        tools:layout_editor_absoluteY="9dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.981"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.008"
+        tools:ignore="MissingConstraints" />
 
     <TextView
+        android:id="@+id/textView8"
         android:layout_width="105dp"
         android:layout_height="32dp"
         android:text="혼잡률 정보"
         android:textColor="#1f1b22"
         android:textSize="20dp"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="153dp"
-        tools:layout_editor_absoluteY="6dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.008"
+        tools:ignore="MissingConstraints" />
+
+    <!--혼잡률에 대한 정보를 설명하는 팝업창-->
+
+    <View
+        android:id="@+id/view15"
+        android:layout_width="414dp"
+        android:layout_height="390dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.146" />
+
+    <TextView
+        android:id="@+id/level01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="여유 "
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.123"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.476"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="298dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="22dp"
+        android:text="혼잡률 30% 이하로
+ 무조건 좌석에 앉을 수 있는 상태 입니다"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.415"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/level01"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="298dp"
+        android:layout_height="43dp"
+        android:text="칸 혼잡률 30~50%로
+ 빈 좌석이 1~2개 있거나, 통로에 승객이 간간이 서있는 상태입니다"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.415"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.398"
+        tools:ignore="MissingConstraints" />
+
+    <View
+        android:id="@+id/view11"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:background="@android:color/holo_red_dark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.04"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.107" />
+
+    <View
+        android:id="@+id/view9"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:background="@android:color/holo_orange_dark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.04"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.234" />
+
+    <View
+        android:id="@+id/view12"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:background="#FFFF00"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.04"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.354" />
+
+    <View
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:background="@android:color/holo_green_dark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.04"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.478" />
+
+    <TextView
+        android:id="@+id/level04"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="매우 혼잡 "
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.133"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.104"
+        tools:ignore="MissingConstraints" />
+
+
+    <TextView
+        android:id="@+id/level03"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="혼잡 "
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.123"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.235"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/level02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="보통 "
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.123"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.356"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="310dp"
+        android:layout_height="40dp"
+        android:text="혼잡률 70% 초과, 통로에 승객들이
+빽빽하게 서있어서 이동이 불가능한 상태입니다 "
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.465"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.137"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="298dp"
+        android:layout_height="43dp"
+        android:text="혼잡률50~70%로
+ 통로에 승객들이 서 있어서 이동에 영향을 미치는 상태입니다"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.415"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/level03"
+        app:layout_constraintVertical_bias="0.038"
+        tools:ignore="MissingConstraints" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
