@@ -13,7 +13,5 @@ interface RetrofitInterface {
         @Path("startIndex") startIndex: Int = 0,
         @Path("endIndex") endIndex: Int = 2, // 페이지 수
         @Path("statnNm") stationName: String,
-        @Query("TYPE") type: String = "json",
-        @Query("SERVICE") service: String = "realtimeStationArrival"
     ): Response<RealtimeStationArrival>
 }

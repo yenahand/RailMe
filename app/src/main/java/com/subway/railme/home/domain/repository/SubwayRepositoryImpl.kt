@@ -6,6 +6,7 @@ import com.subway.railme.unit.Unit.API
 import com.subway.railme.home.domain.dto.RealtimeStationArrival
 import com.subway.railme.home.domain.model.ArrivalModel
 import com.subway.railme.home.subwayapi.RetrofitClient
+import com.subway.railme.unit.Unit.BASE_URL
 import retrofit2.Response
 
 class SubwayRepositoryImpl(
@@ -15,7 +16,7 @@ class SubwayRepositoryImpl(
     override suspend fun getSubwayInfo(statnNm: String): List<ArrivalModel>? {
         try {
 
-            val response: Response<RealtimeStationArrival> = client.api.getSubway(API,
+            val response: Response<RealtimeStationArrival> = client.getApi(BASE_URL,API).getSubway(API,
                 stationName = statnNm)
             return if (response.isSuccessful) {
                 val realtimeStationArrival: RealtimeStationArrival? = response.body()

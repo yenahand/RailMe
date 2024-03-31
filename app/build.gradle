@@ -66,6 +66,7 @@ dependencies {
     implementation "com.kakao.sdk:v2-user:2.17.0" // 카카오 로그인
 
     implementation 'org.tensorflow:tensorflow-lite:2.8.0' //텐서플로우
+    implementation 'org.tensorflow:tensorflow-lite-select-tf-ops:2.8.0'
     implementation 'org.jsoup:jsoup:1.17.2'
 
 
