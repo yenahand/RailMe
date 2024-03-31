@@ -14,4 +14,9 @@ interface RetrofitInterface {
         @Path("endIndex") endIndex: Int = 2, // 페이지 수
         @Path("statnNm") stationName: String,
     ): Response<RealtimeStationArrival>
+
+    @GET("{api}/searchStation/{lang}/{stationName}")
+    suspend fun getStation(
+
+    )
 }

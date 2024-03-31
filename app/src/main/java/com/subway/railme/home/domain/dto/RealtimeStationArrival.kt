@@ -1,6 +1,8 @@
 package com.subway.railme.home.domain.dto
 
-
+/**
+ * btrainSttus열차종류 (급행,ITX,일반,특급)    statnNm 지하철역명    barvlDt   열차도착예정시간 (단위:초)
+ */
 data class RealtimeStationArrival(
     val errorMessage: ErrorMessage,
     val realtimeArrivalList: List<RealtimeStationArrivalItem>
