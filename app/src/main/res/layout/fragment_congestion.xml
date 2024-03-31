@@ -195,13 +195,13 @@
 
     <ImageButton
         android:id="@+id/ib_CongestionInfo"
-        android:layout_width="56dp"
-        android:layout_height="55dp"
+        android:layout_width="51dp"
+        android:layout_height="48dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="40dp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_CurrentStation"
         app:layout_constraintEnd_toStartOf="@+id/tv_CurrentStation"
-        app:layout_constraintHorizontal_bias="0.069"
+        app:layout_constraintHorizontal_bias="0.079"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
