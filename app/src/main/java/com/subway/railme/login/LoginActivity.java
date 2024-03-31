@@ -123,7 +123,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // 회원가입 액티비티로 이동
-                Intent intent = new Intent(getApplicationContext(), JoinActivity.class);
+                Intent intent = new Intent(LoginActivity.this, JoinActivity.class);
                 startActivity(intent);
             }
         });
