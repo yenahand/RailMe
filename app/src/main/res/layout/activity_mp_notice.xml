@@ -59,10 +59,11 @@
                 android:layout_height="59dp"
                 android:layout_marginLeft="140dp"
                 android:layout_marginTop="324dp"
-                android:text="<   진동모드   >"
+                android:text="   진동모드   "
                 android:textColor="@color/찐보라"
                 android:textSize="22dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                />
 
             <!--촬영용 친구2-->
             <View
@@ -87,7 +88,7 @@
                 android:layout_height="59dp"
                 android:layout_marginLeft="140dp"
                 android:layout_marginTop="424dp"
-                android:text="<   도착1전역   >"
+                android:text="   도착1전역   "
                 android:textColor="@color/찐보라"
                 android:textSize="22dp"
                 android:textStyle="bold" />

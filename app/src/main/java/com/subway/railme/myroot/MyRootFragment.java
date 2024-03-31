@@ -1,5 +1,6 @@
 package com.subway.railme.myroot;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,6 +55,11 @@ public class MyRootFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 onSearchButtonClick();
+                Intent intent = new Intent(getActivity(), MyRootResultActivity.class);
+                intent.putExtra("departureStation", String.valueOf(R.id.et_Departure));
+                intent.putExtra("destinationStation", String.valueOf(R.id.et_Destination));
+                intent.putExtra("departureTime", String.valueOf(R.id.et_StarringTime));
+                startActivity(intent);
             }
         });
 
