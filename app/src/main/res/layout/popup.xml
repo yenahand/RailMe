@@ -15,7 +15,7 @@
         android:id="@+id/view10"
         android:layout_width="414dp"
         android:layout_height="50dp"
-        android:background="@drawable/popup"
+        android:background="@color/찐보라"
         app:layout_constraintBottom_toTopOf="@+id/view15"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.666"

@@ -1,3 +1,4 @@
+
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,116 +9,133 @@
 
     <View
         android:layout_width="wrap_content"
-        android:layout_height="448dp"
+        android:layout_height="452dp"
         android:layout_gravity="top|center_horizontal"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="250dp"
         android:layout_marginRight="20dp"
         android:background="@drawable/rounded_popup" />
 
+
+
     <!--1-->
     <View
-        android:layout_width="323dp"
+        android:layout_width="318dp"
         android:layout_height="74dp"
         android:layout_centerInParent="true"
         android:layout_marginLeft="45dp"
-        android:layout_marginTop="500dp"
+        android:layout_marginTop="550dp"
         android:background="@drawable/rounded_mini"
         android:backgroundTint="@color/white" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="135dp"
-        android:layout_marginTop="520dp"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="570dp"
         android:text="성환역 > 수원역"
         android:textColor="@color/찐보라"
-        android:textSize="23dp"
+        android:textSize="20dp"
         android:textStyle="bold" />
-
-    <ImageView
-        android:layout_width="53dp"
-        android:layout_height="52dp"
-        android:layout_marginLeft="300dp"
-        android:layout_marginTop="510dp"
-        android:src="@drawable/baseline_star_24" />
 
     <ImageView
         android:layout_width="66dp"
         android:layout_height="57dp"
         android:layout_marginLeft="50dp"
-        android:layout_marginTop="510dp"
+        android:layout_marginTop="560dp"
         android:src="@drawable/baseline_directions_subway_24" />
 
     <!--2-->
     <View
-        android:layout_width="323dp"
-        android:layout_height="74dp"
+        android:layout_width="314dp"
+        android:layout_height="72dp"
         android:layout_centerInParent="true"
         android:layout_marginLeft="45dp"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="310dp"
         android:background="@drawable/rounded_mini"
         android:backgroundTint="@color/white" />
 
+    <!--텍스트뷰 일단 임시로 이렇게 해놧습니다-->
     <TextView
+        android:id="@+id/tvRootTimeLog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="135dp"
-        android:layout_marginTop="320dp"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="330dp"
         android:text="병점역 > 오산역"
         android:textColor="@color/찐보라"
-        android:textSize="23dp"
+        android:textSize="20dp"
         android:textStyle="bold" />
-
-    <ImageView
-        android:layout_width="49dp"
-        android:layout_height="49dp"
-        android:layout_marginLeft="300dp"
-        android:layout_marginTop="310dp"
-        android:src="@drawable/baseline_star_24" />
 
     <ImageView
         android:layout_width="66dp"
         android:layout_height="57dp"
         android:layout_marginLeft="50dp"
-        android:layout_marginTop="310dp"
+        android:layout_marginTop="320dp"
         android:src="@drawable/baseline_directions_subway_24" />
 
     <!--3-->
     <View
-        android:layout_width="323dp"
+        android:layout_width="316dp"
         android:layout_height="74dp"
         android:layout_centerInParent="true"
         android:layout_marginLeft="45dp"
-        android:layout_marginTop="400dp"
+        android:layout_marginTop="410dp"
         android:background="@drawable/rounded_mini"
         android:backgroundTint="@color/white" />
 
     <TextView
         android:layout_width="206dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="115dp"
-        android:layout_marginTop="420dp"
+        android:layout_marginLeft="130dp"
+        android:layout_marginTop="430dp"
         android:text="성환역 > 홍대입구역"
         android:textColor="@color/찐보라"
-        android:textSize="23dp"
+        android:textSize="20dp"
         android:textStyle="bold" />
-
-    <ImageView
-        android:layout_width="49dp"
-        android:layout_height="48dp"
-        android:layout_marginLeft="310dp"
-        android:layout_marginTop="410dp"
-        android:src="@drawable/baseline_star_24" />
 
     <ImageView
         android:layout_width="66dp"
         android:layout_height="57dp"
         android:layout_marginLeft="50dp"
-        android:layout_marginTop="410dp"
+        android:layout_marginTop="420dp"
         android:src="@drawable/baseline_directions_subway_24" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="270dp"
+        android:textSize="19dp"
+        android:text="오늘"
+        android:textStyle="bold"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="520dp"
+        android:textSize="19dp"
+        android:text="어제"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="42dp"
+        android:layout_height="wrap_content"
+        android:text="▼"
+        android:textSize="30dp"
+        android:layout_marginLeft="190dp"
+        android:layout_marginTop="640dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="222dp"
+        android:text="타임로그"
+        android:textSize="30dp"
+        android:textStyle="bold"/>
 
 
 </FrameLayout>
+
