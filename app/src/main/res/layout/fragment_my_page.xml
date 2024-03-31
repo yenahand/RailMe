@@ -23,72 +23,76 @@
             android:layout_width="wrap_content"
             android:layout_height="51dp"
             android:layout_marginLeft="95dp"
-            android:layout_marginTop="17dp"
+            android:layout_gravity="center_vertical"
             android:text="로그인 해주세요"
             android:textColor="@color/white"
             android:textSize="28sp" />
 
         <ImageView
-            android:layout_width="103dp"
-            android:layout_height="75dp"
-            android:layout_weight="1"
-            android:src="@drawable/baseline_login_24"
-            tools:ignore="MissingConstraints" />
-
+            android:layout_width="75dp"
+            android:layout_height="72dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/baseline_login_24" />
 
     </LinearLayout>
 
     <ImageView
-        android:layout_width="94dp"
-        android:layout_height="93dp"
-        android:layout_weight="1"
+        android:layout_width="97dp"
+        android:layout_height="101dp"
         android:src="@drawable/page"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="9dp"
-        tools:layout_editor_absoluteY="13dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
 
     <!-- 카테고리별 설정 텍스트 -->
 
-    <!--즐겨찾기-->
-
-    <!--타임로그-->
-
-    <!--알림 설정 -->
-    <ImageButton
-        android:id="@+id/ib_notice"
-        android:layout_width="120dp"
-        android:layout_height="94dp"
-        android:background="@drawable/rounded_mypage"
-        android:scaleType="centerCrop"
-        android:padding="20dp"
-        android:src="@drawable/notice"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="275dp"
-        tools:layout_editor_absoluteY="144dp" />
-
-    <ImageButton
-        android:id="@+id/ib_time"
-        android:layout_width="120dp"
-        android:layout_height="94dp"
-        android:background="@drawable/rounded_mypage"
-        android:scaleType="centerCrop"
-        android:padding="20dp"
-        android:src="@drawable/time"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="145dp"
-        tools:layout_editor_absoluteY="144dp" />
-
+    <!-- 즐겨찾기 -->
     <ImageButton
         android:id="@+id/ib_favorite"
         android:layout_width="120dp"
         android:layout_height="94dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="10dp"
         android:background="@drawable/rounded_mypage"
         android:scaleType="centerCrop"
         android:padding="20dp"
         android:src="@drawable/star"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/loginArea"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="144dp" />
 
+    <!-- 타임로그 -->
+    <ImageButton
+        android:id="@+id/ib_time"
+        android:layout_width="120dp"
+        android:layout_height="94dp"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/rounded_mypage"
+        android:scaleType="centerCrop"
+        android:padding="20dp"
+        android:src="@drawable/time"
+        app:layout_constraintStart_toEndOf="@id/ib_favorite"
+        app:layout_constraintTop_toTopOf="@id/ib_favorite"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="145dp"
+        tools:layout_editor_absoluteY="144dp" />
+
+    <!-- 알림 설정 -->
+    <ImageButton
+        android:id="@+id/ib_notice"
+        android:layout_width="120dp"
+        android:layout_height="94dp"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/rounded_mypage"
+        android:scaleType="centerCrop"
+        android:padding="20dp"
+        android:src="@drawable/notice"
+        app:layout_constraintStart_toEndOf="@id/ib_time"
+        app:layout_constraintTop_toTopOf="@id/ib_time"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="275dp"
+        tools:layout_editor_absoluteY="144dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -18,8 +18,8 @@
 
     <ImageView
         android:id="@+id/iv_congestion"
-        android:layout_width="135dp"
-        android:layout_height="123dp"
+        android:layout_width="139dp"
+        android:layout_height="122dp"
         android:layout_marginTop="204dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,20 +63,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_congestion" />
 
+
     <TextView
         android:id="@+id/tv_CongestionRate"
-        android:layout_width="97dp"
-        android:layout_height="35dp"
+        android:layout_width="93dp"
+        android:layout_height="36dp"
         android:layout_marginTop="29dp"
         android:text="혼잡률 %"
         android:textSize="23dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.55"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view8"
-        app:layout_constraintVertical_bias="0.059"
+        app:layout_constraintVertical_bias="0.042"
         tools:ignore="MissingConstraints" />
-
 
     <TextView
         android:id="@+id/tv_CurrentStation"
@@ -206,6 +207,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/baseline_info_24" />
+
+    <TextView
+        android:layout_width="39dp"
+        android:layout_height="53dp"
+        android:text="▼"
+        android:textSize="40dp"
+        tools:layout_editor_absoluteX="186dp"
+        tools:layout_editor_absoluteY="230dp"
+        tools:ignore="MissingConstraints" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

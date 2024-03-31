@@ -6,33 +6,97 @@
     android:layout_height="match_parent"
     tools:context=".mypage.MpNoticeActivity">
 
-    <LinearLayout
-        android:id="@+id/bt_notice"
-        android:layout_width="414dp"
-        android:layout_height="120dp"
-        android:layout_marginTop="188dp"
-        android:background="@color/연보라"
-        android:orientation="vertical"
-        android:padding="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".mypage.MpFavoriteFragment">
 
-        <TextView
-            android:id="@+id/tv_notice"
-            android:layout_width="90dp"
-            android:layout_height="40dp"
-            android:text="알림 설정"
-            android:textSize="22sp"
-            android:textStyle="bold" />
-
-        <Switch
-            android:id="@+id/sw_notice"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="도착시 알림" />
+            android:layout_height="match_parent"
+            tools:context=".mypage.MpTimeFragment">
 
-    </LinearLayout>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="448dp"
+                android:layout_gravity="top|center_horizontal"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="250dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/rounded_popup" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="222dp"
+                android:text="알림설정"
+                android:textSize="30dp"
+                android:textStyle="bold"/>
+
+            <!--촬영용 친구1-->
+            <View
+                android:layout_width="318dp"
+                android:layout_height="59dp"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="45dp"
+                android:layout_marginTop="310dp"
+                android:background="@drawable/rounded_mini"
+                android:backgroundTint="@color/white" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="280dp"
+                android:textSize="19dp"
+                android:text="알림소리"
+               />
+
+            <TextView
+                android:layout_width="155dp"
+                android:layout_height="59dp"
+                android:layout_marginLeft="140dp"
+                android:layout_marginTop="324dp"
+                android:text="<   진동모드   >"
+                android:textColor="@color/찐보라"
+                android:textSize="22dp"
+                android:textStyle="bold" />
+
+            <!--촬영용 친구2-->
+            <View
+                android:layout_width="318dp"
+                android:layout_height="59dp"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="45dp"
+                android:layout_marginTop="410dp"
+                android:background="@drawable/rounded_mini"
+                android:backgroundTint="@color/white" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="380dp"
+                android:textSize="19dp"
+                android:text="알림위치"
+                />
+
+            <TextView
+                android:layout_width="155dp"
+                android:layout_height="59dp"
+                android:layout_marginLeft="140dp"
+                android:layout_marginTop="424dp"
+                android:text="<   도착1전역   >"
+                android:textColor="@color/찐보라"
+                android:textSize="22dp"
+                android:textStyle="bold" />
+
+
+
+        </FrameLayout>
+
+
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
