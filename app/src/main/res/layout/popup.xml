@@ -15,7 +15,7 @@
         android:id="@+id/view10"
         android:layout_width="414dp"
         android:layout_height="50dp"
-        android:background="#594E59"
+        android:background="@drawable/popup"
         app:layout_constraintBottom_toTopOf="@+id/view15"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.666"
@@ -223,7 +223,7 @@
         app:layout_constraintHorizontal_bias="0.415"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/level03"
-        app:layout_constraintVertical_bias="0.038"
+        app:layout_constraintVertical_bias="0.034"
         tools:ignore="MissingConstraints" />
 
 
