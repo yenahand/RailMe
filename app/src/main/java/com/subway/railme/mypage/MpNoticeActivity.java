@@ -18,7 +18,7 @@ public class MpNoticeActivity extends AppCompatActivity {
         binding = ActivityMpNoticeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        binding.swNotice.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        /*binding.swNotice.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
@@ -27,6 +27,6 @@ public class MpNoticeActivity extends AppCompatActivity {
 
                 }
             }
-        });
+        });*/
     }
 }
