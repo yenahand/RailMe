@@ -20,7 +20,7 @@ public class MyRootResultActivity extends AppCompatActivity {
     private TextView tvmyresultarrive;
     private TextView tvmyresulttime;
 
-    @SuppressLint({"MissingInflatedId", "SetTextI18n"})
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
