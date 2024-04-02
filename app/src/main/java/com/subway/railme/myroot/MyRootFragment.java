@@ -29,7 +29,7 @@ import retrofit2.Response;
 
 public class MyRootFragment extends Fragment {
 
-    private EditText etDepartureTime;
+    //private EditText etDepartureTime;
     private EditText etDeparture;
     private EditText etDestination;
     private TextView tvFindResult;
@@ -37,13 +37,14 @@ public class MyRootFragment extends Fragment {
 
     private String departureStationName;
     private String destinationStationName;
+    
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_my_root, container, false);
 
-        etDepartureTime = rootView.findViewById(R.id.et_StarringTime);
+        //etDepartureTime = rootView.findViewById(R.id.et_StarringTime);
         etDeparture = rootView.findViewById(R.id.et_Departure);
         etDestination = rootView.findViewById(R.id.et_Destination);
         tvFindResult = rootView.findViewById(R.id.tv_FindResult);
@@ -54,11 +55,19 @@ public class MyRootFragment extends Fragment {
         btFindRoot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onSearchButtonClick();
+                //onSearchButtonClick();
+                //String departureTime = etDepartureTime.getText().toString();
+                String departureStation = etDeparture.getText().toString();
+                String destinationStation = etDestination.getText().toString();
+
+                getStationID(departureStation, destinationStation);
+                //displayShortestPath(travelTime);
+
                 Intent intent = new Intent(getActivity(), MyRootResultActivity.class);
-                intent.putExtra("departureStation", String.valueOf(R.id.et_Departure));
-                intent.putExtra("destinationStation", String.valueOf(R.id.et_Destination));
-                intent.putExtra("departureTime", String.valueOf(R.id.et_StarringTime));
+                intent.putExtra("departureStation", departureStation);
+                intent.putExtra("destinationStation", destinationStation);
+                //intent.putExtra("departureTime", departureTime);
+
                 startActivity(intent);
             }
         });
@@ -66,16 +75,19 @@ public class MyRootFragment extends Fragment {
         return rootView;
     }
 
-    private void onSearchButtonClick() {
+
+
+    // private
+    /*public void onSearchButtonClick() {
         String departureTime = etDepartureTime.getText().toString();
         String departureStation = etDeparture.getText().toString();
         String destinationStation = etDestination.getText().toString();
 
         getStationID(departureStation, destinationStation, departureTime);
-    }
+    }*/
 
     // 출발역과 도착역의 StationID 가져옴
-    private void getStationID(final String departureStation, final String destinationStation, final String departureTime) {
+    private void getStationID(final String departureStation, final String destinationStation) {
         StationIDApi stationIDApi = RetrofitClient.getRetrofitInstance().create(StationIDApi.class);
         Call<StationIDResponse> departureCall = stationIDApi.searchStation(OdsayApiKey.key, departureStation, "json");
         departureCall.enqueue(new Callback<StationIDResponse>() {
@@ -84,7 +96,7 @@ public class MyRootFragment extends Fragment {
                 if (response.isSuccessful() && response.body() != null && response.body().getStationList() != null && response.body().getStationList().size() > 0) {
                     StationID departureStationID = response.body().getStationList().get(0);
 
-                    getDestinationStationID(departureStationID.getStationID(), destinationStation, departureTime);
+                    getDestinationStationID(departureStationID.getStationID(), destinationStation); //departureTime
                 } else {
 
                     Toast.makeText(getActivity(), "출발역의 StationID를 가져오는 데 실패했습니다...", Toast.LENGTH_SHORT).show();
@@ -99,7 +111,7 @@ public class MyRootFragment extends Fragment {
         });
     }
 
-    private void getDestinationStationID(final int departureStationID, final String destinationStation, final String departureTime) {
+    private void getDestinationStationID(final int departureStationID, final String destinationStation) {
         StationIDApi stationIDApi = RetrofitClient.getRetrofitInstance().create(StationIDApi.class);
         Call<StationIDResponse> destinationCall = stationIDApi.searchStation(OdsayApiKey.key, destinationStation, "json");
         destinationCall.enqueue(new Callback<StationIDResponse>() {
@@ -108,7 +120,7 @@ public class MyRootFragment extends Fragment {
                 if (response.isSuccessful() && response.body() != null && response.body().getStationList() != null && response.body().getStationList().size() > 0) {
                     StationID destinationStationID = response.body().getStationList().get(0);
                     // 출발역과 도착역의 StationID를 가져왔으므로 이어서 Route API 호출하기
-                    getSubwayPath(departureStationID, destinationStationID.getStationID(), departureTime);
+                    getSubwayPath(departureStationID, destinationStationID.getStationID()); //departureTime
                 } else {
                     // API 호출 실패 처리
                     Toast.makeText(getActivity(), "도착역 StationID를 가져오는 데 실패했습니다...", Toast.LENGTH_SHORT).show();
@@ -124,7 +136,7 @@ public class MyRootFragment extends Fragment {
     }
 
 
-    private void getSubwayPath(final int departureStationID, final int destinationStationID, final String departureTime) {
+    private void getSubwayPath(final int departureStationID, final int destinationStationID) {
         RouteApi routeApi = RetrofitClient.getRetrofitInstance().create(RouteApi.class);
         Call<RouteResponse> call = routeApi.getSubwayPath(OdsayApiKey.key, departureStationID, destinationStationID, 0, "json", 1000, 1);
         call.enqueue(new Callback<RouteResponse>() {
@@ -176,4 +188,6 @@ public class MyRootFragment extends Fragment {
 
         tvFindResult.setText("▶ 출발역: " + departureStationName + "\n▶ 도착역: " + destinationStationName + "\n∘총 소요시간: " + travelTime + "\n∘정차역 수: " + stationCount + "\n∘요금: " + cashFare + "\n∘경로: " + pathText.toString());
     }
+
+    //public void
 }
