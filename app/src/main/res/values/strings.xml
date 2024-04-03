@@ -3,6 +3,4 @@
     <!-- 카카오 네이티브 앱 키 -->
     <string name="kakao_app_key">8c38182120bfba3a8e9b9cc350ff986b</string>
     <string name="title_activity_arrival_info.xml">activity_arrival_info.xml</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
