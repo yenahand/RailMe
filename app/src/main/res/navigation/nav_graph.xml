@@ -9,17 +9,18 @@
         android:id="@+id/homeKFragment"
         android:name="com.subway.railme.home.HomeKFragment"
         android:label="HomeKFragment"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home_k" />
     <fragment
         android:id="@+id/myRootFragment"
         android:name="com.subway.railme.myroot.MyRootFragment"
         android:label="fragment_chating"
-        tools:layout="@layout/fragment_congestion" />
+        tools:layout="@layout/fragment_my_root"
+   />
     <fragment
-        android:id="@+id/congestionFragment"
-        android:name="com.subway.railme.congestion.CongestionFragment"
-        android:label="fragment_communication"
-        tools:layout="@layout/fragment_my_root" />
+        android:id="@+id/congestionKFragment"
+        android:name="com.subway.railme.congestion.CongestionKFragment"
+        android:label="CongestionFragmentK"
+        tools:layout="@layout/fragment_congestion_k"  />
     <fragment
         android:id="@+id/myPageFragment"
         android:name="com.subway.railme.mypage.MyPageFragment"
