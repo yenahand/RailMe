@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.subway.railme.db.MyApplication
 import com.subway.railme.home.domain.model.ArrivalModel
 import com.subway.railme.home.domain.repository.SubWayRepository
 import com.subway.railme.home.domain.repository.SubwayRepositoryImpl
@@ -29,6 +30,7 @@ class SubWayInfoViewModel(
     fun setSubwayInfo(statnNm: String) {
         Log.d("SubWayInfoViewModel", "Input word: $statnNm")
         subWay = statnNm
+        MyApplication.prefs.setStationInfo("stationName", statnNm)
         viewModelScope.launch {
             val arrivalModels = subWayRepository.getSubwayInfo(statnNm)
             _searchWay.value = arrivalModels
