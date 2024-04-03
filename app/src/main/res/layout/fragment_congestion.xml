@@ -23,7 +23,7 @@
         android:layout_marginTop="204dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_CurrentStation"
+        app:layout_constraintTop_toBottomOf="@+id/tv_currentStation"
         app:srcCompat="@drawable/main"
         app:tint="#54484F"
         tools:ignore="MissingConstraints" />
@@ -80,7 +80,7 @@
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/tv_CurrentStation"
+        android:id="@+id/tv_currentStation"
         android:layout_width="93dp"
         android:layout_height="47dp"
         android:layout_marginStart="160dp"
@@ -200,8 +200,8 @@
         android:layout_height="48dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="40dp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_CurrentStation"
-        app:layout_constraintEnd_toStartOf="@+id/tv_CurrentStation"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_currentStation"
+        app:layout_constraintEnd_toStartOf="@+id/tv_currentStation"
         app:layout_constraintHorizontal_bias="0.079"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -216,6 +216,8 @@
         tools:layout_editor_absoluteX="186dp"
         tools:layout_editor_absoluteY="230dp"
         tools:ignore="MissingConstraints" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
