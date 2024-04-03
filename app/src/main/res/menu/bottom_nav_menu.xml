@@ -13,7 +13,7 @@
         android:icon="@drawable/path"
         />
     <item
-        android:id="@+id/congestionFragment"
+        android:id="@+id/congestionKFragment"
         android:title="혼잡도"
         android:icon="@drawable/main"
         />
