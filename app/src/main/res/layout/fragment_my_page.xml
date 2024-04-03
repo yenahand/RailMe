@@ -21,7 +21,8 @@
             android:layout_width="86dp"
             android:layout_height="94dp"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="3dp"
+            android:layout_gravity="center_vertical"
             android:src="@drawable/page"
             tools:ignore="MissingConstraints" />
 
@@ -30,6 +31,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="2dp"
             android:text="로그인 해주세요"
             android:textColor="@color/white"
             android:textSize="28sp" />
@@ -37,6 +40,7 @@
         <ImageView
             android:layout_width="70dp"
             android:layout_height="66dp"
+            android:layout_marginTop="1dp"
             android:layout_gravity="center_vertical"
             android:src="@drawable/baseline_login_24" />
 
