@@ -6,4 +6,10 @@
     <color name="찐보라">#5E4F63</color>
     <color name="보라버튼">#3c3648</color>
     <color name="보라버튼누름">#3c3648</color>
+    <color name="congestion_0">#00FF00</color> <!-- 여유 (녹색) -->
+    <color name="congestion_25">#FFFF00</color> <!-- 보통 (노란색) -->
+    <color name="congestion_50">#FFA500</color> <!-- 혼잡 (주황색) -->
+    <color name="congestion_75">#FF0000</color> <!-- 매우 혼잡 (빨강색) -->
+    <color name="congestion_100">#8B0000</color> <!-- 매우 혼잡 (진한 빨강색) -->
+
 </resources>
