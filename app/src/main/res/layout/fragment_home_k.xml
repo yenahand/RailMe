@@ -13,15 +13,7 @@
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
         android:scaleType="matrix"
-        android:src="@drawable/nosundo" />
-
-    <ImageView
-        android:layout_width="63dp"
-        android:layout_height="93dp"
-        android:layout_marginStart="157dp"
-        android:layout_marginTop="288dp"
-        android:adjustViewBounds="true"
-        android:src="@drawable/location" />
+        android:src="@drawable/subway_image" />
 
     <EditText
         android:id="@+id/searchStation"
