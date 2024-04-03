@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.subway.railme.R;
 import com.subway.railme.myroot.myroot_API.API_StationID.StationID;
@@ -51,7 +52,6 @@ public class MyRootFragment extends Fragment {
         btFindRoot = rootView.findViewById(R.id.bt_FindRoot);
 
 
-
         btFindRoot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,14 +68,15 @@ public class MyRootFragment extends Fragment {
                 intent.putExtra("destinationStation", destinationStation);
                 //intent.putExtra("departureTime", departureTime);
 
+                onDestroy();
                 startActivity(intent);
+
+
             }
         });
 
         return rootView;
     }
-
-
 
     // private
     /*public void onSearchButtonClick() {

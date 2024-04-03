@@ -1,29 +1,30 @@
 package com.subway.railme.myroot;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.subway.railme.R;
-import com.subway.railme.databinding.ActivityLoginBinding;
-import com.subway.railme.databinding.ActivityMyRootResultBinding;
 
 public class MyRootResultActivity extends AppCompatActivity {
 
     private TextView tvmyresultstart;
     private TextView tvmyresultarrive;
+    private TextView tvstartup;
+    private TextView tvarriveup;
     //private TextView tvmyresulttime;
-    private ImageButton ibGoBack;
+    private ImageView ibgoback;
+    private Fragment MyRootFragment;
 
-    @SuppressLint("MissingInflatedId")
+    @SuppressLint({"MissingInflatedId", "WrongViewCast"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,21 +37,22 @@ public class MyRootResultActivity extends AppCompatActivity {
 
         tvmyresultstart = findViewById(R.id.tv_myresult_start);
         tvmyresultarrive = findViewById(R.id.tv_myresult_arrive);
+        tvstartup = findViewById(R.id.tv_start_up);
+        tvarriveup = findViewById(R.id.tv_arrive_up);
         //tvmyresulttime = findViewById(R.id.tv_myresult_time);
-        //ibGoBack = findViewById(R.id.IB_GoBack);
+        ibgoback = findViewById(R.id.IB_goback);
 
-        tvmyresultstart.setText("출발역: " + departureStation);
-        tvmyresultarrive.setText("도착역: " + destinationStation);
+        tvmyresultstart.setText("" + departureStation);
+        tvmyresultarrive.setText("" + destinationStation);
+        tvstartup.setText("" + departureStation);
+        tvarriveup.setText("" + destinationStation);
         //tvmyresulttime.setText("" + departureTime + "분");
 
-        /*ibGoBack.setOnClickListener(new View.OnClickListener() {
+        ibgoback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.myRootFragment, new MyRootFragment())
-                        .commit();
+                finish();
             }
-        });*/
-
+        });
     }
 }
