@@ -20,6 +20,7 @@ class CongestionKFragment : Fragment() {
     private var _binding : FragmentCongestionKBinding? = null
     private val binding get() = _binding!!
     private lateinit var stationNameTextView:TextView
+    private lateinit var stationName: String
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
