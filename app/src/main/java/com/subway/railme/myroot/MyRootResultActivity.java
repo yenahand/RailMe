@@ -16,11 +16,12 @@ import com.subway.railme.R;
 
 public class MyRootResultActivity extends AppCompatActivity {
 
-    private TextView tvmyresultstart;
-    private TextView tvmyresultarrive;
-    private TextView tvstartup;
-    private TextView tvarriveup;
-    //private TextView tvmyresulttime;
+    private TextView tvdStation;
+    private TextView tvdStation2;
+    private TextView tvaStation;
+    private TextView tvaStation2;
+
+    private TextView tvrouteResult;
     private ImageView ibgoback;
     private Fragment MyRootFragment;
 
@@ -33,20 +34,21 @@ public class MyRootResultActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String departureStation = intent.getStringExtra("departureStation");
         String destinationStation = intent.getStringExtra("destinationStation");
-        //String departureTime = intent.getStringExtra("departureTime");
+        String departureTime = intent.getStringExtra("departureTime");
 
-        tvmyresultstart = findViewById(R.id.tv_myresult_start);
-        tvmyresultarrive = findViewById(R.id.tv_myresult_arrive);
-        tvstartup = findViewById(R.id.tv_start_up);
-        tvarriveup = findViewById(R.id.tv_arrive_up);
-        //tvmyresulttime = findViewById(R.id.tv_myresult_time);
+        tvdStation = findViewById(R.id.tv_dStation);
+        tvdStation2 = findViewById(R.id.tv_dStation2);
+        tvaStation = findViewById(R.id.tv_aStation);
+        tvaStation2 = findViewById(R.id.tv_aStation2);
+        tvrouteResult = findViewById(R.id.tv_routeResult);
+        ///tvmyresulttime = findViewById(R.id.tv_myresult_time);
         ibgoback = findViewById(R.id.IB_goback);
 
-        tvmyresultstart.setText("" + departureStation);
-        tvmyresultarrive.setText("" + destinationStation);
-        tvstartup.setText("" + departureStation);
-        tvarriveup.setText("" + destinationStation);
-        //tvmyresulttime.setText("" + departureTime + "분");
+        tvdStation.setText( departureStation+"역");
+        tvaStation2.setText( destinationStation+"역");
+        tvdStation.setText( departureStation+"역");
+        tvaStation2.setText( destinationStation+"역");
+        tvrouteResult.setText("소요시간: " + departureTime + "분");
 
         ibgoback.setOnClickListener(new View.OnClickListener() {
             @Override
