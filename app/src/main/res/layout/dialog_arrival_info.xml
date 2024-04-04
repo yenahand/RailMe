@@ -16,7 +16,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="160dp"
-            android:background="@drawable/rounded_dialog"
+            android:background="@drawable/rounded_re"
             android:gravity="center"
             android:text="지하철 역명"
             android:textAlignment="center"
