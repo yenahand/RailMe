@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.subway.railme.R
 import com.subway.railme.databinding.FragmentCongestionKBinding
+import com.subway.railme.db.MyApplication
 
 /**
  * 혼잡도 프래그먼트 코틀린
@@ -33,13 +34,10 @@ class CongestionKFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         stationNameTextView = binding.tvCurrentStation
 
-        val arguments = arguments
-        if (arguments != null) {
-            val stationName = arguments.getString("stationName")
-            if (stationName != null) {
-                stationNameTextView.text = stationName
-            }
-        }
+        val savedStationName = MyApplication.prefs.getStationInfo("stationName", "")
+        stationName = "$savedStationName 역"
+        stationNameTextView.text = stationName
+
 
         binding.ibCongestionInfo.setOnClickListener {
             showCongestionInfoPopup(binding.root)
