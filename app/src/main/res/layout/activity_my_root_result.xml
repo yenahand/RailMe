@@ -9,6 +9,7 @@
     tools:layout_editor_absoluteX="-7dp"
     tools:layout_editor_absoluteY="0dp">
 
+    <!--상단 보라색 바-->
     <View
         android:id="@+id/view13"
         android:layout_width="415dp"
@@ -19,8 +20,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
+    <!--가운데 보라 막대-->
     <View
-        android:id="@+id/view17"
         android:layout_width="193dp"
         android:layout_height="37dp"
         android:background="#594C61"
@@ -31,7 +32,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.325" />
 
-
+    <!--가운데 원-->
     <View
         android:id="@+id/view18"
         android:layout_width="96dp"
@@ -43,8 +44,8 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
+    <!--가운데 원-->
     <View
-        android:id="@+id/view1"
         android:layout_width="96dp"
         android:layout_height="91dp"
         android:layout_marginStart="257dp"
@@ -54,8 +55,8 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
+    <!--출발역명 위 출발역텍스트-->
     <TextView
-        android:id="@+id/tv_departure"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="출발역"
@@ -69,7 +70,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.017" />
 
-
+    <!--도착역명 위 도착역텍스트-->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -84,6 +85,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.016" />
 
+    <!--뒤로가기버튼-->
     <ImageView
         android:id="@+id/IB_goback"
         android:layout_width="42dp"
@@ -96,8 +98,8 @@
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/goback" />
 
+    <!--상단 화살표 아이콘-->
     <ImageView
-        android:id="@+id/imageView"
         android:layout_width="66dp"
         android:layout_height="76dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -108,6 +110,7 @@
         app:layout_constraintVertical_bias="0.024"
         app:srcCompat="@drawable/move" />
 
+    <!--상단 출발역명 텍스트-->
     <TextView
         android:id="@+id/tv_dStation"
         android:layout_width="76dp"
@@ -115,14 +118,15 @@
         android:text="출발역명"
         android:textSize="20dp"
         android:textStyle="bold"
-        tools:ignore="MissingConstraints"
         android:layout_marginTop="40dp"
-        android:layout_marginLeft="73dp"
+        android:layout_marginLeft="78dp"
         app:layout_constraintHorizontal_bias="0.481"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.325" />
+        app:layout_constraintVertical_bias="0.325"
+        tools:ignore="MissingConstraints"/>
 
+    <!--가운데 원 안 출발역 텍스트-->
     <TextView
         android:id="@+id/tv_dStation2"
         android:layout_width="95dp"
@@ -131,14 +135,16 @@
         android:text="출발역"
         android:textSize="20dp"
         android:textStyle="bold"
-        tools:ignore="MissingConstraints"
+        android:textColor="#525252"
         android:layout_marginTop="220dp"
         android:layout_marginLeft="46dp"
         app:layout_constraintHorizontal_bias="0.481"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.325"/>
+        app:layout_constraintVertical_bias="0.325"
+        tools:ignore="MissingConstraints"/>
 
+    <!--가운데 원 안 도착역텍스트-->
     <TextView
         android:id="@+id/tv_aStation2"
         android:layout_width="94dp"
@@ -147,14 +153,48 @@
         android:text="도착역"
         android:textSize="20dp"
         android:textStyle="bold"
-        tools:ignore="MissingConstraints"
+        android:textColor="#525252"
         android:layout_marginTop="225dp"
         android:layout_marginLeft="258dp"
         app:layout_constraintHorizontal_bias="0.481"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.325"/>
+        app:layout_constraintVertical_bias="0.325"
+        tools:ignore="MissingConstraints"/>
 
+    <!--depart텍스트-->
+    <TextView
+        android:layout_width="94dp"
+        android:layout_height="41dp"
+        android:gravity="center"
+        android:text="depart!"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        android:layout_marginTop="168dp"
+        android:layout_marginLeft="45dp"
+        app:layout_constraintHorizontal_bias="0.481"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.325"
+        tools:ignore="MissingConstraints"/>
+
+    <!--arrive텍스트-->
+    <TextView
+        android:layout_width="94dp"
+        android:layout_height="41dp"
+        android:gravity="center"
+        android:text="arrive"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        android:layout_marginTop="168dp"
+        android:layout_marginLeft="258dp"
+        app:layout_constraintHorizontal_bias="0.481"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.325"
+        tools:ignore="MissingConstraints"/>
+
+    <!--상단 도착역명-->
     <TextView
         android:id="@+id/tv_aStation"
         android:layout_width="81dp"
@@ -162,27 +202,28 @@
         android:text="도착역명"
         android:textSize="20dp"
         android:textStyle="bold"
-        tools:ignore="MissingConstraints"
         android:layout_marginTop="40dp"
-        android:layout_marginLeft="254dp"
+        android:layout_marginLeft="259dp"
         app:layout_constraintHorizontal_bias="0.481"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.325" />
+        app:layout_constraintVertical_bias="0.325"
+        tools:ignore="MissingConstraints"/>
 
+    <!--차 아이콘-->
     <ImageView
-        android:id="@+id/imageView2"
         android:layout_width="89dp"
         android:layout_height="65dp"
         app:srcCompat="@drawable/going"
-        tools:ignore="MissingConstraints"
         android:layout_marginTop="177dp"
         android:layout_marginLeft="140dp"
         app:layout_constraintHorizontal_bias="0.481"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.325"/>
+        app:layout_constraintVertical_bias="0.325"
+        tools:ignore="MissingConstraints"/>
 
+    <!--결과창-->
     <TextView
         android:id="@+id/tv_routeResult"
         android:layout_width="351dp"

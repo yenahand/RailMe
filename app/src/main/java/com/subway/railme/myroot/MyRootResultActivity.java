@@ -1,13 +1,9 @@
 package com.subway.railme.myroot;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,9 +19,7 @@ public class MyRootResultActivity extends AppCompatActivity {
 
     private TextView tvrouteResult;
     private ImageView ibgoback;
-    private Fragment MyRootFragment;
 
-    @SuppressLint({"MissingInflatedId", "WrongViewCast"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,13 +35,12 @@ public class MyRootResultActivity extends AppCompatActivity {
         tvaStation = findViewById(R.id.tv_aStation);
         tvaStation2 = findViewById(R.id.tv_aStation2);
         tvrouteResult = findViewById(R.id.tv_routeResult);
-        ///tvmyresulttime = findViewById(R.id.tv_myresult_time);
         ibgoback = findViewById(R.id.IB_goback);
 
-        tvdStation.setText( departureStation+"역");
-        tvaStation2.setText( destinationStation+"역");
-        tvdStation.setText( departureStation+"역");
-        tvaStation2.setText( destinationStation+"역");
+        tvdStation.setText(departureStation + "역");
+        tvdStation2.setText(departureStation + "역");
+        tvaStation.setText(destinationStation + "역");
+        tvaStation2.setText(destinationStation + "역");
         tvrouteResult.setText("소요시간: " + departureTime + "분");
 
         ibgoback.setOnClickListener(new View.OnClickListener() {
