@@ -13,18 +13,7 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="16dp">
 
-        <!--맨 위 로그인 문구-->
-
-        <!--로그인 입력 설명과 칸-->
-
-        <!--비밀번호 입력 설명과 칸-->
-
-        <!--로그인 버튼-->
-
-        <!-- 회원가입 버튼 -->
-
-        <!--간편 회원가입 문구-->
-
+        <!--앱 이름-->
         <TextView
             android:id="@+id/textView"
             android:layout_width="231dp"
@@ -55,6 +44,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.118" />
 
+        <!--로그인 입력칸-->
         <EditText
             android:id="@+id/et_Login"
             android:layout_width="299dp"
@@ -73,10 +63,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.325" />
 
-        <!--카카오 로그인 버튼-->
 
-        <!--자동 로그인 선택 버튼-->
-
+        <!--비밀번호 입력칸-->
         <EditText
             android:id="@+id/et_Password"
             android:layout_width="300dp"
@@ -96,6 +84,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.421" />
 
+        <!--로그인-->
         <Button
             android:id="@+id/bt_login"
             android:layout_width="264dp"
@@ -113,6 +102,7 @@
             app:layout_constraintVertical_bias="0.609" />
 
 
+        <!--회원가입-->
         <Button
             android:id="@+id/bt_login_join"
             android:layout_width="264dp"
@@ -145,6 +135,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.812" />
 
+
+        <!--카카오 로그인 버튼-->
         <ImageButton
             android:id="@+id/ib_kakao_login"
             android:layout_width="192dp"
@@ -160,6 +152,7 @@
             app:srcCompat="@drawable/kakao_login_medium_narrow"
             tools:ignore="InvalidId" />
 
+        <!--자동로그인 체크박스-->
         <CheckBox
             android:id="@+id/cb_autologin"
             android:layout_width="wrap_content"
