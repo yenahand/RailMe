@@ -63,6 +63,35 @@ public class MyPageFragment extends Fragment {
 
     }
 
+    //요것도 수정해봤는데 문제 생기시면 지워도 됩니다!
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        loginArea = view.findViewById(R.id.tv_loginArea);
+
+        // Fragment를 호스팅하는 Activity에서 Intent를 가져옵니다.
+        Intent intent = getActivity().getIntent();
+        if (intent != null) {
+            // Intent에서 데이터를 가져옵니다.
+            strNick = intent.getStringExtra("name");
+            strEmail = intent.getStringExtra("Email");
+
+            // 가져온 데이터를 TextView에 설정합니다.
+            if (strNick != null && !strNick.isEmpty()) {
+                // 닉네임이 있으면 표시합니다.
+                loginArea.setText(strNick);
+            } else {
+                // 닉네임이 없으면 로그인을 해주세요 텍스트 표시
+                loginArea.setText("로그인 해주세요");
+            }
+        } else {
+            // Intent 없으면 로그인을 해주세요 텍스트 표시
+            loginArea.setText("로그인 해주세요");
+        }
+    }
+
+/*
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
