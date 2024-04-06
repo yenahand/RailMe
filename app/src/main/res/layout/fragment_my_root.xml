@@ -5,53 +5,11 @@
     android:id="@+id/home_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EFEAD7"
+    android:background="@drawable/total_find"
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="0dp">
 
-
-    <!--디자인 이미지파일-->
-
-    <ImageView
-        android:id="@+id/route_top"
-        android:layout_width="match_parent"
-        android:layout_height="190dp"
-        android:scaleType="fitXY"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="-20dp"
-        app:srcCompat="@drawable/route_top"
-        tools:ignore="MissingConstraints" />
-
-
-
-    <ImageView
-        android:id="@+id/route_explain"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:srcCompat="@drawable/route_explain"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/route_find"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:srcCompat="@drawable/route_find"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/route_railme"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/route_railme" />
+    <!--이미지 하나로 합쳐서 폰 가로세로 크기 달라지면 edit,버튼 위치만 수정하면 될 것 같습니다!-->
 
     <EditText
         android:id="@+id/et_Departure"
