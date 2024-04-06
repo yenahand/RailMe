@@ -64,13 +64,15 @@ class HomeKFragment : Fragment() {
         binding.searchBT.setOnClickListener {
             val word = binding.searchStation.text.toString()
             viewModel.setSubwayInfo(word)
-        }
-        viewModel.searchWay.observe(viewLifecycleOwner) { arrivalModels ->
-            arrivalModels?.let {
-                val dialog = ArrivalInfoDialog(requireContext(), it)
-                dialog.show()
+            viewModel.searchWay.observe(viewLifecycleOwner) { arrivalModels ->
+                arrivalModels?.let {
+                    val dialog = ArrivalInfoDialog(requireContext(), it)
+                    dialog.show()
+                }
             }
         }
+
+
 
     }
     override fun onDestroyView() {

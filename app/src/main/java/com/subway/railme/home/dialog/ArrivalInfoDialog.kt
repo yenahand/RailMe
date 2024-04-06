@@ -1,5 +1,6 @@
 package com.subway.railme.home.dialog
 
+import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
@@ -40,6 +41,8 @@ class ArrivalInfoDialog(
         val btnShutdown = findViewById<Button>(R.id.btn_shutdown)
         btnShutdown.setOnClickListener {
             dismiss() // 닫기버튼
+            this@ArrivalInfoDialog.dismiss()
         }
     }
+
 }
