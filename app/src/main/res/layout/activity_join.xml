@@ -89,7 +89,7 @@
         android:layout_marginStart="75dp"
         android:layout_marginTop="75dp"
         android:layout_marginEnd="72dp"
-        android:background="#594E60"
+        android:background="#816EB0"
         android:hint="회원가입"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

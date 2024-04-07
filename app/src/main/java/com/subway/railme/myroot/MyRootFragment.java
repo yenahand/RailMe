@@ -48,7 +48,7 @@ public class MyRootFragment extends Fragment {
         //etDepartureTime = rootView.findViewById(R.id.et_StarringTime);
         etDeparture = rootView.findViewById(R.id.et_Departure);
         etDestination = rootView.findViewById(R.id.et_Destination);
-        tvFindResult = rootView.findViewById(R.id.tv_FindResult);
+        //tvFindResult = rootView.findViewById(R.id.tv_FindResult);
         btFindRoot = rootView.findViewById(R.id.bt_FindRoot);
 
 
