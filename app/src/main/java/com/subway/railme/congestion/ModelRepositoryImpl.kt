@@ -1,37 +1,40 @@
 package com.subway.railme.congestion
 
 import android.content.Context
+import com.subway.railme.db.PreferenceUtil
+import com.subway.railme.predict.TFLiteModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okio.IOException
 import org.tensorflow.lite.Interpreter
 import java.io.File
 
-class ModelRepositoryImpl(private val context: Context) : ModelRepository {
-    override suspend fun getModel(): List<Interpreter> {
-        val interpreters = mutableListOf<Interpreter>()
+class ModelRepositoryImpl(context: Context, modelPath: String, options: Interpreter.Options) : ModelRepository {
+    private val preferenceUtil = PreferenceUtil(context)
+    private val stationFileLoader = StationFileLoader
+    init {
+        // StationFileLoader 초기화
+        StationFileLoader.init(context, modelPath, options)
+    }
+    override suspend fun predict(inputData: FloatArray): Float {
+        return StationFileLoader.predict(inputData)
+    }
+    override suspend fun getCongestionModel(stationName: String, currentDate: String): List<CongestionModel> {
+        val stationName = preferenceUtil.getStationInfo("stationName", "")
+        val currentTime = preferenceUtil.getTime("currentTime", "")
+        // 현재 시간 및 역 이름을 사용하여 딥러닝 모델로 혼잡도를 예측
+        val congestionRate = predictCongestion(stationName, currentTime)
 
-        for (i in 1..8) {
-            val modelFileName = "line$i/$i+linemodel.tflite"
+        val congestionModel = CongestionModel(congestionRate, stationName, currentTime)
+        return listOf(congestionModel)
+    }
+    private suspend fun predictCongestion(stationName: String, currentTime: String): Float {
+        // "+역" 추가
+        val inputStationName = stationName + "역"
 
-            try {
-                val inputStream = context.assets.open(modelFileName)
-                val modelFile = withContext(Dispatchers.IO) {
-                    File.createTempFile("model", null, context.cacheDir)
-                }
-                inputStream.use { input ->
-                    modelFile.outputStream().use { output ->
-                        input.copyTo(output)
-                    }
-                }
-
-                val interpreter = Interpreter(modelFile)
-                interpreters.add(interpreter)
-            } catch (e: IOException) {
-                e.printStackTrace()
-            }
-        }
-
-        return interpreters
+        // 예측에 사용될 입력 데이터 생성
+        val inputData = floatArrayOf(0.0f) // 예시 입력 데이터
+        return predict(inputData)
     }
 }
+

@@ -13,4 +13,21 @@ class PreferenceUtil(context: Context) {
         prefs.edit().putString(key,str).apply()
     }
 
+    fun setTime(key:String,sh:String){
+        prefs.edit().putString(key,sh).apply()
+    }
+
+    fun getTime(key:String, no:String):String{
+        return prefs.getString(key,no).toString()
+    }
+
+
+    fun getDate(key: String,date: String):String{
+        return prefs.getString(key,date).toString()
+    }
+
+    fun setDate(key: String,date:String){
+        prefs.edit().putString(key,date).apply()
+    }
+
 }

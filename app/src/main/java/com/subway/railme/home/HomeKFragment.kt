@@ -9,7 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.lifecycle.ViewModelProvider
+import com.subway.railme.congestion.CongestionModel
 import com.subway.railme.databinding.FragmentHomeKBinding
+import com.subway.railme.db.MyApplication
 import com.subway.railme.home.dialog.ArrivalInfoDialog
 import com.subway.railme.viewmodel.SubWayInfoViewModel
 import com.subway.railme.viewmodel.SubWayInfoViewModelFactory
@@ -63,6 +65,10 @@ class HomeKFragment : Fragment() {
 
         binding.searchBT.setOnClickListener {
             val word = binding.searchStation.text.toString()
+            val currentDate = CongestionModel.getCurrentDate()
+            val currentTime = CongestionModel.getCurrentTime()
+            MyApplication.prefs.setTime("currentTime",currentTime)
+            MyApplication.prefs.setDate("currentDate", currentDate)
             viewModel.setSubwayInfo(word)
             viewModel.searchWay.observe(viewLifecycleOwner) { arrivalModels ->
                 arrivalModels?.let {
