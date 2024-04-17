@@ -18,6 +18,8 @@ import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.subway.railme.R
+import com.subway.railme.congestion.CongestionModel.Companion.getColorBasedOnCongestionRate
+import com.subway.railme.congestion.CongestionModel.Companion.getCongestionText
 import com.subway.railme.databinding.FragmentCongestionKBinding
 import com.subway.railme.db.MyApplication
 import org.tensorflow.lite.Interpreter
@@ -60,20 +62,6 @@ class CongestionKFragment(
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         lineSpinner.adapter = adapter
 
-
-        lineSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parentView: AdapterView<*>?, selectedItemView: View?, position: Int, id: Long) {
-                val selectedLine = parentView?.getItemAtPosition(position).toString()
-
-                loadTFLiteModel(selectedLine)
-            }
-
-            override fun onNothingSelected(parentView: AdapterView<*>?) {
-                val selectedLine = parentView?.getItemAtPosition(0).toString()
-                loadTFLiteModel(selectedLine)
-            }
-
-        }
         loadPreferencesData()
         val savedStationName = MyApplication.prefs.getStationInfo("stationName", "")
         stationName = "$savedStationName 역"
@@ -83,58 +71,90 @@ class CongestionKFragment(
             showCongestionInfoPopup(binding.root)
         }
         binding.predictButton.setOnClickListener {
-            if (::tfliteModel.isInitialized) {
-                val sdf = SimpleDateFormat("yyyy-MM-dd")
-                val currentDate = sdf.format(Date())
+            // 선택된 호선이 유효한지 확인
+            if (isValidStation(selectedLine, stationName)) {
+                // tfliteModel이 초기화되었는지 확인
+                if (::tfliteModel.isInitialized) {
+                    // 현재 시간을 가져옵니다.
+                    val sdf = SimpleDateFormat("yyyy-MM-dd")
+                    val currentDate = sdf.format(Date())
 
-                val stationData = StationFileLoader.readStationData(
-                    requireContext(),
-                    savedStationName
-                )
-                val currentTime = MyApplication.prefs.getTime("currentTime", "")
-                val mappedTime = mapTimeToNumber(currentTime)
-                val inputData = stationData?.let { preprocessAndScale(it) }
-                val dateDiff = calculateDateDiff(currentDate)
-                val predictions = ArrayList<Float>()
-                inputData?.let {
-                    for (i in 0 until dateDiff + mappedTime) {
-                        if (i >= lookBack) {
-                            val prediction = tfliteModel.predict(it)
-                            predictions.add(prediction)
-                            System.arraycopy(it, 1, it, 0, it.size - 1)
-                            it[it.size - 1] = prediction
+                    // 선택된 역의 데이터를 읽어옵니다.
+                    val stationData = StationFileLoader.readStationData(
+                        requireContext(),
+                        stationName
+                    )
+
+                    // 사용자가 선택한 시간을 가져옵니다.
+                    val currentTime = MyApplication.prefs.getTime("currentTime", "")
+
+                    // 시간을 숫자로 변환합니다.
+                    val mappedTime = mapTimeToNumber(currentTime)
+
+                    // 데이터를 전처리하고 스케일링합니다.
+                    val inputData = stationData?.let { preprocessAndScale(it) }
+
+                    // 날짜 차이를 계산합니다.
+                    val dateDiff = calculateDateDiff(currentDate)
+
+                    // 예측 값을 저장할 리스트를 만듭니다.
+                    val predictions = ArrayList<Float>()
+
+                    inputData?.let {
+                        for (i in 0 until dateDiff + mappedTime) {
+                            if (i >= lookBack) {
+                                // TensorFlow Lite 모델을 사용하여 혼잡도 예측
+                                val prediction = tfliteModel.predict(it)
+                                predictions.add(prediction)
+                                // 입력 데이터를 업데이트합니다.
+                                System.arraycopy(it, 1, it, 0, it.size - 1)
+                                it[it.size - 1] = prediction
+                            }
                         }
                     }
+
+                    // 예측 값을 화면에 표시합니다.
+                    val scaledPredictions = FloatArray(predictions.size) { predictions[it] }
+                    val originalPredictions = stationData?.let { preprocessAndInverseScale(scaledPredictions, it) }
+                    val lastOriginalPrediction = originalPredictions?.get(originalPredictions.size - 1)
+                    val congestionRate = lastOriginalPrediction ?: 0f
+
+                    // 혼잡도 모델을 생성합니다.
+                    val congestionModel = CongestionModel(
+                        congestionRate = congestionRate,
+                        stationName = stationName,
+                        currentDate = CongestionModel.getCurrentDate()
+                    )
+
+                    // 혼잡도에 따른 색상을 가져옵니다.
+                    val color = congestionModel.getColorResId(requireContext())
+
+                    // 화면에 혼잡도 정보를 표시합니다.
+                    binding.congestionColor.setBackgroundColor(ContextCompat.getColor(requireContext(), color))
+                    binding.tvCongestionRate.text = stationData.toString()
+                } else {
+                    Log.e("CongestionKFragment", "tfliteModel is not initialized")
+                    // tfliteModel이 초기화되지 않았을 경우 처리할 코드를 여기에 추가하세요.
                 }
-
-                val scaledPredictions = FloatArray(predictions.size) { predictions[it] }
-                val originalPredictions = stationData?.let { preprocessAndInverseScale(scaledPredictions, it) }
-                val lastOriginalPrediction = originalPredictions?.get(originalPredictions.size - 1)
-
-                val congestionRate = lastOriginalPrediction ?: 0f
-
-                /*// 혼잡도 텍스트 계산
-                val congestionText = getCongestionText(congestionRate)*/
-
-                // 혼잡도 모델 생성
-                val congestionModel = CongestionModel(
-                    congestionRate = congestionRate,
-                    stationName = savedStationName,
-                    currentDate = CongestionModel.getCurrentDate()
-                )
-
-                // 혼잡도에 따른 색상 가져오기
-                val color = congestionModel.getColorResId(requireContext())
-                binding.congestionColor.setBackgroundColor(ContextCompat.getColor(requireContext(), color))
-
-           /*     // 혼잡도 텍스트를 화면에 표시
-                binding.resultTextView.text = "혼잡도: $congestionText"*/
             } else {
-                Log.e("CongestionKFragment", "tfliteModel is not initialized")
-                // 처리할 내용 추가
+                // 선택된 호선이 유효하지 않은 경우 처리할 코드를 여기에 추가하세요.
+                Log.e("CongestionKFragment", "Selected station is not valid")
             }
         }
 
+        // 스피너의 선택 이벤트 처리
+        lineSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parentView: AdapterView<*>?, selectedItemView: View?, position: Int, id: Long) {
+                selectedLine = parentView?.getItemAtPosition(position).toString()
+                loadTFLiteModel(selectedLine)
+            }
+
+            override fun onNothingSelected(parentView: AdapterView<*>?) {
+                // 아무것도 선택되지 않았을 때 기본 값을 설정
+                selectedLine = parentView?.getItemAtPosition(0).toString()
+                loadTFLiteModel(selectedLine)
+            }
+        }
     }
 
     override fun onDestroyView() {
@@ -156,22 +176,31 @@ class CongestionKFragment(
             // 예측에 사용될 입력 데이터 준비
             val inputData = preprocessInputData(stationData, date, time)
 
-    /*        // 혼잡도 예측하기
-            val congestionRate = CongestionModel.getCongestionRateFromModel(requireContext(), getTFLiteModelPath(selectedLine), inputData)
+            // 혼잡도 예측하기
+            val congestionRate = predictCongestionUsingModel(inputData)
 
             // 혼잡도 텍스트 가져오기
-            val congestionText = CongestionModel.getCongestionText(congestionRate)
+            val congestionText = getCongestionText(congestionRate)
 
             // 혼잡도에 따른 색상 가져오기
-            val color = CongestionModel.getColorBasedOnCongestionRate(congestionRate)
+            val color = getColorBasedOnCongestionRate(congestionRate)
 
             // 결과 텍스트뷰에 혼잡도 값 및 색상 적용
             binding.tvCongestionRate.text = congestionText
-            binding.congestionColor.setBackgroundColor(color)*/
+            binding.congestionColor.setBackgroundColor(color)
         } else {
             // 데이터가 유효하지 않을 경우 예외 처리
             Log.e("CongestionKFragment", "Invalid station data")
             // 오류 처리 또는 사용자에게 메시지 표시
+        }
+    }
+    private fun predictCongestionUsingModel(inputData: FloatArray): Float {
+        if (::tfliteModel.isInitialized) {
+            // TensorFlow Lite 모델을 사용하여 혼잡도 예측
+            return tfliteModel.predict(inputData)
+        } else {
+            Log.e("CongestionKFragment", "TensorFlow Lite model is not initialized")
+            return 0f
         }
     }
     private fun preprocessInputData(stationData: FloatArray, date: String, time: String): FloatArray {
@@ -197,20 +226,33 @@ class CongestionKFragment(
         val modelFilePath = getTFLiteModelPath(selectedLine)
 
         // 모델 파일 경로를 사용하여 모델 로드
-        val options = Interpreter.Options()
-            .addDelegate(FlexDelegate())
-            .setUseXNNPACK(false)
-        try {
-            tfliteModel = TFLiteModel(requireContext(), modelFilePath, options)
-        } catch (e: IllegalArgumentException) {
-            // 모델 파일 로드 중 오류 발생 시 예외 처리
-            Log.e("CongestionKFragment", "Error loading TensorFlow Lite model", e)
-            // 오류 처리 방법에 따라 추가 작업이 필요할 수 있음
+        if (modelFilePath.isNotEmpty()) { // 모델 파일 경로가 비어 있지 않은 경우에만 모델 로드
+            val options = Interpreter.Options()
+                .addDelegate(FlexDelegate())
+                .setUseXNNPACK(false)
+            try {
+                tfliteModel = TFLiteModel(requireContext(), modelFilePath, options)
+            } catch (e: IllegalArgumentException) {
+                // 모델 파일 로드 중 오류 발생 시 예외 처리
+                Log.e("CongestionKFragment", "Error loading TensorFlow Lite model", e)
+                // 오류 처리 방법에 따라 추가 작업이 필요할 수 있음
+            }
+        } else {
+            Log.e("CongestionKFragment", "Model file path is empty")
+            // 처리할 내용 추가
         }
     }
 
     private fun getTFLiteModelPath(selectedLine: String?): String {
-        return selectedLine?.let { "$it/model.tflite" } ?: "" // null 체크 추가
+        return selectedLine?.let { line ->
+            val lineNumber = getLineNumberFromSelectedLine(line)
+            "$line/$lineNumber/linemodel.tflite"
+        } ?: ""
+    }
+
+    private fun getLineNumberFromSelectedLine(selectedLine: String): String {
+        // 스피너에서 선택한 역의 호선 정보에서 숫자 부분을 추출하여 반환합니다.
+        return selectedLine.replace("\\D".toRegex(), "")
     }
 
     @SuppressLint("SimpleDateFormat")
