@@ -17,10 +17,14 @@ data class CongestionModel(
     companion object {
         // 혼잡도에 따라 RGB 색상을 반환하는 함수
         fun getColorBasedOnCongestionRate(congestionRate: Float): Int {
-            val green = (255 * (100 - congestionRate)) / 100
-            val red = (255 * congestionRate) / 100
-            return Color.rgb(red.toInt(), green.toInt(), 0) // RGB 값으로 색상 생성
+            return when {
+                congestionRate < 0.75 -> Color.GREEN // 75% 미만: 초록색
+                congestionRate < 1.25 -> Color.YELLOW // 75% 이상, 125% 미만: 노란색
+                congestionRate < 1.75 -> Color.RED // 125% 이상, 175% 미만: 빨간색
+                else -> Color.rgb(139, 0, 0) // 175% 이상: 진한 빨간색
+            }
         }
+
         fun getCurrentDate(): String {
             val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
             return dateFormat.format(Date())
@@ -31,12 +35,14 @@ data class CongestionModel(
         }
         fun getCongestionText(congestionRate: Float): String {
             return when {
-                congestionRate < 0.25f -> "여유"
-                congestionRate < 0.5f -> "보통"
-                congestionRate < 0.75f -> "혼잡"
+                congestionRate < 0.75 -> "여유"
+                congestionRate < 1.25 -> "보통"
+                congestionRate < 1.75 -> "혼잡"
                 else -> "매우 혼잡"
             }
         }
+
+
 
     }
 

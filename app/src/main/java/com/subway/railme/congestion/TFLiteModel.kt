@@ -9,9 +9,8 @@ import java.io.IOException
 import java.nio.MappedByteBuffer
 import java.nio.channels.FileChannel
 
-class TFLiteModel (private val context: Context, private val modelPath: String, private val options: Interpreter.Options) {
+class TFLiteModel(private val context: Context, private val modelPath: String, private val options: Interpreter.Options) {
     private val tflite: Interpreter
-
     private val lookBack = 10
     private val inputBuffer = Array(1) { Array(lookBack) { FloatArray(1) } }
 
@@ -32,7 +31,7 @@ class TFLiteModel (private val context: Context, private val modelPath: String, 
             val fileChannel: FileChannel = inputStream.channel
             val startOffset: Long = fileDescriptor.startOffset
             val declaredLength: Long = fileDescriptor.declaredLength
-            fileChannel.map(FileChannel.MapMode.READ_ONLY, startOffset, declaredLength)
+            fileChannel.map(FileChannel.MapMode.READ_ONLY, startOffset, declaredLength) as MappedByteBuffer
         } catch (e: IOException) {
             Log.e("TFLiteModel", "model file load error.", e)
             null

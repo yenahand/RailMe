@@ -11,6 +11,8 @@ import java.io.BufferedReader
 import java.io.FileInputStream
 import java.io.InputStream
 import java.io.InputStreamReader
+import java.nio.ByteBuffer
+import java.nio.ByteOrder
 import java.nio.MappedByteBuffer
 import java.nio.channels.FileChannel
 
@@ -30,35 +32,26 @@ object StationFileLoader {
         }
     }
 
-    private fun loadModelFile(context: Context, modelPath: String): MappedByteBuffer? {
+    private fun loadModelFile(context: Context, modelPath: String, selectedLine: String = ""): ByteBuffer? {
         try {
-            val fileDescriptor: AssetFileDescriptor = context.assets.openFd(modelPath)
-            val inputStream = FileInputStream(fileDescriptor.fileDescriptor)
-            val fileChannel = inputStream.channel
-            val startOffset = fileDescriptor.startOffset
-            val declaredLength = fileDescriptor.declaredLength
-            return fileChannel.map(FileChannel.MapMode.READ_ONLY, startOffset, declaredLength)
+            val fullPath = if (selectedLine.isNotEmpty()) "$selectedLine/$modelPath" else modelPath
+            val assetManager = context.assets
+            val inputStream: InputStream = assetManager.open(fullPath)
+            val modelData = inputStream.readBytes()
+            inputStream.close()
+            return ByteBuffer.allocateDirect(modelData.size)
+                .order(ByteOrder.nativeOrder())
+                .put(modelData)
+                .apply { rewind() }
         } catch (e: IOException) {
-            Log.e("TFLiteModel", "model file load error.", e)
+            Log.e("TFLiteModel", "Failed to load TensorFlow Lite model.", e)
             return null
         }
     }
-
-
-    fun predict(inputData: FloatArray): Float {
-        for (i in 0 until lookBack - 1) {
-            inputBuffer[0][i][0] = inputBuffer[0][i + 1][0]
-        }
-        inputBuffer[0][lookBack - 1][0] = inputData[0]
-
-        val output = Array(1) { FloatArray(1) }
-        tflite.run(inputBuffer, output)
-        return output[0][0]
-    }
-    fun readStationData(context: Context, stationName: String): FloatArray? {
+    fun readStationData(context: Context, stationName: String, selectedLine: String): FloatArray? {
         return try {
-            val selectedLine = MyApplication.prefs.getStationInfo("stationName","")
-            val csvFilePath = "$selectedLine/$stationName.csv"
+            val csvFileName = "$selectedLine.csv" // 파일명 구성
+            val csvFilePath = "$stationName/$csvFileName" // 경로 구성
             val assetManager = context.assets
             val inputStream = assetManager.open(csvFilePath)
             val br = BufferedReader(InputStreamReader(inputStream))
@@ -79,4 +72,5 @@ object StationFileLoader {
             null
         }
     }
+
 }

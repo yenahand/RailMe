@@ -17,7 +17,7 @@ class ModelRepositoryImpl(context: Context, modelPath: String, options: Interpre
         StationFileLoader.init(context, modelPath, options)
     }
     override suspend fun predict(inputData: FloatArray): Float {
-        return StationFileLoader.predict(inputData)
+     TODO()
     }
     override suspend fun getCongestionModel(stationName: String, currentDate: String): List<CongestionModel> {
         val stationName = preferenceUtil.getStationInfo("stationName", "")
