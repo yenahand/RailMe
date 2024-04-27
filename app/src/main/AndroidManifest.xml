@@ -50,6 +50,10 @@
             android:name="com.google.firebase.ml.vision.DEPENDENCIES"
             android:value="label" />
 
+        <meta-data
+            android:name="com.naver.maps.map.CLIENT_ID"
+            android:value="p4f00t7by0" />
+
         <receiver
             android:name="com.google.android.gms.tagmanager.InstallReferrerReceiver"
             android:enabled="true"

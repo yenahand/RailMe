@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.naver.maps.map.MapFragment;
 import com.subway.railme.R;
 import com.subway.railme.databinding.FragmentMyPageBinding;
 
@@ -27,6 +28,7 @@ public class MyPageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentMyPageBinding.inflate(inflater, container, false);
+
          return binding.getRoot();
     }
     @Override
@@ -52,27 +54,24 @@ public class MyPageFragment extends Fragment {
                 }
             }
         });
+        binding.ibTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MpTimeFragment neverFrag = new MpTimeFragment();
+                FragmentManager fragmentManager = getChildFragmentManager();
+                Fragment currentView = fragmentManager.findFragmentById(R.id.map);
 
-
-  /*      // Fragment를 호스팅하는 Activity에서 Intent를 가져옵니다.
-        Intent intent = getActivity().getIntent();
-        if (intent != null) {
-            // Intent에서 데이터를 가져옵니다.
-            strNick = intent.getStringExtra("name");
-            strEmail = intent.getStringExtra("Email");
-
-            // 가져온 데이터를 TextView에 설정합니다.
-            if (strNick != null && !strNick.isEmpty()) {
-                // 닉네임이 있으면 표시합니다.
-                loginArea.setText(strNick);
-            } else {
-                // 닉네임이 없으면 로그인을 해주세요 텍스트 표시
-                loginArea.setText("로그인 해주세요");
+                if(currentView instanceof MpTimeFragment){
+                    fragmentManager.beginTransaction()
+                            .remove(currentView)
+                            .commit();
+                }else {
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.map,neverFrag)
+                            .commit();
+                }
             }
-        } else {
-            // Intent 없으면 로그인을 해주세요 텍스트 표시
-            loginArea.setText("로그인 해주세요");
-        }*/
+        });
     }
 
 

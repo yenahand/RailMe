@@ -4,63 +4,101 @@ import android.content.Context;
 import android.hardware.lights.LightsManager;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.android.gms.tasks.RuntimeExecutionException;
+import com.naver.maps.map.LocationTrackingMode;
+import com.naver.maps.map.MapFragment;
+import com.naver.maps.map.MapView;
+import com.naver.maps.map.NaverMap;
+import com.naver.maps.map.NaverMapSdk;
+import com.naver.maps.map.OnMapReadyCallback;
+import com.naver.maps.map.util.FusedLocationSource;
 import com.subway.railme.R;
 import com.subway.railme.databinding.FragmentMpTimeBinding;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Vector;
 
-import javax.annotation.Nullable;
-
-public class MpTimeFragment extends Fragment {
-
+public class MpTimeFragment extends Fragment  implements OnMapReadyCallback {
+    private static final int LOCATION_PERMISSION_REQUEST_CODE =100 ;
     private FragmentMpTimeBinding binding;
-    private FragmentMpTimeListener fragmentMpTimeListener;
+    private MapView mapView;
+    private NaverMap naverMap;
+    private FusedLocationSource fusedLocationSource;
+        public MpTimeFragment(){
 
-    public interface FragmentMpTimeListener{
-        void onInputASent(CharSequence input);
     }
-
-    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentMpTimeBinding.inflate(inflater, container, false);
+        fusedLocationSource = new FusedLocationSource(this,LOCATION_PERMISSION_REQUEST_CODE);
         return binding.getRoot();
 
+    }
+    @Override
+    public void onMapReady(@NonNull NaverMap naverMap) {
+        naverMap.setLocationSource(fusedLocationSource);
+        naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
+    }
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mapView = view.findViewById(R.id.map_view);
+        mapView.onCreate(savedInstanceState);
+    }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        mapView.onStart();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mapView.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mapView.onPause();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mapView.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mapView.onStop();
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        binding = null;
-    }
-
-    public void updateEditText(CharSequence newText) {
-        binding.tvRootTimeLog.setText(newText);
+        mapView.onDestroy();
     }
 
     @Override
-    public void onAttach(@Nullable Context context) {
-        super.onAttach(context);
-        if(context instanceof FragmentMpTimeListener){
-            fragmentMpTimeListener = (FragmentMpTimeListener)context;
-        } else {
-            throw new RuntimeException(context.toString() + " must implement FragmentListener");
-        }
+    public void onLowMemory() {
+        super.onLowMemory();
+        mapView.onLowMemory();
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        fragmentMpTimeListener = null;
-    }
+
 }
+

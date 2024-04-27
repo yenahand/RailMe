@@ -16,6 +16,9 @@ dependencyResolutionManagement {
             url 'http://oss.sonatype.org/content/repositories/snapshots'
             allowInsecureProtocol true
         }
+        maven {
+            url 'https://naver.jfrog.io/artifactory/maven/'
+        }
     }
 }
 rootProject.name = "RailMe"
