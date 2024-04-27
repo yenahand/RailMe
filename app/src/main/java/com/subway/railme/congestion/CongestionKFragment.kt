@@ -81,6 +81,7 @@ class CongestionKFragment(
             override fun onNothingSelected(parentView: AdapterView<*>?) {
                 // 아무것도 선택되지 않았을 때 기본 값을 설정
                 selectedLine = parentView?.getItemAtPosition(0).toString()
+
                 loadTFLiteModel(selectedLine)
             }
         }
@@ -137,6 +138,10 @@ class CongestionKFragment(
                         val originalPredictions = preprocessAndInverseScale(scaledPredictions, stationData)
                         val lastOriginalPrediction = originalPredictions.lastOrNull() ?: 0f
                         val congestionRate = lastOriginalPrediction
+                        Log.e("SHSH", "Scaled Predictions: ${scaledPredictions.joinToString(", ")}")
+                        Log.e("SHSH", "Original Predictions: ${originalPredictions.joinToString(", ")}")
+                        Log.e("SHSH", "Last Original Prediction: $lastOriginalPrediction")
+                        Log.e("SHSH", "Congestion Rate: $congestionRate")
 
                         // 혼잡도 모델을 생성합니다.
                         val congestionModel = CongestionModel(
@@ -349,6 +354,7 @@ class CongestionKFragment(
         }
 
         return inputData
+
     }
 
     private fun preprocessAndInverseScale(
@@ -382,7 +388,7 @@ class CongestionKFragment(
         return try {
             val csvFileName = "$stationName.csv"
             val assetManager: AssetManager = requireContext().assets
-            assetManager.open(csvFileName).close() // Attempt to open and close the CSV file
+            assetManager.open(csvFileName).close()
             true
         } catch (e: IOException) {
             Log.e("CongestionKFragment", "CSV file not found for station: $stationName", e)

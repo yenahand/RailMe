@@ -12,7 +12,7 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="110dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginTop="0dp"
         android:background="@color/찐보라"
@@ -103,5 +103,12 @@
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="275dp"
         tools:layout_editor_absoluteY="144dp" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="503dp"
+        android:layout_below="@+id/ib_time"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="10dp" />
 
 </RelativeLayout>
