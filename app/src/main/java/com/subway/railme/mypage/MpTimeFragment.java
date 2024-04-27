@@ -20,6 +20,7 @@ import com.naver.maps.map.MapView;
 import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.NaverMapSdk;
 import com.naver.maps.map.OnMapReadyCallback;
+import com.naver.maps.map.UiSettings;
 import com.naver.maps.map.util.FusedLocationSource;
 import com.subway.railme.R;
 import com.subway.railme.databinding.FragmentMpTimeBinding;
@@ -46,9 +47,22 @@ public class MpTimeFragment extends Fragment  implements OnMapReadyCallback {
 
     }
     @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String[] permissions,  @NonNull int[] grantResults) {
+        if (fusedLocationSource.onRequestPermissionsResult(
+                requestCode, permissions, grantResults)) {
+            return;
+        }
+        super.onRequestPermissionsResult(
+                requestCode, permissions, grantResults);
+    }
+    @Override
     public void onMapReady(@NonNull NaverMap naverMap) {
         naverMap.setLocationSource(fusedLocationSource);
         naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
+        UiSettings uiSettings = naverMap.getUiSettings();
+        uiSettings.setLocationButtonEnabled(true);
+
     }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
