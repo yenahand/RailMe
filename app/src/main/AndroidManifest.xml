@@ -22,6 +22,15 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".IntroActivity"
+            android:exported="true" >
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
+        <activity
             android:name=".myroot.MyRootResultActivity"
             android:exported="false" />
         <activity
@@ -29,13 +38,7 @@
             android:exported="false" />
         <activity
             android:name=".login.LoginActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false"/>
         <activity
             android:name=".login.JoinActivity"
             android:exported="false" />
@@ -49,19 +52,10 @@
         <meta-data
             android:name="com.google.firebase.ml.vision.DEPENDENCIES"
             android:value="label" />
-
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="p4f00t7by0" />
 
-        <receiver
-            android:name="com.google.android.gms.tagmanager.InstallReferrerReceiver"
-            android:enabled="true"
-            android:exported="false"
-            tools:ignore="MissingClass,WrongManifestParent">
-            <intent-filter>
-                <action android:name="com.android.vending.INSTALL_REFERRER" />
-            </intent-filter>
-        </receiver>
     </application>
+
 </manifest>

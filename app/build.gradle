@@ -97,6 +97,8 @@ dependencies {
     implementation 'com.naver.maps:map-sdk:3.18.0'
     implementation 'com.google.android.gms:play-services-location:21.1.0' // 네이버 지도 위치 추적
 
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.19'
+
 }
 
 
