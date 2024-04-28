@@ -30,7 +30,7 @@ import java.util.Objects;
 import java.util.Vector;
 
 public class MpTimeFragment extends Fragment  implements OnMapReadyCallback {
-    private static final int LOCATION_PERMISSION_REQUEST_CODE =100 ;
+    private static final int LOCATION_PERMISSION_REQUEST_CODE =1000 ;
     private FragmentMpTimeBinding binding;
     private MapView mapView;
     private NaverMap naverMap;
@@ -42,7 +42,6 @@ public class MpTimeFragment extends Fragment  implements OnMapReadyCallback {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentMpTimeBinding.inflate(inflater, container, false);
-        fusedLocationSource = new FusedLocationSource(this,LOCATION_PERMISSION_REQUEST_CODE);
         return binding.getRoot();
 
     }
@@ -58,17 +57,24 @@ public class MpTimeFragment extends Fragment  implements OnMapReadyCallback {
     }
     @Override
     public void onMapReady(@NonNull NaverMap naverMap) {
+        fusedLocationSource = new FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE);
+        this.naverMap = naverMap;
         naverMap.setLocationSource(fusedLocationSource);
         naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
         UiSettings uiSettings = naverMap.getUiSettings();
         uiSettings.setLocationButtonEnabled(true);
-
     }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mapView = view.findViewById(R.id.map_view);
         mapView.onCreate(savedInstanceState);
+
+        fusedLocationSource = new FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE);
+
+        if (mapView != null) {
+            mapView.getMapAsync(this);
+        }
     }
 
     @Override

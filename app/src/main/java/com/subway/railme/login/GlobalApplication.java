@@ -4,7 +4,7 @@ import android.app.Application;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 
-import com.kakao.sdk.common.KakaoSdk;
+
 
 
 public class GlobalApplication extends Application {
@@ -23,7 +23,7 @@ public class GlobalApplication extends Application {
         } catch (PackageManager.NameNotFoundException e) {
             // if we can't find it in the manifest, just return null
         }
-        KakaoSdk.init(this, kakaoAppkey);
+
     }
 
 
