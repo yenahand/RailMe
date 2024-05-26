@@ -27,7 +27,7 @@ object RetrofitClient {
             .addInterceptor { chain ->
                 val request: Request = chain.request()
                     .newBuilder()
-                    .addHeader("Authorization", apiKey) // API 키 추가
+                    .addHeader("Authorization", apiKey)
                     .build()
                 chain.proceed(request)
             }

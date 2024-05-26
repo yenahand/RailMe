@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,13 +9,17 @@
 
     <ImageView
         android:id="@+id/iv_SubwayMap"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:adjustViewBounds="true"
-        android:layout_centerVertical="true"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:adjustViewBounds="true"
         android:scaleType="centerCrop"
-        android:src="@drawable/subway_image" />
+        android:src="@drawable/subway_image"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/searchStation"
@@ -26,9 +30,6 @@
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
         android:layout_gravity="top"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="0dp"
         android:autofillHints="subway"
         android:background="@drawable/rounded"
         android:drawableStart="@android:drawable/ic_menu_search"
@@ -36,26 +37,35 @@
         android:hint="역명을 검색해주세요"
         android:inputType="text"
         android:padding="16dp"
-        android:textColorHint="#808080" />
+        android:textColorHint="#808080"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:visibility="gone" />
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/searchBT"
+        app:layout_constraintEnd_toStartOf="@+id/searchBT"
+        app:layout_constraintTop_toTopOf="@+id/searchBT" />
 
 
     <ImageButton
         android:id="@+id/searchBT"
         android:layout_width="60dp"
         android:layout_height="61dp"
-        android:layout_marginStart="340dp"
-        android:layout_marginTop="15dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginEnd="24dp"
         android:background="@android:color/transparent"
         android:onClick="mOnClick"
         android:scaleType="fitXY"
-        android:src="@drawable/baseline_manage_search_24" />
+        android:src="@drawable/baseline_manage_search_24"
+        app:layout_constraintBottom_toBottomOf="@+id/searchStation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/searchStation" />
 
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
