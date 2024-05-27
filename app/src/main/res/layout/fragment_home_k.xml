@@ -4,43 +4,59 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
 
 
-    <ImageView
-        android:id="@+id/iv_SubwayMap"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:adjustViewBounds="true"
-        android:scaleType="centerCrop"
-        android:src="@drawable/subway_image"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
-    <EditText
-        android:id="@+id/searchStation"
+        <ImageView
+            android:id="@+id/iv_SubwayMap"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/subway_image"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="top"
-        android:autofillHints="subway"
-        android:background="@drawable/rounded"
-        android:drawableStart="@android:drawable/ic_menu_search"
-        android:drawablePadding="8dp"
-        android:hint="역명을 검색해주세요"
-        android:inputType="text"
-        android:padding="16dp"
-        android:textColorHint="#808080"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/searchStation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:autofillHints="subway"
+            android:background="@drawable/rounded"
+            android:drawableStart="@android:drawable/ic_menu_search"
+            android:drawablePadding="8dp"
+            android:hint="역명을 검색해주세요"
+            android:inputType="text"
+            android:padding="16dp"
+            android:textColorHint="#808080"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -58,14 +74,14 @@
         android:layout_width="60dp"
         android:layout_height="61dp"
         android:layout_alignParentStart="true"
-        android:layout_marginEnd="24dp"
+        android:layout_marginEnd="40dp"
         android:background="@android:color/transparent"
         android:onClick="mOnClick"
         android:scaleType="fitXY"
         android:src="@drawable/baseline_manage_search_24"
-        app:layout_constraintBottom_toBottomOf="@+id/searchStation"
+        app:layout_constraintBottom_toBottomOf="@+id/constraintLayout2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/searchStation" />
+        app:layout_constraintTop_toTopOf="@+id/constraintLayout2" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
